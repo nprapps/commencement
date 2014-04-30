@@ -85,6 +85,8 @@ COPY EDITING
 COPY_GOOGLE_DOC_KEY = '0AlXMOHKxzQVRdFM0eHpucEdWRzRiMVFDdkY4amx6QkE'
 COPY_PATH = 'data/copy.xlsx'
 
+DATA_GOOGLE_DOC_KEY = '1a1SZvyycLpv4w8iyq-wvmT-eUERRGfzVkfliFkaQVnE'
+
 """
 SHARING
 """

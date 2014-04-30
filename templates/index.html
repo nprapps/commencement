@@ -13,7 +13,6 @@
 </header>
 {% endblock %}
 
-
 {% block content %}
 <h1>{{ PROJECT_NAME }}</h1>
 <div id="story-meta">
@@ -24,17 +23,13 @@
     </p>
 </div>
 
-<h2>Example COPY list</h2>
-<dl>
-    {% for row in COPY.example_list %}
-    <dt>{{ row.term }}</dt><dd>{{ row.definition }}</dd>
+<h2>Speeches</h2>
+<ul>
+    {% for speech in speeches %}
+    <li>{{ speech.name }} at {{ speech.school }}</li>
     {% endfor %}
-</dl>
-
-<h2>JST example</h2>
-<p id="template-example"></p>
+</ul>
 {% endblock %}
-
 
 {% block wide_content %}
 <div class="row">

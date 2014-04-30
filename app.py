@@ -4,6 +4,7 @@ import argparse
 from flask import Flask, render_template
 
 import app_config
+import data
 from render_utils import make_context, urlencode_filter
 import static
 
@@ -11,32 +12,17 @@ app = Flask(app_config.PROJECT_NAME)
 
 app.jinja_env.filters['urlencode'] = urlencode_filter
 
-# Example application views
 @app.route('/')
 def index():
     """
     Example view demonstrating rendering a simple HTML page.
     """
-    return render_template('index.html', **make_context())
+    context = make_context()
 
-@app.route('/widget.html')
-def widget():
-    """
-    Embeddable widget example page.
-    """
-    return render_template('widget.html', **make_context())
+    context['speeches'] = data.load() 
 
-@app.route('/test_widget.html')
-def test_widget():
-    """
-    Example page displaying widget at different embed sizes.
-    """
-    return render_template('test_widget.html', **make_context())
+    return render_template('index.html', **context)
 
-@app.route('/test/test.html')
-def test_dir():
-    return render_template('index.html', **make_context())
-    
 app.register_blueprint(static.static)
 
 # Boilerplate

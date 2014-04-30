@@ -10,6 +10,7 @@ from jinja2 import Template
 
 import app
 import app_config
+import data
 from etc import github
 from etc.gdocs import GoogleDoc
 
@@ -150,7 +151,8 @@ def update_data():
     """
     Stub function for updating app-specific data.
     """
-    pass
+    data.download()
+    data.parse()
 
 @task
 def app_config_js():
