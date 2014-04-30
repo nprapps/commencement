@@ -24,7 +24,37 @@
 {% endblock %}
 
 {% block content %}
-<ul>
+
+<div class="filters container">
+    <form role="form" class="row">
+        <div class="form-group year">
+            <label for="yearInput" class="control-label">Year</label>
+            <select class="form-control" id="yearInput">
+              <option>1879</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+        </div>
+
+        <div class="form-group year">
+            <label for="speakerInput" class="control-label">Speaker</label>
+            <input type="text" class="form-control" id="speakerInput" placeholder="Text input">
+        </div>
+
+        <div class="form-group tags">
+            <label for="tagsInput" class="control-label">Topics</label>
+            <select class="form-control">
+              <option>All</option>
+            </select>
+        </div>
+
+    </form>
+</div>
+
+
+<ul class="speeches">
     {% for speech in speeches %}
     <li>
         <a href="/speech/{{ speech.slug }}/">

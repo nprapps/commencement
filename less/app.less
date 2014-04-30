@@ -162,7 +162,24 @@ h1 + #story-meta { margin-top: -11px; }
 // Homepage 
 
 .homepage {
-	#main-content ul {
+
+	.filters {
+		padding-top: @line-height-computed;
+		padding-bottom: @line-height-computed;
+		color: @gray-light;
+
+		.form-group {
+			.make-md-column(4);
+
+			label {
+				font-weight: normal;
+				text-transform: uppercase;
+				font-size: @font-size-small;
+			}
+		}
+	}
+
+	.speeches {
 		.list-unstyled;
 
 		li {
@@ -183,6 +200,7 @@ h1 + #story-meta { margin-top: -11px; }
 				h2 {
 					text-transform: uppercase;
 					font-size: @font-size-large;
+					margin-bottom: 0;
 				}
 
 				p {
@@ -195,10 +213,15 @@ h1 + #story-meta { margin-top: -11px; }
 
 				.speech-info {
 					padding: @line-height-computed / 2 0;
+
+					@media screen and (min-width: @screen-lg){
+						max-width: 1140px;
+						margin: 0 auto;
+					}
 				}
 
 				.speech-school:after {
-					content: ' \00B7';
+					content: ',';
 				}
 
 				@media screen and (min-width: @screen-sm){
@@ -206,7 +229,6 @@ h1 + #story-meta { margin-top: -11px; }
 						display: table;
 						padding: 0;
 						width: 100%;
-						max-width: @screen-lg;
 
 						h2,p {
 							display: table-cell;
