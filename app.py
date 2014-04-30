@@ -23,6 +23,18 @@ def index():
 
     return render_template('index.html', **context)
 
+@app.route('/speech/<string:slug>/')
+def speech(slug):
+    """
+    Example view demonstrating rendering a simple HTML page.
+    """
+    context = make_context()
+
+    context['speeches'] = data.load() 
+    context['speech'] = next(s for s in context['speeches'] if s['slug'] == slug)
+
+    return render_template('speech.html', **context)
+
 app.register_blueprint(static.static)
 
 # Boilerplate

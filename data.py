@@ -19,6 +19,11 @@ def download():
     with open('data/data.csv', 'wb') as writefile:
         writefile.write(r.content)
 
+def slugify(row):
+    slug = '%(name)s-%(school)s-%(year)s' % row
+
+    return slug.lower().replace(' ', '-')
+
 def parse():
     """
     Parses the data CSV to JSON.
@@ -32,6 +37,13 @@ def parse():
     tags = {}
 
     for row in rows:
+        print '%(name)s at %(school)s' % row
+
+        for k, v in row.items():
+            row[k] = v.strip()
+
+        row['year'] = 'TODO'
+
         row['tags'] = [t.strip().lower() for t in row['tags'].split(';')]
         
         for tag in row['tags']:
@@ -39,6 +51,9 @@ def parse():
                 tags[tag] = 0
 
             tags[tag] += 1
+
+        row['slug'] = slugify(row)
+        print row['slug']
 
         speeches.append(row)
 
