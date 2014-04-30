@@ -157,8 +157,12 @@ h1 + #story-meta { margin-top: -11px; }
 
 #main-content {
 	background: #333;
+}
 
-	> ul {
+// Homepage 
+
+.homepage {
+	#main-content > ul {
 		.list-unstyled;
 
 		li {
@@ -265,6 +269,9 @@ h1 + #story-meta { margin-top: -11px; }
 
 		p {
 			color: @gray-light;
+			display: inline-block;
+			font-family: @font-family-serif;
+			font-style: italic;
 		}
 	}
 
@@ -384,7 +391,6 @@ footer {
 	}
 }
 @media (max-width: 480px) {
-	h1 { font-size: 26px; }
 	#story-meta p { font-size: 11px; }
 	nav ul.site-links {
 		li { display: none; }

@@ -17,14 +17,21 @@
 {% block content %}
 <div class="speech-header">
 	<h1>{{ speech.name }}</h1>
-	<p class="speech-school">{{ speech.school }}</p>
-	<p class="speech-date">{{ speech.date }}</p>
+	<p class="speech-info">{{ speech.school }} &middot; {{ speech.date }}</p>
 </div>
 
 <div class="money-quote">
 	<blockquote>
-		<p>{{ speech.money_quote }}</p>
+		<p>{{ speech.money_quote|smartypants }}</p>
 	</blockquote>
 </div>
+
+{% if speech.money_quote2 %}
+<div class="money-quote">
+	<blockquote>
+		<p>{{ speech.money_quote2|smartypants }}</p>
+	</blockquote>
+</div>
+{% endif %}
 
 {% endblock %}

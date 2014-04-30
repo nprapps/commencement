@@ -3,6 +3,8 @@
 import argparse
 from flask import Flask, render_template
 
+from typogrify.templatetags import jinja_filters
+
 import app_config
 import data
 from render_utils import make_context, urlencode_filter
@@ -11,6 +13,7 @@ import static
 app = Flask(app_config.PROJECT_NAME)
 
 app.jinja_env.filters['urlencode'] = urlencode_filter
+jinja_filters.register(app.jinja_env)
 
 @app.route('/')
 def index():
