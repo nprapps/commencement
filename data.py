@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import csv
+import datetime
 import json
 import math
 
@@ -44,14 +45,20 @@ def parse():
         row['year'] = None
         row['decade'] = None
 
-        if len(row['date']) >= 4: 
+        if row['date']: 
             try:
-                row['year'] = int(row['date'][-4:])
-                row['decade'] = math.floor(row['year'] / 10) * 10
+                month, day, year = map(int, row['date'].split('/'))
+                row['year'] = year
+                row['decade'] = math.floor(year / 10) * 10
+
+                d = datetime.date(year, month, day)
+
+                row['date'] = '%s %i %i' % (d.strftime('%B'), day, year) 
             except ValueError:
                 print 'Invalid date for %(name)s at %(school)s' % row
         else:
-            print 'No year for %(name)s at %(school)s' % row 
+            print 'No date for %(name)s at %(school)s' % row 
+            row['date'] = None
 
         row['tags'] = [t.strip().lower() for t in row['tags'].split(';')]
         
@@ -69,8 +76,31 @@ def parse():
     #for t in ['%s: %i' % (k, v) for k, v in tags.items()]:
     #    print t
 
-    with open('www/static-data/data.json', 'wb') as writefile:
-        writefile.write(json.dumps(speeches))
+    # Render complete data
+    with open('www/static-data/data.json', 'w') as f:
+        f.write(json.dumps(speeches))
+
+    thin_speeches = []
+
+    for speech in speeches:
+        thin_speeches.append({
+            'slug': speech['slug'],
+            'name': speech['name'],
+            'profession': speech['profession'],
+            'school': speech['school'],
+            'tags': speech['tags'],
+            'year': speech['year'],
+            'decade': speech['decade']
+        })
+
+    del row['money_quote']
+    del row['money_quote2']
+    del row['still_image_url']
+    del row['source_url']
+
+    # Render thin data for index
+    with open('www/static-data/data-thin.json', 'w') as f:
+        f.write(json.dumps(thin_speeches))
 
     print "Finished."
 
