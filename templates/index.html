@@ -4,9 +4,17 @@
 <header>
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="header-wrapper">
                 <h1>{{ COPY.content.header_title }}</h1>
-                <h2>{{ COPY.content.lorem_ipsum }}</h2>
+                <p>{{ COPY.content.lorem_ipsum }}</p>
+
+                <div id="story-meta">
+                    <p class="byline">by <span>{{ COPY.attribution.byline }}</span></p>
+                    <p class="dateblock">
+                        <span class="date">{{ COPY.attribution.pubdate }}</span>
+                        <span class="time"> {{ COPY.attribution.pubtime }}</span>
+                    </p>
+                </div>
             </div>
         </div>
     </div>
@@ -14,19 +22,16 @@
 {% endblock %}
 
 {% block content %}
-<h1>{{ PROJECT_NAME }}</h1>
-<div id="story-meta">
-    <p class="byline">by <span>{{ COPY.attribution.byline }}</span></p>
-    <p class="dateblock">
-        <span class="date">{{ COPY.attribution.pubdate }}</span>
-        <span class="time"> {{ COPY.attribution.pubtime }}</span>
-    </p>
-</div>
-
 <h2>Speeches</h2>
 <ul>
     {% for speech in speeches %}
-    <li><a href="/speech/{{ speech.slug }}/">{{ speech.name }} at {{ speech.school }}</a></li>
+    <li>
+        <a href="/speech/{{ speech.slug }}/">
+            <h2 class="speech-name">{{ speech.name }}</h2>
+            <p class="speech-school">{{ speech.school }}</p>
+            <p class="speech-year">{{ speech.year }}</p>
+        </a>
+    </li>
     {% endfor %}
 </ul>
 {% endblock %}
