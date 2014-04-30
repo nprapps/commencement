@@ -27,9 +27,11 @@
     {% for speech in speeches %}
     <li>
         <a href="/speech/{{ speech.slug }}/">
-            <h2 class="speech-name">{{ speech.name }}</h2>
-            <p class="speech-school">{{ speech.school }}</p>
-            <p class="speech-year">{{ speech.year }}</p>
+            <div class="speech-info">
+                <h2 class="speech-name">{{ speech.name }}</h2>
+                <p class="speech-school">{{ speech.school }}</p>
+                <p class="speech-year">{{ speech.year }}</p>
+            </div>
         </a>
     </li>
     {% endfor %}
