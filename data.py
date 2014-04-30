@@ -2,6 +2,7 @@
 
 import csv
 import json
+import math
 
 import requests
 
@@ -37,12 +38,20 @@ def parse():
     tags = {}
 
     for row in rows:
-        print '%(name)s at %(school)s' % row
-
         for k, v in row.items():
             row[k] = v.strip()
 
-        row['year'] = 'TODO'
+        row['year'] = None
+        row['decade'] = None
+
+        if len(row['date']) >= 4: 
+            try:
+                row['year'] = int(row['date'][-4:])
+                row['decade'] = math.floor(row['year'] / 10) * 10
+            except ValueError:
+                print 'Invalid date for %(name)s at %(school)s' % row
+        else:
+            print 'No year for %(name)s at %(school)s' % row 
 
         row['tags'] = [t.strip().lower() for t in row['tags'].split(';')]
         
@@ -53,9 +62,12 @@ def parse():
             tags[tag] += 1
 
         row['slug'] = slugify(row)
-        print row['slug']
 
         speeches.append(row)
+
+    # print tags
+    #for t in ['%s: %i' % (k, v) for k, v in tags.items()]:
+    #    print t
 
     with open('www/static-data/data.json', 'wb') as writefile:
         writefile.write(json.dumps(speeches))

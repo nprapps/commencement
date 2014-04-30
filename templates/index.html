@@ -26,7 +26,7 @@
 <h2>Speeches</h2>
 <ul>
     {% for speech in speeches %}
-    <li>{{ speech.name }} at {{ speech.school }}</li>
+    <li><a href="/speech/{{ speech.slug }}/">{{ speech.name }} at {{ speech.school }}</a></li>
     {% endfor %}
 </ul>
 {% endblock %}
