@@ -162,7 +162,7 @@ h1 + #story-meta { margin-top: -11px; }
 // Homepage 
 
 .homepage {
-	#main-content > ul {
+	#main-content ul {
 		.list-unstyled;
 
 		li {
@@ -265,6 +265,11 @@ h1 + #story-meta { margin-top: -11px; }
 		h1 {
 			text-transform: uppercase;
 			color: #fff;
+			font-size: @font-size-base * 2;
+
+			@media screen and (min-width: @screen-sm){
+				font-size: @font-size-base * 4;
+			}
 		}
 
 		p {
@@ -278,16 +283,21 @@ h1 + #story-meta { margin-top: -11px; }
 	.money-quote {
 
 		blockquote {
-			.make-md-column(10);
-			.make-md-column-push(1);
+			.make-sm-column(10);
+			.make-sm-column-push(1);
 			color: #fff;
 			border: none;
 			position: relative;
 
 			p {
-				font-size: @font-size-base * 2;
+				font-size: @font-size-base;
 				line-height: 1.2;
 				font-family: Gotham, @font-family-sans-serif;
+
+				@media screen and (min-width: @screen-sm){
+					font-size: @font-size-base * 1.333333333;
+					line-height: 1.3;
+				}
 			}
 
 			&:before {
@@ -295,10 +305,15 @@ h1 + #story-meta { margin-top: -11px; }
 				content: '\201C';
 				position: absolute;
 				right: 100%;
-				font-size: @font-size-base * 7;
+				top: 8px;
+				font-size: 84px;
 				font-weight: bold;
 				line-height: 1;
 
+			}
+
+			@media screen and (max-width: @screen-xs-max){
+				margin-left: 50px;
 			}
 		}
 	}

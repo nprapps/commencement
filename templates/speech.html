@@ -15,22 +15,26 @@
 {% endblock %}
 
 {% block content %}
-<div class="speech-header">
-	<h1>{{ speech.name }}</h1>
-	<p class="speech-info">{{ speech.school }} &middot; {{ speech.date }}</p>
-</div>
-
-<div class="money-quote">
-	<blockquote>
-		<p>{{ speech.money_quote|smartypants }}</p>
-	</blockquote>
-</div>
-
-{% if speech.money_quote2 %}
-<div class="money-quote">
-	<blockquote>
-		<p>{{ speech.money_quote2|smartypants }}</p>
-	</blockquote>
+<div class="container">
+	<div class="row">
+		<div class="speech-header">
+			<h1>{{ speech.name }}</h1>
+			<p class="speech-info">{{ speech.school }} &middot; {{ speech.date }}</p>
+		</div>
+	
+		<div class="money-quote">
+			<blockquote>
+				<p>{{ speech.money_quote|smartypants }}</p>
+			</blockquote>
+		</div>
+	
+		{% if speech.money_quote2 %}
+		<div class="money-quote">
+			<blockquote>
+				<p>{{ speech.money_quote2|smartypants }}</p>
+			</blockquote>
+		</div>
+	</div>
 </div>
 {% endif %}
 
