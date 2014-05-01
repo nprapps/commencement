@@ -30,7 +30,7 @@ def index():
     return render_template('index.html', **context)
 
 @app.route('/speech/<string:slug>/')
-def speech(slug):
+def _speech(slug):
     """
     Example view demonstrating rendering a simple HTML page.
     """

@@ -241,6 +241,60 @@ def render():
         with open(filename, 'w') as f:
             f.write(content.encode('utf-8'))
 
+    render_speeches()
+
+@task
+def render_speeches():
+    """
+    Render the speech pages.
+    """
+    from flask import g, url_for
+
+    update_copy()
+    assets.sync()
+    update_data()
+    less()
+    jst()
+
+    app_config_js()
+    copy_js()
+
+    local('rm -rf .speeches_html')
+
+    speeches = data.load()  
+
+    compiled_includes = []
+
+    for speech in speeches:
+        slug = speech['slug']
+
+        with app.app.test_request_context():
+            path = '%sindex.html' % url_for('_speech', slug=slug)
+
+        with app.app.test_request_context(path=path):
+            print 'Rendering %s' % path
+
+            g.compile_includes = True
+            g.compiled_includes = compiled_includes
+
+            view = app.__dict__['_speech']
+            content = view(slug)
+
+            compiled_includes = g.compiled_includes
+
+        path = '.speeches_html%s' % path
+
+        # Ensure path exists
+        head = os.path.split(path)[0]
+
+        try:
+            os.makedirs(head)
+        except OSError:
+            pass
+
+        with open(path, 'w') as f:
+            f.write(content.encode('utf-8'))
+
 @task
 def tests():
     """
@@ -539,6 +593,8 @@ def deploy(remote='origin'):
             deploy_confs()
 
     render()
+    _gzip('.speeches_html', '.speeches_gzip')
+    _deploy_to_s3('.speeches_gzip')
     _gzip('www', '.gzip')
     _deploy_to_s3()
 
