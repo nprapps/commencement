@@ -103,7 +103,6 @@ header {
 	background-color: @yellow;
 	padding: 50px 0 30px;
 	margin: 0;
-	border-bottom: 2px solid #fff;
 
 	.header-wrapper {
 		.make-md-column(12);
@@ -139,7 +138,7 @@ header {
 
 
 // Content
-#content { 
+#main-content { 
 	background: #333;
 }
 #story-meta {
@@ -337,6 +336,38 @@ h1 + #story-meta { margin-top: -11px; }
 			@media screen and (max-width: @screen-xs-max){
 				margin-left: 50px;
 			}
+		}
+	}
+
+	.comments-wrapper {
+		background: @gray-lighter;
+		padding-top: @line-height-computed;
+
+		h2 {
+			text-transform: uppercase;
+			font-size: @font-size-base * 2;
+		}
+
+		h3 {
+			font-size: @font-size-base;
+		}
+
+		.comment-terms {
+			font-size: @font-size-small;
+			color: @gray;
+		}
+
+		a {
+			color: #111;
+			background: @yellow;
+
+			&:hover {
+				text-decoration: none;
+			}
+		}
+
+		#comments {
+			.make-md-column(8);
 		}
 	}
 }
