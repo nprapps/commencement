@@ -208,6 +208,16 @@ h1 + #story-meta { margin-top: -11px; }
 					font-size: @font-size-small;
 					color: @gray-light;
 					display: inline-block;
+
+					&.speech-features {
+						.fa-circle {
+							color: @yellow;
+						}
+
+						.fa-inverse {
+							color: #333;
+						}
+					}
 				}
 
 				.speech-info {
@@ -242,10 +252,16 @@ h1 + #story-meta { margin-top: -11px; }
 						}
 
 						p {
-							width: 25%;
+							&.speech-school {
+								width: 25%;
+							}
+
+							&.speech-features {
+								width: 5%;
+							}
 
 							&.speech-year {
-								width: 15%;
+								width: 10%;
 								text-align: right;
 								padding-right: 0;
 							}
@@ -269,7 +285,7 @@ h1 + #story-meta { margin-top: -11px; }
 		padding-bottom: @line-height-computed;
 
 		h1 {
-			font-size: @font-size-base * 1.5;
+			font-size: @font-size-base * 2;
 			font-family: @font-family-sans-serif;
 			margin-bottom: 0;
 
@@ -358,11 +374,12 @@ h1 + #story-meta { margin-top: -11px; }
 		}
 
 		a {
-			color: #111;
+			color: @text-color;
 			background: @yellow;
 
 			&:hover {
 				text-decoration: none;
+				opacity: 0.6;
 			}
 		}
 
