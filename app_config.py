@@ -126,6 +126,13 @@ COMMENT_PROMPT = 'Leave a comment'
 DISQUS_UUID = '$NEW_DISQUS_UUID'
 
 """
+APP-SPECIFIC
+"""
+TAGS = sorted(['historic', 'politics', 'profound', 'author', 'cold-war'])
+PROFESSIONS = sorted(['author', 'business', 'activist', 'scientist'])
+DECADES = list(range(1840, 2010, 10))
+
+"""
 Utilities
 """
 def get_secrets():
