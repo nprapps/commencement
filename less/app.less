@@ -139,9 +139,10 @@ header {
 
 
 // Content
-#main-content { 
+.main-content {
 	background: #333;
 }
+
 #story-meta {
 	margin-bottom: 22px;
 
@@ -154,10 +155,6 @@ header {
 		&.dateblock .date { margin-right: 0.8em; }	}
 }
 h1 + #story-meta { margin-top: -11px; }
-
-#main-content {
-	background: #333;
-}
 
 // Homepage 
 
@@ -283,6 +280,12 @@ h1 + #story-meta { margin-top: -11px; }
 // Speech
 
 .speech {
+	.main-content {
+		a {
+			color: @yellow;
+		}
+	}
+
 	header {
 		padding-top: @line-height-computed;
 		padding-bottom: @line-height-computed;
@@ -297,6 +300,8 @@ h1 + #story-meta { margin-top: -11px; }
 			}
 		}
 	}
+
+
 
 	.speech-header {
 		.make-md-column(12);
@@ -349,7 +354,7 @@ h1 + #story-meta { margin-top: -11px; }
 		}
 	}
 
-	.money-quote {
+	.speech-quotes {
 
 		blockquote {
 			.make-sm-column(10);
@@ -385,6 +390,11 @@ h1 + #story-meta { margin-top: -11px; }
 				margin-left: 50px;
 			}
 		}
+
+		.full-text {
+			.make-md-column(11);
+			.make-md-column-push(1);
+		}
 	}
 
 	.comments-wrapper {
@@ -401,7 +411,7 @@ h1 + #story-meta { margin-top: -11px; }
 		}
 
 		.comment-terms {
-			font-size: @font-size-small;
+			font-size: @font-size-base * 0.833333333;
 			color: @gray;
 		}
 

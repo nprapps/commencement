@@ -38,19 +38,23 @@
 		</div>
 		{% endif %}
 	
-		<div class="money-quote">
+		<div class="speech-quotes">
+			{% if speech.money_quote %}
 			<blockquote>
 				<p>{{ speech.money_quote|smartypants }}</p>
 			</blockquote>
-		</div>
-	
-		{% if speech.money_quote2 %}
-		<div class="money-quote">
+			{% endif %}
+
+			{% if speech.money_quote2 %}
 			<blockquote>
 				<p>{{ speech.money_quote2|smartypants }}</p>
 			</blockquote>
+			{% endif %}
+
+			{% if speech.full_text %}
+			<p class="full-text"><a href="{{ speech.full_text }}">Read the full text <i class="fa fa-angle-right fa-lg"></i></a></p>
+			{% endif %}
 		</div>
-		{% endif %}
 	</div>
 </div>
 {% endblock %}
