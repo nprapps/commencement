@@ -28,13 +28,11 @@
 <div class="filters container">
     <form role="form" class="row">
         <div class="form-group year">
-            <label for="yearInput" class="control-label">Year</label>
-            <select class="form-control" id="yearInput">
-              <option>1879</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
+            <label for="decade-filter" class="control-label">Year</label>
+            <select class="form-control" id="decade-filter">
+                {% for decade in DECADES %}
+                <option value="{{ decade }}">{{ decade }}s</option>
+                {% endfor %}
             </select>
         </div>
 
@@ -44,9 +42,11 @@
         </div>
 
         <div class="form-group tags">
-            <label for="tagsInput" class="control-label">Topics</label>
-            <select class="form-control">
-              <option>All</option>
+            <label for="tags" class="control-label">Topics</label>
+            <select class="form-control" id="tags">
+                {% for tag in TAGS %}
+                <option>{{ tag }}</option>
+                {% endfor %}
             </select>
         </div>
 
