@@ -60,7 +60,7 @@ def parse():
             print 'No date for %(name)s at %(school)s' % row 
             row['date'] = None
 
-        row['tags'] = [t.strip().lower() for t in row['tags'].split(';')]
+        row['tags'] = [t.strip().lower() for t in row['tags'].replace(',', ';').split(';')]
         
         for tag in row['tags']:
             if tag not in tags:

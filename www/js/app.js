@@ -11,19 +11,21 @@ var filterSpeeches = function() {
     var decade = $decadeFilter.val();
     var tag = $tagFilter.val();
 
-    var selector = [];
+    var selector = '';
 
     if (decade) {
-        selector.push('.decade-' + decade); 
+        selector += ('.decade-' + decade); 
     }
 
     if (tag) {
-        selector.push('.tag-' + tag);
+        selector += ('.tag-' + tag);
     }
 
-    selector = selector.join(' ');
-
-    $speeches.filter(selector).show();
+    if (!selector) {
+        $speeches.show();
+    } else {
+        $speeches.filter(selector).show();
+    }
 }
 
 $(function() {
