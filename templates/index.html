@@ -57,7 +57,7 @@
 <ul class="speeches">
     {% for speech in speeches %}
     <li id="{{ speech.slug }}" class="decade-{{ speech.decade|int }} {% for tag in speech.tags %}tag-{{ tag }} {% endfor %}">
-        <a href="/speech/{{ speech.slug }}/">
+        <a href="speech/{{ speech.slug }}/">
             <div class="speech-info">
                 <h2 class="speech-name">{{ speech.name }}</h2>
                 <p class="speech-features">

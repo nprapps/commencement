@@ -196,7 +196,7 @@ def render():
     app_config_js()
     copy_js()
 
-    compiled_includes = []
+    compiled_includes = {} 
 
     for rule in app.app.url_map.iter_rules():
         rule_string = rule.rule
@@ -241,8 +241,6 @@ def render():
         with open(filename, 'w') as f:
             f.write(content.encode('utf-8'))
 
-    render_speeches()
-
 @task
 def render_speeches():
     """
@@ -263,7 +261,7 @@ def render_speeches():
 
     speeches = data.load()  
 
-    compiled_includes = []
+    compiled_includes = {} 
 
     for speech in speeches:
         slug = speech['slug']
@@ -593,10 +591,17 @@ def deploy(remote='origin'):
             deploy_confs()
 
     render()
-    _gzip('.speeches_html', '.speeches_gzip')
-    _deploy_to_s3('.speeches_gzip')
     _gzip('www', '.gzip')
     _deploy_to_s3()
+
+@task
+def deploy_speeches(remote='origin'):
+    """
+    Deploy the speeches.
+    """
+    render_speeches()
+    _gzip('.speeches_html', '.speeches_gzip')
+    _deploy_to_s3('.speeches_gzip')
 
 """
 Cron jobs

@@ -49,3 +49,5 @@ www/assets
 data/gdoc*.csv
 data/data.csv
 www/static-data/*
+.speeches_html
+.speeches_gzip
