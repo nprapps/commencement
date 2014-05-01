@@ -30,6 +30,7 @@
         <div class="form-group year">
             <label for="decade-filter" class="control-label">Year</label>
             <select class="form-control" id="decade-filter">
+                <option value="">Select a decade...</option>
                 {% for decade in DECADES %}
                 <option value="{{ decade }}">{{ decade }}s</option>
                 {% endfor %}
@@ -43,20 +44,19 @@
 
         <div class="form-group tags">
             <label for="tags" class="control-label">Topics</label>
-            <select class="form-control" id="tags">
+            <select class="form-control" id="tag-filter">
+                <option value="">Select a topic...</option>
                 {% for tag in TAGS %}
-                <option>{{ tag }}</option>
+                <option value="{{ tag }}">{{ tag }}</option>
                 {% endfor %}
             </select>
         </div>
-
     </form>
 </div>
 
-
 <ul class="speeches">
     {% for speech in speeches %}
-    <li>
+    <li id="{{ speech.slug }}" class="decade-{{ speech.decade|int }} {% for tag in speech.tags %}tag-{{ tag }} {% endfor %}">
         <a href="/speech/{{ speech.slug }}/">
             <div class="speech-info">
                 <h2 class="speech-name">{{ speech.name }}</h2>
@@ -76,4 +76,10 @@
         <p>{{ COPY.content.lorem_ipsum }}</p>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_foot %}
+<script type="text/javascript">
+    var SPEECHES = {{ speeches_json }};
+</script>
 {% endblock %}

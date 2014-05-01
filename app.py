@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import argparse
-from flask import Flask, render_template
+from flask import Flask, Markup, render_template
 
 from typogrify.templatetags import jinja_filters
 
@@ -23,6 +23,9 @@ def index():
     context = make_context()
 
     context['speeches'] = data.load() 
+
+    with open('www/static-data/data-thin.json') as f:
+        context['speeches_json'] = Markup(f.read())
 
     return render_template('index.html', **context)
 
