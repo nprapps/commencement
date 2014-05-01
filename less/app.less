@@ -2,6 +2,7 @@
 @import "less/lib/font-awesome/font-awesome";
 @import "less/lib/prefixer";
 @import "less/adhesion";
+@import "less/lib/mediaelementplayer";
 
 // Global variables
 @img-root: "../img";
@@ -294,6 +295,33 @@ h1 + #story-meta { margin-top: -11px; }
 			a {
 				color: @text-color;
 			}
+		}
+	}
+
+	.speech-video {
+		.make-md-column(12);
+
+		.video-wrapper {
+			overflow: hidden;
+			position: relative;
+			padding-bottom: 56.25%; /* 16:9 */
+			padding-top: 25px;
+			height: 0;
+		}
+
+		.mejs-container,
+		.me-plugin,
+		.mejs-overlay,
+		embed,
+		object,
+		video {
+			width: 100% !important;
+			height: 100% !important;
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
 		}
 	}
 
