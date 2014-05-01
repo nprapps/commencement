@@ -53,7 +53,7 @@ def parse():
 
                 d = datetime.date(year, month, day)
 
-                row['date'] = '%s %i %i' % (d.strftime('%B'), day, year) 
+                row['date'] = '%s %i, %i' % (d.strftime('%B'), day, year) 
             except ValueError:
                 print 'Invalid date for %(name)s at %(school)s' % row
         else:
