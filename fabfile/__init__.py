@@ -241,27 +241,20 @@ def render():
         with open(filename, 'w') as f:
             f.write(content.encode('utf-8'))
 
+    return compiled_includes
+
 @task
-def render_speeches():
+def render_speeches(compiled_includes):
     """
     Render the speech pages.
     """
     from flask import g, url_for
 
-    update_copy()
-    assets.sync()
-    update_data()
-    less()
-    jst()
-
-    app_config_js()
-    copy_js()
-
     local('rm -rf .speeches_html')
 
     speeches = data.load()  
 
-    compiled_includes = {} 
+    compiled_includes = compiled_includes or {} 
 
     for speech in speeches:
         slug = speech['slug']
@@ -378,7 +371,7 @@ def install_requirements():
     require('settings', provided_by=[production, staging])
 
     run('%(SERVER_VIRTUALENV_PATH)s/bin/pip install -U -r %(SERVER_REPOSITORY_PATH)s/requirements.txt' % app_config.__dict__)
-    run('cd %s; %s' % (app_config.SERVER_REPOSITORY_PATH, NPM_INSTALL_PATH)) 
+    run('cd %s; %s' % (app_config.SERVER_REPOSITORY_PATH, NPM_INSTALL_COMMAND)) 
 
 @task
 def install_crontab():
@@ -590,16 +583,10 @@ def deploy(remote='origin'):
         if app_config.DEPLOY_SERVICES:
             deploy_confs()
 
-    render()
+    compiled_includes = render()
+    render_speeches(compiled_includes)
     _gzip('www', '.gzip')
     _deploy_to_s3()
-
-@task
-def deploy_speeches(remote='origin'):
-    """
-    Deploy the speeches.
-    """
-    render_speeches()
     _gzip('.speeches_html', '.speeches_gzip')
     _deploy_to_s3('.speeches_gzip')
 
