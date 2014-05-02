@@ -5,6 +5,8 @@ import datetime
 import json
 import math
 
+from urlparse import urlparse, parse_qs
+
 import requests
 
 import app_config
@@ -44,6 +46,8 @@ def parse():
 
         row['year'] = None
         row['decade'] = None
+        row['youtube_id'] = None
+        row['vimeo_id'] = None
 
         if row['date']: 
             try:
@@ -59,6 +63,17 @@ def parse():
         else:
             print 'No date for %(name)s at %(school)s' % row 
             row['date'] = None
+
+        if row['video_url']:
+            o = urlparse(row['video_url'])
+
+            if o.netloc.find('youtu') >= 0:
+                if parse_qs(o.query):
+                    row['youtube_id'] = parse_qs(o.query)['v'][0]
+                else:
+                    row['youtube_id'] = o.path.split('/')[-1]
+            elif o.netloc.find('vimeo') >= 0:
+                row['vimeo_id'] = o.path.split('/')[-1]
 
         row['tags'] = [t.strip().lower() for t in row['tags'].replace(',', ';').split(';')]
         

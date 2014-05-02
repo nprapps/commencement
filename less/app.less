@@ -2,7 +2,6 @@
 @import "less/lib/font-awesome/font-awesome";
 @import "less/lib/prefixer";
 @import "less/adhesion";
-@import "less/lib/mediaelementplayer";
 
 // Global variables
 @img-root: "../img";
@@ -10,7 +9,7 @@
 
 // Colors
 
-@yellow: #ffd54a;
+@yellow: #FFC235;
 
 // Typography
 
@@ -166,7 +165,7 @@ h1 + #story-meta { margin-top: -11px; }
 		color: @gray-light;
 
 		.form-group {
-			.make-md-column(4);
+			.make-md-column(3);
 
 			label {
 				font-weight: normal;
@@ -278,7 +277,6 @@ h1 + #story-meta { margin-top: -11px; }
 }
 
 // Speech
-
 .speech {
 	.main-content {
 		a {
@@ -312,6 +310,7 @@ h1 + #story-meta { margin-top: -11px; }
 			text-transform: uppercase;
 			color: #fff;
 			font-size: @font-size-base * 2;
+			margin-bottom: 0;
 
 			@media screen and (min-width: @screen-sm){
 				font-size: @font-size-base * 4;
@@ -334,7 +333,6 @@ h1 + #story-meta { margin-top: -11px; }
 			overflow: hidden;
 			position: relative;
 			padding-bottom: 56.25%; /* 16:9 */
-			padding-top: 25px;
 			height: 0;
 		}
 
@@ -355,6 +353,8 @@ h1 + #story-meta { margin-top: -11px; }
 	}
 
 	.speech-quotes {
+		padding-bottom: @line-height-computed;
+		.clearfix;
 
 		blockquote {
 			.make-sm-column(10);
