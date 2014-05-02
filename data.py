@@ -4,6 +4,7 @@ import csv
 import datetime
 import json
 import math
+import re
 
 from urlparse import urlparse, parse_qs
 
@@ -24,9 +25,22 @@ def download():
         writefile.write(r.content)
 
 def slugify(row):
-    slug = '%(name)s-%(school)s-%(year)s' % row
+    bits = []
 
-    return slug.lower().replace(' ', '-')
+    for field in ('name', 'school', 'year'):
+        d = row[field]
+
+        if d:
+            d = str(d)
+            d = d.lower()
+            d = re.sub(r"[^\w\s]", '', d)
+            d = re.sub(r"\s+", '-', d)
+
+            bits.append(d)
+
+    slug = '-'.join(bits) 
+
+    return slug
 
 def parse():
     """
