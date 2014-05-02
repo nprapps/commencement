@@ -79,9 +79,38 @@
 			{% endif %}
 
 			{% if speech.money_quote2 %}
-			<blockquote>
-				<p>{{ speech.money_quote2|smartypants }}</p>
-			</blockquote>
+			<div class="quote">
+				<blockquote>
+					<p>{{ speech.money_quote2|smartypants }}</p>
+				</blockquote>
+
+				<ul class="sharing">
+					<li>
+						<a href="#">
+							<span class="fa-stack">
+							    <i class="fa fa-circle fa-stack-2x"></i>
+							    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+							</span>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<span class="fa-stack">
+							    <i class="fa fa-circle fa-stack-2x"></i>
+							    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+							</span>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<span class="fa-stack">
+							    <i class="fa fa-circle fa-stack-2x"></i>
+							    <i class="fa fa-pinterest fa-stack-1x fa-inverse"></i>
+							</span>
+						</a>
+					</li>
+				</ul>
+			</div>
 			{% endif %}
 		</div>
 	</div>

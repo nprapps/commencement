@@ -372,11 +372,19 @@ h1 + #story-meta { margin-top: -11px; }
 				&:hover {
 					color: @yellow;
 				}
+
+				.fa-inverse {
+					color: #333;
+				}
 			}
 
 			@media screen and (max-width: @screen-xs-max){
 				li {
 					display: inline-block;
+
+					&:first-child {
+						margin-left: 50px;
+					}
 				}
 			}
 		}
@@ -416,6 +424,7 @@ h1 + #story-meta { margin-top: -11px; }
 
 			@media screen and (max-width: @screen-xs-max){
 				margin-left: 50px;
+				margin-bottom: @line-height-computed / 2;
 			}
 		}
 	}
