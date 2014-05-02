@@ -58,6 +58,10 @@
 			{% if speech.full_text %}
 			<p class="full-text"><a href="{{ speech.full_text }}">Read the full text <i class="fa fa-angle-right fa-lg"></i></a></p>
 			{% endif %}
+
+			{% if speech.video_url and not speech.youtube_id or speech.vimeo_id %}
+			<p class="video-link"><a href="{{ speech.video_url }}">Watch the speech <i class="fa fa-angle-right fa-lg"></i></a></p>
+			{% endif %}
 		</div>
 	</div>
 </div>
