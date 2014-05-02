@@ -44,9 +44,17 @@
 	
 		<div class="speech-quotes">
 			{% if speech.money_quote %}
-			<blockquote>
-				<p>{{ speech.money_quote|smartypants }}</p>
-			</blockquote>
+			<div class="quote">
+				<blockquote>
+					<p>{{ speech.money_quote|smartypants }}</p>
+				</blockquote>
+
+				<ul class="sharing">
+					<li><a href="#"><i class="fa fa-facebook-square fa-fw fa-lg"></i></a></li>
+					<li><a href="#"><i class="fa fa-twitter-square fa-fw fa-lg"></i></a></li>
+					<li><a href="#"><i class="fa fa-pinterest-square fa-fw fa-lg"></i></a></li>
+				</ul>
+			</div>
 			{% endif %}
 
 			{% if speech.money_quote2 %}
@@ -54,16 +62,31 @@
 				<p>{{ speech.money_quote2|smartypants }}</p>
 			</blockquote>
 			{% endif %}
-
-			{% if speech.full_text %}
-			<p class="full-text"><a href="{{ speech.full_text }}">Read the full text <i class="fa fa-angle-right fa-lg"></i></a></p>
-			{% endif %}
-
-			{% if speech.video_url and not speech.youtube_id and not speech.vimeo_id %}
-			<p class="video-link"><a href="{{ speech.video_url }}">Watch the speech <i class="fa fa-angle-right fa-lg"></i></a></p>
-			{% endif %}
 		</div>
 	</div>
+
+	<ul class="external-links">
+		{% if speech.full_text %}
+		<li class="full-text"><a href="{{ speech.full_text }}"><span class="fa-stack fa-lg">
+		  <i class="fa fa-circle fa-stack-2x"></i>
+		  <i class="fa fa-align-justify fa-stack-1x fa-inverse"></i>
+		</span> Read the full text</a></li>
+		{% elif speech.source_url %}
+		<li class="full-text"><a href="{{ speech.source_url }}"><span class="fa-stack fa-lg">
+		  <i class="fa fa-circle fa-stack-2x"></i>
+		  <i class="fa fa-align-justify fa-stack-1x fa-inverse"></i>
+		</span> Read the text</a></li>
+		{% endif %}
+
+		
+
+		{% if speech.video_url and not speech.youtube_id and not speech.vimeo_id %}
+		<li class="video-link"><a href="{{ speech.video_url }}"><span class="fa-stack fa-lg">
+		  <i class="fa fa-circle fa-stack-2x"></i>
+		  <i class="fa fa-video-camera fa-stack-1x fa-inverse"></i>
+		</span> Watch the speech</a></li>
+		{% endif %}
+	</ul>
 </div>
 {% endblock %}
 
