@@ -118,7 +118,7 @@ def parse():
             'school': speech['school'],
             'field': speech['field'],
             'mood': speech['mood'],
-            'subject': speech['subject'],
+            'advice': speech['advice'],
             'year': speech['year'],
             'decade': speech['decade']
         })

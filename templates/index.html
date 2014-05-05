@@ -28,49 +28,19 @@
 <div class="filters container">
     <form role="form" class="row">
         <div class="form-group subjects">
-            <label for="moods" class="control-label">Mood</label>
+            <label for="moods" class="control-label">Advice about...</label>
             <select class="form-control" id="mood-filter">
-                <option value="">Select a mood...</option>
+                <option value=""></option>
                 {% for mood  in MOODS %}
                 <option value="{{ mood }}">{{ mood }}</option>
                 {% endfor %}
             </select>
         </div>
 
-        <div class="form-group subjects">
-            <label for="fields" class="control-label">Field</label>
-            <select class="form-control" id="field-filter">
-                <option value="">Select a field...</option>
-                {% for field in FIELDS %}
-                <option value="{{ field }}">{{ field }}</option>
-                {% endfor %}
-            </select>
-        </div>
-
-        <div class="form-group subjects">
-            <label for="subjects" class="control-label">Topic</label>
-            <select class="form-control" id="subject-filter">
-                <option value="">Select a subject...</option>
-                {% for subject  in SUBJECTS %}
-                <option value="{{ subject }}">{{ subject }}</option>
-                {% endfor %}
-            </select>
-        </div>
-
         <div class="form-group year">
-            <label for="decade-filter" class="control-label">Decade</label>
-            <select class="form-control" id="decade-filter">
-                <option value="">Select a decade...</option>
-                {% for decade in DECADES %}
-                <option value="{{ decade }}">{{ decade }}s</option>
-                {% endfor %}
-            </select>
-        </div>
-
-        <!--<div class="form-group year">
-            <label for="speakerInput" class="control-label">Speaker</label>
+            <label for="speakerInput" class="control-label">Search for a speech</label>
             <input type="text" class="form-control" id="speakerInput" placeholder="Text input">
-        </div>-->
+        </div>
     </form>
 </div>
 
