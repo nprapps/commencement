@@ -483,12 +483,12 @@ h1 + #story-meta { margin-top: -11px; }
 			width: 50%;
 			min-height: 44px;
 			background: @yellow;
-			color: #222;
+			color: #333;
 			padding: @grid-gutter-width / 2;
 			text-align: center;
 
 			&:hover {
-				background: #222;
+				background: #333;
 				color: @yellow;
 				text-decoration: none;
 			}
@@ -520,13 +520,19 @@ h1 + #story-meta { margin-top: -11px; }
 			color: @gray;
 		}
 
+		.comments-close {
+			display: none;
+		}
+
 		a {
 			color: @text-color;
 			background: @yellow;
+			padding: 0 1px;
 
 			&:hover {
 				text-decoration: none;
-				opacity: 0.6;
+				color: @yellow;
+				background: #333;
 			}
 		}
 
