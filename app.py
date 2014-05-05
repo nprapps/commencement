@@ -38,10 +38,11 @@ def _speech(slug):
 
     context['speeches'] = data.load() 
     speech  = next(s for s in context['speeches'] if s['slug'] == slug)
-    context['speech'] =speech
+    context['speech'] = speech
 
     context['share_url'] = 'http://%s/%s/speech/%s' % (app_config.PRODUCTION_S3_BUCKETS[0], app_config.PROJECT_SLUG, slug)
-    context['share_image'] = 'http://TKTK.com'
+    context['money_quote_image'] = 'http://TKTK/quote.jpg'
+    context['money_quote2_image'] = 'http://TKTK/quote2.jpg'
     context['share_text'] = '%(name)s\'s commencement address at %(school)s in %(year)i.' % speech
 
     return render_template('speech.html', **context)

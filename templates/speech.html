@@ -44,73 +44,15 @@
 	
 		<div class="speech-quotes">
 			{% if speech.money_quote %}
-			<div class="quote">
-				<blockquote>
-					<p>{{ speech.money_quote|smartypants }}</p>
-				</blockquote>
-
-				<ul class="sharing">
-					<li>
-						<a href="https://www.facebook.com/dialog/feed?app_id={{ FACEBOOK_APP_ID }}&amp;link={{ share_url|urlencode }}&amp;name={{ share_text|urlencode }}&amp;picture={{ share_image_url|urlencode }}&amp;redirect_uri={{ share_url|urlencode }}" alt="Share on Facebook" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Facebook In Navbar', '{{ PROJECT_NAME }}']);">
-							<span class="fa-stack">
-							    <i class="fa fa-circle fa-stack-2x"></i>
-							    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-							</span>
-						</a>
-					</li>
-					<li>
-                        <a href="http://twitter.com/share?text={{ share_text|urlencode }} {{ share_url|urlencode }}&amp;url={{ share_url|urlencode }}" alt="Share on Twitter" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Twitter In Speech', '{{ PROJECT_NAME }}']);">
-							<span class="fa-stack">
-							    <i class="fa fa-circle fa-stack-2x"></i>
-							    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-							</span>
-						</a>
-					</li>
-					<li>
-                        <a href="https://pinterest.com/pin/create/button/?url={{ share_url|urlencode }}&media={{ share_image_url|urlencode }}&description={{ share_text|urlencode }}" alt="Share on Pinterest" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Pinterest In Speech', '{{ PROJECT_NAME }}']);">
-							<span class="fa-stack">
-							    <i class="fa fa-circle fa-stack-2x"></i>
-							    <i class="fa fa-pinterest fa-stack-1x fa-inverse"></i>
-							</span>
-						</a>
-					</li>
-				</ul>
-			</div>
+                {% with quote=speech.money_quote, image=money_quote_image %}
+                    {% include '_money_quote.html' %}
+                {% endwith %}
 			{% endif %}
 
 			{% if speech.money_quote2 %}
-			<div class="quote">
-				<blockquote>
-					<p>{{ speech.money_quote2|smartypants }}</p>
-				</blockquote>
-
-				<ul class="sharing">
-					<li>
-						<a href="#">
-							<span class="fa-stack">
-							    <i class="fa fa-circle fa-stack-2x"></i>
-							    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-							</span>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<span class="fa-stack">
-							    <i class="fa fa-circle fa-stack-2x"></i>
-							    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-							</span>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<span class="fa-stack">
-							    <i class="fa fa-circle fa-stack-2x"></i>
-							    <i class="fa fa-pinterest fa-stack-1x fa-inverse"></i>
-							</span>
-						</a>
-					</li>
-				</ul>
-			</div>
+                {% with quote=speech.money_quote2, image=money_quote2_image %}
+                    {% include '_money_quote.html' %}
+                {% endwith %}
 			{% endif %}
 		</div>
 	</div>
