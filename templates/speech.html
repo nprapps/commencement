@@ -44,73 +44,15 @@
 	
 		<div class="speech-quotes">
 			{% if speech.money_quote %}
-			<div class="quote">
-				<blockquote>
-					<p>{{ speech.money_quote|smartypants }}</p>
-				</blockquote>
-
-				<ul class="sharing">
-					<li>
-						<a href="#">
-							<span class="fa-stack">
-							    <i class="fa fa-circle fa-stack-2x"></i>
-							    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-							</span>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<span class="fa-stack">
-							    <i class="fa fa-circle fa-stack-2x"></i>
-							    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-							</span>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<span class="fa-stack">
-							    <i class="fa fa-circle fa-stack-2x"></i>
-							    <i class="fa fa-pinterest fa-stack-1x fa-inverse"></i>
-							</span>
-						</a>
-					</li>
-				</ul>
-			</div>
+                {% with quote=speech.money_quote, image=money_quote_image %}
+                    {% include '_money_quote.html' %}
+                {% endwith %}
 			{% endif %}
 
 			{% if speech.money_quote2 %}
-			<div class="quote">
-				<blockquote>
-					<p>{{ speech.money_quote2|smartypants }}</p>
-				</blockquote>
-
-				<ul class="sharing">
-					<li>
-						<a href="#">
-							<span class="fa-stack">
-							    <i class="fa fa-circle fa-stack-2x"></i>
-							    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-							</span>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<span class="fa-stack">
-							    <i class="fa fa-circle fa-stack-2x"></i>
-							    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-							</span>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<span class="fa-stack">
-							    <i class="fa fa-circle fa-stack-2x"></i>
-							    <i class="fa fa-pinterest fa-stack-1x fa-inverse"></i>
-							</span>
-						</a>
-					</li>
-				</ul>
-			</div>
+                {% with quote=speech.money_quote2, image=money_quote2_image %}
+                    {% include '_money_quote.html' %}
+                {% endwith %}
 			{% endif %}
 		</div>
 	</div>
@@ -127,7 +69,6 @@
 		  <i class="fa fa-align-justify fa-stack-1x fa-inverse"></i>
         </span> {{ COPY.content.source_link}}</a></li>
 		{% endif %}
-
 		
 
 		{% if speech.video_url and not speech.youtube_id and not speech.vimeo_id %}
@@ -165,10 +106,8 @@
 {% endblock %}
 
 
-{% block footer_js %}
-{{ super() }}
-
-{{ JS.push('js/comments.js') }}
-{{ JS.render('js/app-footer-speech.min.js') }}
-{% endblock footer_js %}
+{% block extra_foot_js %}
+    {{ JS.push('js/comments.js') }}
+    {{ JS.render('js/app-footer-speech.min.js') }}
+{% endblock %}
 
