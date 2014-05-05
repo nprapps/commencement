@@ -1,6 +1,7 @@
 var $speeches = null;
 var $adviceFilter = {};
 var $search = null;
+var $body = null;
 
 var searchIndex = null;
 
@@ -30,19 +31,22 @@ $(function() {
     $speeches = $('.speeches li');
     $adviceFilter = $('#advice-filter');
     $search = $('#search');
+    $body = $('body');
 
-    searchIndex = lunr(function () {
-        this.field('name', {boost: 10})
-        this.field('mood')
-        this.field('school')
-        this.field('year')
-        this.ref('slug')
-    })
+    if ($body.hasClass('homepage')){
+        searchIndex = lunr(function () {
+            this.field('name', {boost: 10})
+            this.field('mood')
+            this.field('school')
+            this.field('year')
+            this.ref('slug')
+        })
 
-    _.each(SPEECHES, function(speech) {
-        searchIndex.add(speech);
-    });
+        _.each(SPEECHES, function(speech) {
+            searchIndex.add(speech);
+        });
 
-    $adviceFilter.on('change', filterSpeeches);
-    $search.on('keyup', filterSpeeches);
+        $adviceFilter.on('change', filterSpeeches);
+        $search.on('keyup', filterSpeeches);
+    }
 });

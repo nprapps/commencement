@@ -138,6 +138,8 @@
 		{% endif %}
 	</ul>
 </div>
+
+
 {% endblock %}
 
 {% block comments %}
@@ -145,6 +147,18 @@
 	<div class="container">
 		<div class="row">
 			<div id="comments"></div>
+		</div>
+	</div>
+</div>
+
+<div class="more-speeches">
+	<div class="container">
+		<div class="row">
+			<h2>More Speeches</h2>
+			<div class="next-speech">
+				<a class="mood" href="#">See another {{ speech.mood }} speech <i class="fa fa-angle-right"></i></a>
+				<a class="topic" href="#">See another speech about {{ speech.advice }} <i class="fa fa-angle-right"></i></a>
+			</div>
 		</div>
 	</div>
 </div>

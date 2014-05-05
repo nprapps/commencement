@@ -459,6 +459,49 @@ h1 + #story-meta { margin-top: -11px; }
 		}
 	}
 
+	.more-speeches {
+		background: #fff;
+		padding: @line-height-computed 0;
+
+		h2 {
+			.make-sm-column(10);
+			.make-sm-column-push(2);
+
+			text-transform: uppercase;
+			color: #222;
+		}
+
+		.next-speech {
+			.make-sm-column(8);
+			.make-sm-column-push(2);
+			display: table;
+		}
+
+		.mood,
+		.topic {
+			display: table-cell;
+			width: 50%;
+			min-height: 44px;
+			background: @yellow;
+			color: #222;
+			padding: @grid-gutter-width / 2;
+			text-align: center;
+
+			&:hover {
+				background: #222;
+				color: @yellow;
+				text-decoration: none;
+			}
+		}
+
+		.mood {
+			border-right: 1px solid #fff;
+		}
+		.topic {
+			border-left:  1px solid #fff;
+		}
+	}
+
 	.comments-wrapper {
 		background: @gray-lighter;
 		padding-top: @line-height-computed;
