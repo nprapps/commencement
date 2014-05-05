@@ -1,30 +1,48 @@
 var $speeches = null;
 var $adviceFilter = {};
+var $search = null;
+
+var searchIndex = null;
 
 var filterSpeeches = function() {
-    /*
-     * Only show speeches whose slugs are `visibleSlugs`.
-     */
     $speeches.hide();
 
+    var $visibleSpeeches = $speeches;
+    var query = $search.val();
     var advice = $adviceFilter.val();
 
-    var selector = '';
+    if (query) {
+        var results = searchIndex.search(query);
+        var slugs = _.pluck(results, 'ref');
+        var ids = _.map(slugs, function(s) { return '#' + s });
+
+        $visibleSpeeches = $(ids.join(','));
+    }
 
     if (advice) {
-        selector += ('.advice-' + advice);
+        $visibleSpeeches = $visibleSpeeches.filter('.advice-' + advice)
     }
 
-    if (!selector) {
-        $speeches.show();
-    } else {
-        $speeches.filter(selector).show();
-    }
+    $visibleSpeeches.show();
 }
 
 $(function() {
     $speeches = $('.speeches li');
     $adviceFilter = $('#advice-filter');
+    $search = $('#search');
+
+    searchIndex = lunr(function () {
+        this.field('name', {boost: 10})
+        this.field('mood')
+        this.field('school')
+        this.field('year')
+        this.ref('slug')
+    })
+
+    _.each(SPEECHES, function(speech) {
+        searchIndex.add(speech);
+    });
 
     $adviceFilter.on('change', filterSpeeches);
+    $search.on('keyup', filterSpeeches);
 });
