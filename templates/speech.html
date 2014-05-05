@@ -69,7 +69,6 @@
 		  <i class="fa fa-align-justify fa-stack-1x fa-inverse"></i>
         </span> {{ COPY.content.source_link}}</a></li>
 		{% endif %}
-
 		
 
 		{% if speech.video_url and not speech.youtube_id and not speech.vimeo_id %}
@@ -93,10 +92,8 @@
 {% endblock %}
 
 
-{% block footer_js %}
-{{ super() }}
-
-{{ JS.push('js/comments.js') }}
-{{ JS.render('js/app-footer-speech.min.js') }}
-{% endblock footer_js %}
+{% block extra_foot_js %}
+    {{ JS.push('js/comments.js') }}
+    {{ JS.render('js/app-footer-speech.min.js') }}
+{% endblock %}
 
