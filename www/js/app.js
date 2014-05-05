@@ -1,6 +1,5 @@
 var $speeches = null;
-var $decadeFilter = null;
-var $tagFilter = null;
+var $adviceFilter = {};
 
 var filterSpeeches = function() {
     /*
@@ -8,17 +7,12 @@ var filterSpeeches = function() {
      */
     $speeches.hide();
 
-    var decade = $decadeFilter.val();
-    var tag = $tagFilter.val();
+    var advice = $adviceFilter.val();
 
     var selector = '';
 
-    if (decade) {
-        selector += ('.decade-' + decade); 
-    }
-
-    if (tag) {
-        selector += ('.tag-' + tag);
+    if (advice) {
+        selector += ('.advice-' + advice);
     }
 
     if (!selector) {
@@ -30,9 +24,7 @@ var filterSpeeches = function() {
 
 $(function() {
     $speeches = $('.speeches li');
-    $decadeFilter = $('#decade-filter');
-    $tagFilter = $('#tag-filter');
+    $adviceFilter = $('#advice-filter');
 
-    $decadeFilter.on('change', filterSpeeches);
-    $tagFilter.on('change', filterSpeeches);
+    $adviceFilter.on('change', filterSpeeches);
 });

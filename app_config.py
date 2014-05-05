@@ -133,6 +133,7 @@ APP-SPECIFIC
 FIELDS = sorted(['Arts', 'Science', 'Writing'])
 MOODS = sorted(['Funny', 'Inspirational', 'Dark'])
 SUBJECTS = sorted(['Success', 'Health', 'Society', 'Creativity'])
+ADVICE = sorted(['Dream', 'YOLO', 'Society', 'Creativity', 'Success'])
 DECADES = list(range(1840, 2010, 10))
 
 """
