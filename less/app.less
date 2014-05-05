@@ -485,12 +485,22 @@ h1 + #story-meta { margin-top: -11px; }
 			background: @yellow;
 			color: #333;
 			padding: @grid-gutter-width / 2;
-			text-align: center;
+			// text-align: center;
 
 			&:hover {
 				background: #333;
 				color: @yellow;
 				text-decoration: none;
+			}
+
+			h3 {
+				font-size: @font-size-small;
+			}
+
+			h4 {
+				text-transform: uppercase;
+				font-size: @font-size-base;
+				font-weight: bold;
 			}
 		}
 

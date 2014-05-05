@@ -5,6 +5,8 @@
 {% block extra_head %}
 	<script>
 		var speechSlug = '{{ speech.slug}}';
+		var speechMood = '{{ speech.mood }}';
+		var speechAdvice = '{{ speech.advice }}';
 	</script>
 {% endblock extra_head %}
 
@@ -97,8 +99,14 @@
 		<div class="row">
 			<h2>More Speeches</h2>
 			<div class="next-speech">
-				<a class="mood" href="#">See another {{ speech.mood }} speech <i class="fa fa-angle-right"></i></a>
-				<a class="topic" href="#">See another speech about {{ speech.advice }} <i class="fa fa-angle-right"></i></a>
+				<a class="mood" href="#">
+					<h3>See another <span></span> speech&nbsp;<i class="fa fa-angle-right"></i></h3>
+					<h4></h4>
+				</a>
+				<a class="topic" href="#">
+					<h3>See another speech about <span></span>&nbsp;<i class="fa fa-angle-right"></i></h3>
+					<h4></h4>
+				</a>
 			</div>
 		</div>
 	</div>
@@ -107,7 +115,12 @@
 
 
 {% block extra_foot_js %}
+	{{ JS.push('js/app.js') }}
     {{ JS.push('js/comments.js') }}
     {{ JS.render('js/app-footer-speech.min.js') }}
+
+	<script type="text/javascript">
+	    var SPEECHES = {{ speeches_json }};
+	</script>
 {% endblock %}
 

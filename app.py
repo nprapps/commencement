@@ -45,6 +45,9 @@ def _speech(slug):
     context['money_quote2_image'] = 'http://TKTK/quote2.jpg'
     context['share_text'] = '%(name)s\'s commencement address at %(school)s in %(year)i.' % speech
 
+    with open('www/static-data/data-thin.json') as f:
+        context['speeches_json'] = Markup(f.read())
+
     return render_template('speech.html', **context)
 
 app.register_blueprint(static.static)
