@@ -85,7 +85,8 @@ COPY EDITING
 COPY_GOOGLE_DOC_KEY = '0AlXMOHKxzQVRdFM0eHpucEdWRzRiMVFDdkY4amx6QkE'
 COPY_PATH = 'data/copy.xlsx'
 
-DATA_GOOGLE_DOC_KEY = '1a1SZvyycLpv4w8iyq-wvmT-eUERRGfzVkfliFkaQVnE'
+#DATA_GOOGLE_DOC_KEY = '1a1SZvyycLpv4w8iyq-wvmT-eUERRGfzVkfliFkaQVnE'
+DATA_GOOGLE_DOC_KEY = '1YJ0oc85wMuL9twZk1o3n8Qpz58lFTlyBpnOpBwlBe70'
 
 """
 SHARING
@@ -128,8 +129,10 @@ DISQUS_UUID = '$NEW_DISQUS_UUID'
 """
 APP-SPECIFIC
 """
-TAGS = sorted(['historic', 'politics', 'profound', 'author', 'cold-war'])
-PROFESSIONS = sorted(['author', 'business', 'activist', 'scientist'])
+#TAGS = sorted(['historic', 'politics', 'profound', 'author', 'cold-war'])
+FIELDS = sorted(['Arts', 'Science', 'Writing'])
+MOODS = sorted(['Funny', 'Inspirational', 'Dark'])
+SUBJECTS = sorted(['Success', 'Health', 'Society', 'Creativity'])
 DECADES = list(range(1840, 2010, 10))
 
 """

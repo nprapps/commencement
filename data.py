@@ -89,13 +89,13 @@ def parse():
             elif o.netloc.find('vimeo') >= 0:
                 row['vimeo_id'] = o.path.split('/')[-1]
 
-        row['tags'] = [t.strip().lower() for t in row['tags'].replace(',', ';').split(';')]
+        #row['tags'] = [t.strip().lower() for t in row['tags'].replace(',', ';').split(';')]
         
-        for tag in row['tags']:
-            if tag not in tags:
-                tags[tag] = 0
-
-            tags[tag] += 1
+        #for tag in row['tags']:
+        #    if tag not in tags:
+        #        tags[tag] = 0
+        #
+        #    tags[tag] += 1
 
         row['slug'] = slugify(row)
 
@@ -115,16 +115,16 @@ def parse():
         thin_speeches.append({
             'slug': speech['slug'],
             'name': speech['name'],
-            'profession': speech['profession'],
             'school': speech['school'],
-            'tags': speech['tags'],
+            'field': speech['field'],
+            'mood': speech['mood'],
+            'subject': speech['subject'],
             'year': speech['year'],
             'decade': speech['decade']
         })
 
     del row['money_quote']
     del row['money_quote2']
-    del row['still_image_url']
     del row['source_url']
 
     # Render thin data for index
