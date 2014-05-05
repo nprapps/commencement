@@ -13,7 +13,7 @@
     <div class="container">
         <div class="row">
             <div class="header-wrapper">
-                <h1><a href="{{ S3_BASE_URL }}"><h1>{{ PROJECT_NAME }}</h1></a></h1>
+                <h1><a href="{{ S3_BASE_URL }}"><h1>{{ COPY.content.header }}</h1></a></h1>
             </div>
         </div>
     </div>
@@ -120,12 +120,12 @@
 		<li class="full-text"><a href="{{ speech.full_text }}"><span class="fa-stack fa-lg">
 		  <i class="fa fa-circle fa-stack-2x"></i>
 		  <i class="fa fa-align-justify fa-stack-1x fa-inverse"></i>
-		</span> Read the full text</a></li>
+        </span> {{ COPY.content.full_text_link}}</a></li>
 		{% elif speech.source_url %}
 		<li class="full-text"><a href="{{ speech.source_url }}"><span class="fa-stack fa-lg">
 		  <i class="fa fa-circle fa-stack-2x"></i>
 		  <i class="fa fa-align-justify fa-stack-1x fa-inverse"></i>
-		</span> Read the text</a></li>
+        </span> {{ COPY.content.source_link}}</a></li>
 		{% endif %}
 
 		
@@ -134,7 +134,7 @@
 		<li class="video-link"><a href="{{ speech.video_url }}"><span class="fa-stack fa-lg">
 		  <i class="fa fa-circle fa-stack-2x"></i>
 		  <i class="fa fa-video-camera fa-stack-1x fa-inverse"></i>
-		</span> Watch the speech</a></li>
+        </span> {{ COPY.content.watch_link }}</a></li>
 		{% endif %}
 	</ul>
 </div>
