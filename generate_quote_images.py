@@ -27,9 +27,11 @@ LINE_OPTIMAL = (30, 35)
 LOGO = Image.open('www/assets/npr-home.png')
 
 fonts = {}
+fonts['book'] = {}
+fonts['bold'] = {}
 
 def compute_size(lines, fontsize):
-    font = fonts[fontsize]
+    font = fonts['bold'][fontsize]
     width = 0
     height = 0
 
@@ -44,7 +46,7 @@ def compute_size(lines, fontsize):
 def optimize_text(text):
     permutations = {}
     
-    for size in fonts.keys():
+    for size in fonts['bold'].keys():
         for wrap_count in xrange(LINE_MIN, LINE_MAX + 1, LINE_DELTA):
             lines = textwrap.wrap(text, wrap_count)
             width, height = compute_size(lines, size)
@@ -84,7 +86,7 @@ def render(speech):
 
     text = u'“%s”' % speech['money_quote']
     size, wrap_count = optimize_text(text)
-    font = fonts[size]    
+    font = fonts['bold'][size]    
     quote_size = font.getsize(text[0])
     lines = textwrap.wrap(text, wrap_count)
 
@@ -96,7 +98,7 @@ def render(speech):
         if i > 0:
             x += quote_size[0]
 
-        draw.text((x, y), line, font=fonts[size], fill=(0, 0, 0))
+        draw.text((x, y), line, font=fonts['bold'][size], fill=(0, 0, 0))
 
         y += size
 
@@ -104,7 +106,7 @@ def render(speech):
 
     text = u'— %s' % speech['name']
     size = min(size, 32)
-    font = fonts[size]
+    font = fonts['book'][size]
     width, height = font.getsize(text)
     x = (CANVAS_WIDTH - TEXT_MARGIN[1]) - width
 
@@ -121,7 +123,8 @@ def render(speech):
 
 def main():
     for size in xrange(SIZE_MIN, SIZE_MAX + 1, SIZE_DELTA):
-        fonts[size] =  ImageFont.truetype('www/assets/Gotham-Book.otf', size)
+        fonts['book'][size] =  ImageFont.truetype('www/assets/Gotham-Book.otf', size)
+        fonts['bold'][size] =  ImageFont.truetype('www/assets/Gotham-Bold.otf', size)
 
     with open('www/static-data/data.json') as f:
         data = json.load(f)
