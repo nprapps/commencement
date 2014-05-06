@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf8 -*-
 
 import json
 import os
@@ -83,7 +84,7 @@ def render(speech):
     img = Image.new('RGB', (640, 640), (255, 255, 255))
     draw = ImageDraw.Draw(img)
 
-    text = speech['money_quote']
+    text = u'“%s”' % speech['money_quote']
     size, wrap_count = optimize_text(text)
     lines = textwrap.wrap(text, wrap_count)
 
