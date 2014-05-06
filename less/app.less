@@ -530,8 +530,19 @@ h1 + #story-meta { margin-top: -11px; }
 		}
 
 		.comment-terms {
-			font-size: @font-size-base * 0.833333333;
+			font-size: @font-size-base * 0.722222222;
 			color: @gray;
+
+			a {
+				text-color: @gray;
+				background: transparent;
+				border-bottom: 1px dotted @gray-light;
+
+				&:hover {
+					background: @yellow;
+					color: @text-color;
+				}
+			}
 		}
 
 		.comments-close {
