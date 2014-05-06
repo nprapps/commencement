@@ -52,3 +52,4 @@ www/static-data/*
 .speeches_html
 .speeches_gzip
 .quote_images
+www/quote-images/*

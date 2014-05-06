@@ -7,7 +7,7 @@ import textwrap
 
 from PIL import Image, ImageDraw, ImageFont
 
-OUT_DIR = '.quote_images'
+OUT_DIR = 'www/quote-images'
 
 CANVAS_WIDTH = 640
 CANVAS_HEIGHT = 640
