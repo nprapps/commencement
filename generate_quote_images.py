@@ -24,11 +24,9 @@ LINE_MAX = 40
 LINE_DELTA = 5
 LINE_OPTIMAL = (30, 35)
 
-fonts = {}
+LOGO = Image.open('www/assets/npr-home.png')
 
-# VARIABLES
-# font size
-# line char length
+fonts = {}
 
 def compute_size(lines, fontsize):
     font = fonts[fontsize]
@@ -105,11 +103,18 @@ def render(speech):
 
     draw.text((x, y), text, font=font, fill=(0, 0, 0))
 
+    logo_xy = (
+        (CANVAS_WIDTH - 40) - LOGO.size[0],
+        (CANVAS_HEIGHT - 40) - LOGO.size[1]
+    )
+
+    img.paste(LOGO, logo_xy)
+
     img.save('%s/%s.png' % (OUT_DIR, speech['slug']), 'PNG')
 
 def main():
     for size in xrange(SIZE_MIN, SIZE_MAX + 1, SIZE_DELTA):
-        fonts[size] =  ImageFont.truetype('Gotham-Book.otf', size)
+        fonts[size] =  ImageFont.truetype('www/assets/Gotham-Book.otf', size)
 
     with open('www/static-data/data.json') as f:
         data = json.load(f)
