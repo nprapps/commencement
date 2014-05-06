@@ -52,7 +52,7 @@ def parse():
     print "Start parse(): %i rows." % len(rows)
 
     speeches = []
-    tags = {}
+    #tags = {}
 
     for row in rows:
         for k, v in row.items():
@@ -88,6 +88,10 @@ def parse():
                     row['youtube_id'] = o.path.split('/')[-1]
             elif o.netloc.find('vimeo') >= 0:
                 row['vimeo_id'] = o.path.split('/')[-1]
+
+        for k in ['money_quote', 'money_quote2']:
+            if row[k]:
+                row[k] = row[k].strip('"')
 
         #row['tags'] = [t.strip().lower() for t in row['tags'].replace(',', ';').split(';')]
         
