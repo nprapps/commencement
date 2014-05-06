@@ -89,7 +89,6 @@ def render(speech):
     text = u'“%s”' % speech['money_quote']
     size, wrap_count = optimize_text(text)
     font = fonts['bold'][size]    
-    quote_size = font.getsize(text[0])
     lines = textwrap.wrap(text, wrap_count)
 
     y = TEXT_MARGIN[0]
