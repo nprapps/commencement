@@ -31,7 +31,7 @@ var getNewSpeech = function(key, value){
     var newSpeech = _.chain(SPEECHES)
                      .shuffle()
                      .filter(function(pair){
-                       return pair[key] == value && pair['slug'] !== speechSlug;
+                         return pair[key] == value && pair['slug'] !== speechSlug;
                      })
                      .value()[0];
 
@@ -39,7 +39,7 @@ var getNewSpeech = function(key, value){
         newSpeech = _.chain(SPEECHES)
                      .shuffle()
                      .filter(function(pair){
-                       return pair['slug'] !== speechSlug && pair['name'] !== '';
+                         return pair['slug'] !== speechSlug && pair['name'] !== '';
                      })
                      .value()[0];
     }
