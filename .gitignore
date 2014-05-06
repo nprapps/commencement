@@ -51,3 +51,4 @@ data/data.csv
 www/static-data/*
 .speeches_html
 .speeches_gzip
+.quote_images
