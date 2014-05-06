@@ -82,11 +82,11 @@ def optimize_text(text):
 
     return optimal
 
-def render(speech):
+def render(quote, name, slug):
     img = Image.new('RGB', (640, 640), (255, 255, 255))
     draw = ImageDraw.Draw(img)
 
-    text = u'“%s”' % speech['money_quote']
+    text = u'“%s”' % quote 
     size, wrap_count = optimize_text(text)
     font = fonts['bold'][size]    
     lines = textwrap.wrap(text, wrap_count)
@@ -105,7 +105,7 @@ def render(speech):
 
     y += size 
 
-    text = u'— %s' % speech['name']
+    text = u'— %s' % name 
     size = min(size, 32)
     font = fonts['book'][size]
     width, height = font.getsize(text)
@@ -120,7 +120,7 @@ def render(speech):
 
     img.paste(LOGO, logo_xy)
 
-    img.save('%s/%s.png' % (OUT_DIR, speech['slug']), 'PNG')
+    img.save('%s/%s.png' % (OUT_DIR, slug), 'PNG')
 
 def main():
     for size in xrange(SIZE_MIN, SIZE_MAX + 1, SIZE_DELTA):
@@ -136,7 +136,13 @@ def main():
 
     for speech in data:
         print speech['slug']
-        render(speech)
+        render(speech['money_quote'], speech['name'], speech['slug'])
+
+        if speech['money_quote2']:
+            slug = '%s-2' % speech['slug']
+
+            print slug
+            render(speech['money_quote2'], speech['name'], '%s-2' % slug)
 
 if __name__ == '__main__':
     main()
