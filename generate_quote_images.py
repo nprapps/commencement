@@ -122,7 +122,8 @@ def main():
     if not os.path.exists(OUT_DIR):
         os.mkdir(OUT_DIR)
 
-    for speech in data[:5]:
+    for speech in data:
+        print speech['slug']
         render(speech)
 
 if __name__ == '__main__':
