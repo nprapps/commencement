@@ -84,12 +84,19 @@ def render(speech):
 
     text = u'“%s”' % speech['money_quote']
     size, wrap_count = optimize_text(text)
+    font = fonts[size]    
+    quote_size = font.getsize(text[0])
     lines = textwrap.wrap(text, wrap_count)
 
     y = TEXT_MARGIN[0]
 
-    for line in lines:
-        draw.text((TEXT_MARGIN[1], y), line, font=fonts[size], fill=(0, 0, 0))
+    for i, line in enumerate(lines):
+        x = TEXT_MARGIN[1]
+    
+        if i > 0:
+            x += quote_size[0]
+
+        draw.text((x, y), line, font=fonts[size], fill=(0, 0, 0))
 
         y += size
 
