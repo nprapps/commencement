@@ -30,6 +30,8 @@ fonts = {}
 fonts['book'] = {}
 fonts['bold'] = {}
 
+quote_width = {}
+
 def compute_size(lines, fontsize):
     font = fonts['bold'][fontsize]
     width = 0
@@ -52,7 +54,7 @@ def optimize_text(text):
             width, height = compute_size(lines, size)
 
             # Throw away any that exceed canvas space
-            if width > TEXT_MAX_WIDTH:
+            if width > TEXT_MAX_WIDTH - quote_width[size]:
                 continue
 
             if height > TEXT_MAX_HEIGHT:
@@ -96,7 +98,7 @@ def render(speech):
         x = TEXT_MARGIN[1]
     
         if i > 0:
-            x += quote_size[0]
+            x += quote_width[size]
 
         draw.text((x, y), line, font=fonts['bold'][size], fill=(0, 0, 0))
 
@@ -123,8 +125,10 @@ def render(speech):
 
 def main():
     for size in xrange(SIZE_MIN, SIZE_MAX + 1, SIZE_DELTA):
+
         fonts['book'][size] =  ImageFont.truetype('www/assets/Gotham-Book.otf', size)
         fonts['bold'][size] =  ImageFont.truetype('www/assets/Gotham-Bold.otf', size)
+        quote_width[size] = fonts['bold'][size].getsize(u'“')[0]
 
     with open('www/static-data/data.json') as f:
         data = json.load(f)
