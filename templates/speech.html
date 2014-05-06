@@ -29,20 +29,6 @@
 			<h1>{{ speech.name }}</h1>
 			<p class="speech-info">{{ speech.school }}, {{ speech.date }}</p>
 		</div>
-
-		{% if speech.youtube_id or speech.vimeo_id %}
-		<div class="speech-video">
-			<div class="video-wrapper">
-				{% if speech.youtube_id %}
-					<iframe id="player" type="text/html" width="100%" height="100%"
-					  src="http://www.youtube.com/embed/{{ speech.youtube_id }}?enablejsapi=1"
-					  frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-				{% elif speech.vimeo_id %}
-					<iframe src="//player.vimeo.com/video/{{ speech.vimeo_id }}" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-				{% endif %}
-			</div>
-		</div>
-		{% endif %}
 	
 		<div class="speech-quotes">
 			{% if speech.money_quote %}
@@ -57,6 +43,20 @@
                 {% endwith %}
 			{% endif %}
 		</div>
+
+		{% if speech.youtube_id or speech.vimeo_id %}
+		<div class="speech-video">
+			<div class="video-wrapper">
+				{% if speech.youtube_id %}
+					<iframe id="player" type="text/html" width="100%" height="100%"
+					  src="http://www.youtube.com/embed/{{ speech.youtube_id }}?enablejsapi=1"
+					  frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+				{% elif speech.vimeo_id %}
+					<iframe src="//player.vimeo.com/video/{{ speech.vimeo_id }}" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+				{% endif %}
+			</div>
+		</div>
+		{% endif %}
 	</div>
 
 	<ul class="external-links">
