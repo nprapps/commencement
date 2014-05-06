@@ -8,8 +8,11 @@ from PIL import Image, ImageDraw, ImageFont
 
 OUT_DIR = '.quote_images'
 
-MAX_WIDTH = 640
-MAX_HEIGHT = 640
+CANVAS_WIDTH = 640
+CANVAS_HEIGHT = 640
+TEXT_MARGIN = (40, 40, 200, 40)
+TEXT_MAX_WIDTH = CANVAS_WIDTH - (TEXT_MARGIN[1] + TEXT_MARGIN[3])
+TEXT_MAX_HEIGHT = CANVAS_WIDTH - (TEXT_MARGIN[0] + TEXT_MARGIN[2])
 
 SIZE_MIN = 16
 SIZE_MAX = 64
@@ -18,7 +21,7 @@ SIZE_DELTA = 4
 LINE_MIN = 15
 LINE_MAX = 40
 LINE_DELTA = 5
-LINE_OPTIMAL = (20, 25)
+LINE_OPTIMAL = (30, 35)
 
 fonts = {}
 
@@ -48,10 +51,10 @@ def optimize_text(text):
             width, height = compute_size(lines, size)
 
             # Throw away any that exceed canvas space
-            if width > MAX_WIDTH:
+            if width > TEXT_MAX_WIDTH:
                 continue
 
-            if height > MAX_HEIGHT:
+            if height > TEXT_MAX_HEIGHT:
                 continue
 
             permutations[(size, wrap_count)] = (width, height)
@@ -84,10 +87,10 @@ def render(speech):
     size, wrap_count = optimize_text(text)
     lines = textwrap.wrap(text, wrap_count)
 
-    y = 0
+    y = TEXT_MARGIN[0]
 
     for line in lines:
-        draw.text((0, y), line, font=fonts[size], fill=(0, 0, 0))
+        draw.text((TEXT_MARGIN[1], y), line, font=fonts[size], fill=(0, 0, 0))
 
         y += size
 
