@@ -2,6 +2,7 @@ var $speeches = null;
 var $adviceFilter = {};
 var $search = null;
 var $body = null;
+var moodSpeech = null;
 
 var searchIndex = null;
 
@@ -31,7 +32,7 @@ var getNewSpeech = function(key, value){
     var newSpeech = _.chain(SPEECHES)
                      .shuffle()
                      .filter(function(pair){
-                         return pair[key] == value && pair['slug'] !== speechSlug;
+                         return pair[key] == value && pair['slug'] !== speechSlug && pair['slug'] !== moodSpeech;
                      })
                      .value()[0];
 
@@ -39,9 +40,13 @@ var getNewSpeech = function(key, value){
         newSpeech = _.chain(SPEECHES)
                      .shuffle()
                      .filter(function(pair){
-                         return pair['slug'] !== speechSlug && pair['name'] !== '';
+                         return pair['slug'] !== speechSlug && pair['name'] !== '' && pair['slug'] !== moodSpeech;
                      })
                      .value()[0];
+    }
+
+    if (key === 'mood'){
+        moodSpeech = newSpeech['slug'];
     }
 
     return newSpeech;
