@@ -43,7 +43,7 @@ def _speech(slug):
     context['share_url'] = 'http://%s/%s/speech/%s' % (app_config.PRODUCTION_S3_BUCKETS[0], app_config.PROJECT_SLUG, slug)
     context['money_quote_image'] = 'http://TKTK/quote.jpg'
     context['money_quote2_image'] = 'http://TKTK/quote2.jpg'
-    context['share_text'] = '%(name)s\'s commencement address at %(school)s in %(year)i.' % speech
+    context['share_text'] = '%(name)s\'s commencement address at %(school)s in %(year)s.' % speech
 
     with open('www/static-data/data-thin.json') as f:
         context['speeches_json'] = Markup(f.read())

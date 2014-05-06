@@ -131,9 +131,9 @@ APP-SPECIFIC
 """
 #TAGS = sorted(['historic', 'politics', 'profound', 'author', 'cold-war'])
 FIELDS = sorted(['Arts', 'Science', 'Writing'])
-MOODS = sorted(['Funny', 'Inspirational', 'Dark'])
+MOODS = sorted(['funny', 'inspirational', 'dark'])
 SUBJECTS = sorted(['Success', 'Health', 'Society', 'Creativity'])
-ADVICE = sorted(['Dream', 'YOLO', 'Society', 'Creativity', 'Success'])
+ADVICE = sorted(['dream', 'yolo', 'society', 'creativity', 'success'])
 DECADES = list(range(1840, 2010, 10))
 
 """
