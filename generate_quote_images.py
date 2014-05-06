@@ -8,46 +8,81 @@ from PIL import Image, ImageDraw, ImageFont
 
 OUT_DIR = '.quote_images'
 
-SIZE_DEFAULT = 48
+MAX_WIDTH = 640
+MAX_HEIGHT = 640
+
 SIZE_MIN = 16
 SIZE_MAX = 64
 SIZE_DELTA = 4
-OPTIMAL_LINES = 4
+
+LINE_MIN = 15
+LINE_MAX = 40
+LINE_DELTA = 5
+LINE_OPTIMAL = (20, 25)
 
 fonts = {}
-textwrapper = textwrap.TextWrapper(width=30)
 
-def optimize_text_size(text):
-    size = SIZE_DEFAULT
+# VARIABLES
+# font size
+# line char length
 
-    lines = textwrapper.wrap(text)
+def compute_size(lines, fontsize):
+    font = fonts[fontsize]
+    width = 0
+    height = 0
 
-    if len(lines) == OPTIMAL_LINES:
-        pass
-    elif len(lines) < OPTIMAL_LINES:
-        while len(lines) < OPTIMAL_LINES:
-            if size == SIZE_MAX:
-                break 
-                
-            size += SIZE_DELTA 
+    for line in lines:
+        x, y = font.getsize(line)
 
-            lines = textwrapper.wrap(text)
-    else:
-        while len(lines) > OPTIMAL_LINES:
-            if size == SIZE_MIN:
-                break
-                
-            size -= SIZE_DELTA 
+        width = max((width, x))
+        height += y
+    
+    return width, height
 
-            lines = textwrapper.wrap(text)
+def optimize_text(text):
+    permutations = {}
+    
+    for size in fonts.keys():
+        for wrap_count in xrange(LINE_MIN, LINE_MAX + 1, LINE_DELTA):
+            lines = textwrap.wrap(text, wrap_count)
+            width, height = compute_size(lines, size)
 
-    return (lines, size)
+            # Throw away any that exceed canvas space
+            if width > MAX_WIDTH:
+                continue
+
+            if height > MAX_HEIGHT:
+                continue
+
+            permutations[(size, wrap_count)] = (width, height)
+
+    optimal = (0, 0)
+    sub_optimal = (0, 0)
+
+    # Find the largest font size that's in the butter zone
+    for k, v in permutations.items():
+        size, wrap_count = k
+        width, height = v
+
+        if wrap_count in LINE_OPTIMAL:
+            if size > optimal[0]:
+                optimal = k
+        else:
+            if size > sub_optimal[0]:
+                sub_optimal = k
+
+    if not optimal:
+        return sub_optimal
+
+    return optimal
 
 def render(speech):
     img = Image.new('RGB', (640, 640), (255, 255, 255))
     draw = ImageDraw.Draw(img)
 
-    lines, size = optimize_text_size(speech['money_quote'])
+    text = speech['money_quote']
+    size, wrap_count = optimize_text(text)
+    lines = textwrap.wrap(text, wrap_count)
 
     y = 0
 
