@@ -125,7 +125,6 @@ def render(speech):
 
 def main():
     for size in xrange(SIZE_MIN, SIZE_MAX + 1, SIZE_DELTA):
-
         fonts['book'][size] =  ImageFont.truetype('www/assets/Gotham-Book.otf', size)
         fonts['bold'][size] =  ImageFont.truetype('www/assets/Gotham-Bold.otf', size)
         quote_width[size] = fonts['bold'][size].getsize(u'“')[0]
