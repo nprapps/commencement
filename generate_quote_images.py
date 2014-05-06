@@ -95,6 +95,16 @@ def render(speech):
 
         y += size
 
+    y += size 
+
+    text = u'— %s' % speech['name']
+    size = min(size, 32)
+    font = fonts[size]
+    width, height = font.getsize(text)
+    x = (CANVAS_WIDTH - TEXT_MARGIN[1]) - width
+
+    draw.text((x, y), text, font=font, fill=(0, 0, 0))
+
     img.save('%s/%s.png' % (OUT_DIR, speech['slug']), 'PNG')
 
 def main():
