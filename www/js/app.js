@@ -1,5 +1,5 @@
 var $speeches = null;
-var $adviceFilter = {};
+var $tagsFilter = {};
 var $search = null;
 var $body = null;
 var moodSpeech = null;
@@ -11,7 +11,7 @@ var filterSpeeches = function() {
 
     var $visibleSpeeches = $speeches;
     var query = $search.val();
-    var advice = $adviceFilter.val();
+    var tags = $tagsFilter.val();
 
     if (query) {
         var results = searchIndex.search(query);
@@ -21,8 +21,8 @@ var filterSpeeches = function() {
         $visibleSpeeches = $(ids.join(','));
     }
 
-    if (advice) {
-        $visibleSpeeches = $visibleSpeeches.filter('.advice-' + advice)
+    if (tags) {
+        $visibleSpeeches = $visibleSpeeches.filter('.tag-' + tags)
     }
 
     $visibleSpeeches.show();
@@ -54,7 +54,7 @@ var getNewSpeech = function(key, value){
 
 $(function() {
     $speeches = $('.speeches li');
-    $adviceFilter = $('#advice-filter');
+    $tagsFilter = $('#tags-filter');
     $search = $('#search');
     $body = $('body');
 
@@ -71,7 +71,7 @@ $(function() {
             searchIndex.add(speech);
         });
 
-        $adviceFilter.on('change', filterSpeeches);
+        $tagsFilter.on('change', filterSpeeches);
         $search.on('keyup', filterSpeeches);
     }
 
@@ -80,13 +80,13 @@ $(function() {
         var $topic = $('.topic');
 
         var newMoodSpeech = getNewSpeech('mood', speechMood);
-        var newAdviceSpeech = getNewSpeech('advice', speechAdvice);
+        var newAdviceSpeech = getNewSpeech('tags', speechAdvice);
 
         $mood.attr('href', APP_CONFIG.S3_BASE_URL + '/speech/' + newMoodSpeech.slug + '/');
         $mood.find('h4').text(newMoodSpeech.name);
         $mood.find('span').text(newMoodSpeech.mood);
         $topic.attr('href', APP_CONFIG.S3_BASE_URL + '/speech/' + newAdviceSpeech.slug + '/');
         $topic.find('h4').text(newAdviceSpeech.name);
-        $topic.find('span').text(newAdviceSpeech.advice);
+        $topic.find('span').text(newAdviceSpeech.tags);
     }
 });

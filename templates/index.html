@@ -27,12 +27,12 @@
 
 <div class="filters container">
     <form role="form" class="row">
-        <div class="form-group advice">
-            <label for="advice-filter" class="control-label">Find advice</label>
-            <select class="form-control" id="advice-filter">
+        <div class="form-group tags">
+            <label for="tags-filter" class="control-label">Find speeches</label>
+            <select class="form-control" id="tags-filter">
                 <option value=""></option>
-                {% for advice in ADVICE %}
-                <option value="{{ advice }}">{{ advice }}</option>
+                {% for tag, name in TAGS.items() %}
+                <option value="{{ tag }}">{{ name }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -46,7 +46,7 @@
 
 <ul class="speeches">
     {% for speech in speeches %}
-    <li id="{{ speech.slug }}" class="advice-{{ speech.advice }}">
+    <li id="{{ speech.slug }}" class="{% for tag in speech.tags %}tag-{{ tag }} {% endfor %}">
         <a href="speech/{{ speech.slug }}/">
             <div class="speech-info">
                 <h2 class="speech-name">{{ speech.name }}</h2>

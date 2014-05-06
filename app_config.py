@@ -129,12 +129,26 @@ DISQUS_UUID = '$NEW_DISQUS_UUID'
 """
 APP-SPECIFIC
 """
-#TAGS = sorted(['historic', 'politics', 'profound', 'author', 'cold-war'])
-FIELDS = sorted(['Arts', 'Science', 'Writing'])
-MOODS = sorted(['funny', 'inspirational', 'dark'])
-SUBJECTS = sorted(['Success', 'Health', 'Society', 'Creativity'])
-ADVICE = sorted(['dream', 'yolo', 'society', 'creativity', 'success'])
-DECADES = list(range(1840, 2010, 10))
+TAGS = {
+    'funny': 'Funny',
+    'profound': 'Profound',
+    'business': 'Business',
+    'tech': 'Tech',
+    'arts': 'Arts',
+    'author': 'Author',
+    'politics': 'Politics',
+    'change-the-world': 'Change the world',
+    'remember-history': 'Remember history',
+    'inner-voice': 'Inner voice',
+    'dream': 'Dream',
+    'be-luck': 'Be lucky',
+    'unplug': 'Unplug',
+    'be-prepared': 'Be prepared',
+    'work-hard': 'Work hard',
+    'play': 'Play',
+    'dont-give-up': 'Don\'t give up',
+    'yolo': 'YOLO'
+}
 
 """
 Utilities

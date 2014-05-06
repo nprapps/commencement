@@ -52,7 +52,7 @@ def parse():
     print "Start parse(): %i rows." % len(rows)
 
     speeches = []
-    #tags = {}
+    all_tags = {}
 
     for row in rows:
         for k, v in row.items():
@@ -93,21 +93,23 @@ def parse():
             if row[k]:
                 row[k] = row[k].strip('"')
 
-        #row['tags'] = [t.strip().lower() for t in row['tags'].replace(',', ';').split(';')]
-        
-        #for tag in row['tags']:
-        #    if tag not in tags:
-        #        tags[tag] = 0
-        #
-        #    tags[tag] += 1
+        tags = [t.strip().lower() for t in row['tags'].replace(',', ';').split(';')]
+        row['tags'] = []
+
+        for tag in tags:
+            if tag not in app_config.TAGS:
+                print 'Unrecognized tag: %s' % t
+            else:
+                row['tags'].append(tag)
+
+                if tag not in all_tags:
+                    all_tags[tag] = 0
+            
+                all_tags[tag] += 1
 
         row['slug'] = slugify(row)
 
         speeches.append(row)
-
-    # print tags
-    #for t in ['%s: %i' % (k, v) for k, v in tags.items()]:
-    #    print t
 
     # Render complete data
     with open('www/static-data/data.json', 'w') as f:
@@ -120,9 +122,7 @@ def parse():
             'slug': speech['slug'],
             'name': speech['name'],
             'school': speech['school'],
-            'field': speech['field'],
-            'mood': speech['mood'],
-            'advice': speech['advice'],
+            'tags': speech['tags'],
             'year': speech['year'],
             'decade': speech['decade']
         })
