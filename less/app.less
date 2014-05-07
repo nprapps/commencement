@@ -164,11 +164,38 @@ h1 + #story-meta { margin-top: -11px; }
 		background: #111;
 
 		blockquote {
-			.make-sm-column(12);
+			.make-sm-column(10);
+			.make-sm-column-push(1);
 			border: none;
+			padding-top: @line-height-computed * 2;
+			padding-bottom: @line-height-computed * 2;
 
 			p {
 				font-size: @font-size-base;
+				position: relative;
+				margin-bottom: @line-height-computed;
+
+				&:before {
+					color: @gray-light;
+					content: '\201C';
+					position: absolute;
+					right: 100%;
+					top: 0;
+					font-size: 84px;
+					font-weight: bold;
+					line-height: 1;
+					margin-right: @grid-gutter-width / 2;
+				}
+
+				@media screen and (max-width: @screen-xs-max){
+					padding-left: @grid-gutter-width;
+
+					&:before {
+						font-size: 42px;
+						right: auto;
+						left: 0;
+					}
+				}
 
 				@media screen and (min-width: @screen-sm){
 					font-family: Gotham, @font-family-sans-serif;
@@ -197,7 +224,7 @@ h1 + #story-meta { margin-top: -11px; }
 	}
 
 	.filters {
-		padding-top: @line-height-computed;
+		padding-top: @line-height-computed * 2;
 		padding-bottom: @line-height-computed;
 		color: @gray-light;
 
@@ -220,7 +247,7 @@ h1 + #story-meta { margin-top: -11px; }
 
 	.speeches {
 		.list-unstyled;
-		padding-bottom: @line-height-computed;
+		padding-bottom: @line-height-computed * 2;
 		margin-bottom: 0;
 
 		li {
