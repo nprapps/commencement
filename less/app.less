@@ -162,13 +162,36 @@ h1 + #story-meta { margin-top: -11px; }
 	.big-quote {
 		color: #fff;
 		background: #111;
+		padding-top: @line-height-computed * 2;
+		padding-bottom: @line-height-computed * 2;
 
-		blockquote {
+		.lead-quote-wrapper {
 			.make-sm-column(10);
 			.make-sm-column-push(1);
+		}
+
+		#refresh-quote {
+			background: @gray;
+			color: #111;
 			border: none;
-			padding-top: @line-height-computed * 2;
-			padding-bottom: @line-height-computed * 2;
+			float: right;
+
+			&:hover {
+				background: @yellow;
+			}
+		}
+
+		blockquote {
+			text-align: left;
+			border: none;
+			opacity: 0;
+			padding: 0;
+			position: relative;
+			.transition(all 0.5s ease-in);
+
+			&.fadein {
+				opacity: 1;
+			}
 
 			p {
 				font-size: @font-size-base;
@@ -204,6 +227,9 @@ h1 + #story-meta { margin-top: -11px; }
 			}
 
 			cite {
+				display: block;
+				margin-bottom: @line-height-computed;
+
 				a {
 					background: @yellow;
 					color: #000;
@@ -218,6 +244,37 @@ h1 + #story-meta { margin-top: -11px; }
 					&:before {
 						content: "\2014\2009";
 					}
+				}
+			}
+
+			.sharing {
+				li {
+					display: inline-block;
+				}
+
+				a {
+					.fa-stack-1x {
+						color: #111;
+					}
+					.fa-circle {
+						color: @gray-light;
+					}
+
+					&:hover {
+						.fa-circle {
+							color: @yellow;
+						}
+					}
+				}
+
+				@media screen and (min-width: @screen-sm){
+					li {
+						display: block;
+					}
+
+					position: absolute;
+					top: 0;
+					right: -@grid-gutter-width * 2;
 				}
 			}
 		}

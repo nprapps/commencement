@@ -3,6 +3,7 @@ var $tagsFilter = {};
 var $search = null;
 var $body = null;
 var $leadQuote = null;
+var $refreshQuoteButton = null;
 var moodSpeech = null;
 var speechSlug = speechSlug||null;
 
@@ -54,14 +55,25 @@ var getNewSpeech = function(key, value){
     return newSpeech;
 }
 
+var renderLeadQuote = function(){
+    var leadQuote = getNewSpeech();
+    var context = leadQuote;
+    var html = JST.quote(context);
+
+    $leadQuote.html(html);
+    _.defer(function(){
+        $leadQuote.find('blockquote').addClass('fadein');
+    });
+}
+
 $(function() {
     $speeches = $('.speeches li');
     $tagsFilter = $('#tags-filter');
     $search = $('#search');
     $body = $('body');
+    $refreshQuoteButton = $('#refresh-quote');
 
     if ($body.hasClass('homepage')){
-        var leadQuote = getNewSpeech();
         $leadQuote = $('#lead-quote');
         searchIndex = lunr(function () {
             this.field('name', {boost: 10})
@@ -71,16 +83,16 @@ $(function() {
             this.ref('slug')
         })
 
+        renderLeadQuote();
+
         _.each(SPEECHES, function(speech) {
             searchIndex.add(speech);
         });
 
         $tagsFilter.on('change', filterSpeeches);
         $search.on('keyup', filterSpeeches);
+        $refreshQuoteButton.on('click', renderLeadQuote);
 
-        var context = leadQuote;
-        var html = JST.quote(context);
-        $leadQuote.html(html);
     }
 
     if ($body.hasClass('speech')){
