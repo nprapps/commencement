@@ -101,7 +101,7 @@
                     {% if tag in speech['tags'] %}
                         {% for related in speech['related'][tag] %}
                         <a class="topic" href="{{ S3_BASE_URL }}/speech/{{ related.slug }}/">
-                                <h3>See another speech about <span>{{ tag_name }}</span>&nbsp;<i class="fa fa-angle-right"></i></h3>
+                                <h3>See another &ldquo;<span>{{ tag_name }}</span>&rdquo; speech&nbsp;<i class="fa fa-angle-right"></i></h3>
                                 <h4>{{ related.name }}</h4>
                             </a>
                         {% endfor %}

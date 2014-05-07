@@ -29,29 +29,31 @@ var filterSpeeches = function() {
     $visibleSpeeches.show();
 }
 
-var getNewSpeech = function(key, value){
-    var newSpeech = _.chain(SPEECHES)
-                     .shuffle()
-                     .filter(function(pair){
-                         return pair[key] == value;
-                     })
-                     .value()[0];
+var newSpeech = function(key, value){
+    var speech = null;
 
-    if (newSpeech === undefined){
-        newSpeech = _.chain(SPEECHES)
-                     .shuffle()
-                     .filter(function(pair){
-                         return pair['name'] !== '';
-                     })
-                     .value()[0];
-    }
+    return {
+        getSpeech: function(){
+            this.setSpeech();
 
-    return newSpeech;
+            return speech;
+        },
+        setSpeech: function(key, value){
+            speech = _.chain(SPEECHES)
+                      .shuffle()
+                      .filter(function(pair){
+                          return pair[key] == value;
+                      })
+                      .reject(function(pair){
+                          return speech !== null ? pair['slug'] == speech['slug'] : false;
+                      })
+                      .value()[0];
+        }
+    };
 }
 
-var renderLeadQuote = function(){
-    var leadQuote = getNewSpeech();
-    var context = leadQuote;
+var renderLeadQuote = function(quote){
+    var context = typeof(quote['data']) !== 'undefined' ? quote['data'].getSpeech() : quote.getSpeech();
     var html = JST.quote(context);
 
     $leadQuote.html(html);
@@ -76,8 +78,9 @@ $(function() {
             this.field('year')
             this.ref('slug')
         })
+        var quote = newSpeech();
 
-        renderLeadQuote();
+        renderLeadQuote(quote);
 
         _.each(SPEECHES, function(speech) {
             searchIndex.add(speech);
@@ -85,19 +88,6 @@ $(function() {
 
         $tagsFilter.on('change', filterSpeeches);
         $search.on('keyup', filterSpeeches);
-        $refreshQuoteButton.on('click', renderLeadQuote);
-
-    }
-
-    if ($body.hasClass('speech')){
-        var $mood = $('.mood');
-        var $topic = $('.topic');
-
-        $mood.attr('href', APP_CONFIG.S3_BASE_URL + '/speech/' + newMoodSpeech.slug + '/');
-        $mood.find('h4').text(newMoodSpeech.name);
-        $mood.find('span').text(newMoodSpeech.mood);
-        $topic.attr('href', APP_CONFIG.S3_BASE_URL + '/speech/' + newAdviceSpeech.slug + '/');
-        $topic.find('h4').text(newAdviceSpeech.name);
-        $topic.find('span').text(newAdviceSpeech.tags);
+        $refreshQuoteButton.on('click', quote, renderLeadQuote);
     }
 });
