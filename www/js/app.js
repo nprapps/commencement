@@ -2,7 +2,9 @@ var $speeches = null;
 var $tagsFilter = {};
 var $search = null;
 var $body = null;
+var $leadQuote = null;
 var moodSpeech = null;
+var speechSlug = speechSlug||null;
 
 var searchIndex = null;
 
@@ -59,6 +61,8 @@ $(function() {
     $body = $('body');
 
     if ($body.hasClass('homepage')){
+        var leadQuote = getNewSpeech();
+        $leadQuote = $('#lead-quote');
         searchIndex = lunr(function () {
             this.field('name', {boost: 10})
             this.field('mood')
@@ -73,6 +77,10 @@ $(function() {
 
         $tagsFilter.on('change', filterSpeeches);
         $search.on('keyup', filterSpeeches);
+
+        var context = leadQuote;
+        var html = JST.quote(context);
+        $leadQuote.html(html);
     }
 
     if ($body.hasClass('speech')){

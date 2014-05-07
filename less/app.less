@@ -159,6 +159,43 @@ h1 + #story-meta { margin-top: -11px; }
 
 .homepage {
 
+	.big-quote {
+		color: #fff;
+		background: #111;
+
+		blockquote {
+			.make-sm-column(12);
+			border: none;
+
+			p {
+				font-size: @font-size-base;
+
+				@media screen and (min-width: @screen-sm){
+					font-family: Gotham, @font-family-sans-serif;
+					font-size: @font-size-base * 2.333333333;
+				}
+			}
+
+			cite {
+				a {
+					background: @yellow;
+					color: #000;
+					text-transform: uppercase;
+					padding: 2px;
+
+					&:hover {
+						text-decoration: none;
+						background: #fff;
+					}
+
+					&:before {
+						content: "\2014\2009";
+					}
+				}
+			}
+		}
+	}
+
 	.filters {
 		padding-top: @line-height-computed;
 		padding-bottom: @line-height-computed;

@@ -24,7 +24,7 @@ def index():
 
     context['speeches'] = data.load() 
 
-    with open('www/static-data/data-thin.json') as f:
+    with open('www/static-data/data.json') as f:
         context['speeches_json'] = Markup(f.read())
 
     return render_template('index.html', **context)
