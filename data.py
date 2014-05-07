@@ -8,6 +8,8 @@ import re
 
 from urlparse import urlparse, parse_qs
 
+from typogrify.filters import smartypants
+
 import requests
 
 import app_config
@@ -91,7 +93,7 @@ def parse():
 
         for k in ['money_quote', 'money_quote2']:
             if row[k]:
-                row[k] = row[k].strip('"')
+                row[k] = smartypants(row[k].strip('"'))
 
         tags = [t.strip().lower() for t in row['tags'].replace(',', ';').split(';')]
         row['tags'] = []

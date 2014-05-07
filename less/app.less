@@ -430,7 +430,8 @@ h1 + #story-meta { margin-top: -11px; }
 
 
 	.speech-header {
-		.make-md-column(12);
+		.make-sm-column(10);
+		.make-sm-column-push(1);
 		padding-top: @line-height-computed;
 		margin-bottom: @line-height-computed;
 
@@ -492,7 +493,7 @@ h1 + #story-meta { margin-top: -11px; }
 
 		.sharing {
 			.make-sm-column(1);
-			.make-sm-column-push(2);
+			.make-sm-column-push(1);
 
 			a {
 				display: block;
@@ -520,8 +521,8 @@ h1 + #story-meta { margin-top: -11px; }
 		}
 
 		blockquote {
-			.make-sm-column(8);
-			.make-sm-column-push(2);
+			.make-sm-column(10);
+			.make-sm-column-push(1);
 			color: #fff;
 			border: none;
 			position: relative;
@@ -535,7 +536,7 @@ h1 + #story-meta { margin-top: -11px; }
 				font-family: Gotham, @font-family-sans-serif;
 
 				@media screen and (min-width: @screen-sm){
-					font-size: @font-size-base * 1.333333333;
+					font-size: @font-size-base * 2.333333333;
 					line-height: 1.3;
 					-webkit-font-smoothing: antialiased;
 				}
