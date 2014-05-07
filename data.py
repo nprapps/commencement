@@ -54,7 +54,7 @@ def parse():
     print "Start parse(): %i rows." % len(rows)
 
     speeches = []
-    all_tags = {}
+    speeches_by_tag = {}
 
     for row in rows:
         for k, v in row.items():
@@ -104,14 +104,28 @@ def parse():
             else:
                 row['tags'].append(tag)
 
-                if tag not in all_tags:
-                    all_tags[tag] = 0
+                if tag not in speeches_by_tag:
+                    speeches_by_tag[tag] = [] 
             
-                all_tags[tag] += 1
+                speeches_by_tag[tag].append(row)
 
         row['slug'] = slugify(row)
 
         speeches.append(row)
+
+    # Generate related speeches
+    for speech in speeches:
+        speech['related'] = {}
+
+        for tag in speech['tags']:
+            speech['related'][tag] = []
+
+            for tag_speech in speeches_by_tag[tag]:
+                if tag_speech['slug'] != speech['slug']:
+                    speech['related'][tag].append({
+                        'slug': tag_speech['slug'],
+                        'name': tag_speech['name']
+                    })
 
     # Render complete data
     with open('www/static-data/data.json', 'w') as f:
@@ -128,10 +142,6 @@ def parse():
             'year': speech['year'],
             'decade': speech['decade']
         })
-
-    del row['money_quote']
-    del row['money_quote2']
-    del row['source_url']
 
     # Render thin data for index
     with open('www/static-data/data-thin.json', 'w') as f:

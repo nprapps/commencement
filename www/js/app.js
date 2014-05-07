@@ -4,8 +4,6 @@ var $search = null;
 var $body = null;
 var $leadQuote = null;
 var $refreshQuoteButton = null;
-var moodSpeech = null;
-var speechSlug = speechSlug||null;
 
 var searchIndex = null;
 
@@ -35,7 +33,7 @@ var getNewSpeech = function(key, value){
     var newSpeech = _.chain(SPEECHES)
                      .shuffle()
                      .filter(function(pair){
-                         return pair[key] == value && pair['slug'] !== speechSlug && pair['slug'] !== moodSpeech;
+                         return pair[key] == value;
                      })
                      .value()[0];
 
@@ -43,13 +41,9 @@ var getNewSpeech = function(key, value){
         newSpeech = _.chain(SPEECHES)
                      .shuffle()
                      .filter(function(pair){
-                         return pair['slug'] !== speechSlug && pair['name'] !== '' && pair['slug'] !== moodSpeech;
+                         return pair['name'] !== '';
                      })
                      .value()[0];
-    }
-
-    if (key === 'mood'){
-        moodSpeech = newSpeech['slug'];
     }
 
     return newSpeech;
@@ -98,9 +92,6 @@ $(function() {
     if ($body.hasClass('speech')){
         var $mood = $('.mood');
         var $topic = $('.topic');
-
-        var newMoodSpeech = getNewSpeech('mood', speechMood);
-        var newAdviceSpeech = getNewSpeech('tags', speechAdvice);
 
         $mood.attr('href', APP_CONFIG.S3_BASE_URL + '/speech/' + newMoodSpeech.slug + '/');
         $mood.find('h4').text(newMoodSpeech.name);
