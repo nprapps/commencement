@@ -300,12 +300,29 @@ h1 + #story-meta { margin-top: -11px; }
 		}
 
         .tags {
-            .make-sm-column(3);
+            .make-sm-column(10);
             .make-sm-column-push(1);
+
+            li {
+            	padding: 0 5px 0 0;
+            	margin-bottom: 10px;
+            }
+
+            .btn {
+            	border: 1px solid @yellow;
+            	color: @yellow;
+            	font-size: @font-size-base * 0.777777778;
+
+            	&:hover,
+            	&.active {
+            		background: @yellow;
+            		color: #333;
+            	}
+            }
         }
 
         .search {
-            .make-sm-column(7);
+            .make-sm-column(10);
             .make-sm-column-push(1);
         }
 	}

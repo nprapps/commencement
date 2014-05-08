@@ -1,5 +1,6 @@
 var $speeches = null;
-var $tagsFilter = {};
+var $tags = null;
+var $tagButtons = null;
 var $search = null;
 var $body = null;
 var $leadQuote = null;
@@ -12,7 +13,7 @@ var filterSpeeches = function() {
 
     var $visibleSpeeches = $speeches;
     var query = $search.val();
-    var tags = $tagsFilter.val();
+    var tags = $tags.find('.active').first().data('tag');
 
     if (query) {
         var results = searchIndex.search(query);
@@ -62,9 +63,19 @@ var renderLeadQuote = function(quote){
     });
 }
 
+var onTagButtonClick = function(){
+    var $this = $(this);
+
+    $tagButtons.removeClass('active');
+    $this.addClass('active');
+
+    filterSpeeches();
+}
+
 $(function() {
     $speeches = $('.speeches li');
-    $tagsFilter = $('#tags-filter');
+    $tags = $('.tags');
+    $tagButtons = $('.tags .btn');
     $search = $('#search');
     $body = $('body');
     $refreshQuoteButton = $('#refresh-quote');
@@ -86,7 +97,7 @@ $(function() {
             searchIndex.add(speech);
         });
 
-        $tagsFilter.on('change', filterSpeeches);
+        $tagButtons.on('click', onTagButtonClick);
         $search.on('keyup', filterSpeeches);
         $refreshQuoteButton.on('click', quote, renderLeadQuote);
     }
