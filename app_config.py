@@ -130,23 +130,20 @@ DISQUS_UUID = '$NEW_DISQUS_UUID'
 APP-SPECIFIC
 """
 TAGS = {
-    'funny': 'Funny',
-    'profound': 'Profound',
-    'business': 'Business',
-    'tech': 'Tech',
-    'arts': 'Arts',
-    'author': 'Author',
-    'politics': 'Politics',
+    'balance': 'Balance',
+    'be-kind': 'Be kind',
     'change-the-world': 'Change the world',
-    'remember-history': 'Remember history',
-    'inner-voice': 'Inner voice',
-    'dream': 'Dream',
-    'be-luck': 'Be lucky',
-    'unplug': 'Unplug',
-    'be-prepared': 'Be prepared',
-    'work-hard': 'Work hard',
-    'play': 'Play',
     'dont-give-up': 'Don\'t give up',
+    'dream': 'Dream',
+    'embrace-failure': 'Embrace failure',
+    'face-fear': 'Face fear',
+    'inner-voice': 'Inner voice',
+    'make-art': 'Make art',
+    'play': 'Play',
+    'remember-history': 'Remember history',
+    'tips': 'Tips',
+    'unplug': 'Unplug',
+    'work-hard': 'Work hard',
     'yolo': 'YOLO'
 }
 
