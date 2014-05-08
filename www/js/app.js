@@ -6,6 +6,7 @@ var $search = null;
 var $body = null;
 var $leadQuote = null;
 var $refreshQuoteButton = null;
+var $sendMailButton = null;
 
 var searchIndex = null;
 
@@ -64,6 +65,15 @@ var renderLeadQuote = function(quote) {
     });
 }
 
+var onSendMailClick = function() {
+    var $this = $(this);
+    var $form = $this.parent('form');
+    var email_address = $form.find('input').val();
+    var email_body = $form.find('textarea').text();
+    var mailto_string = 'mailto:?to='+ email_address +'&subject=This is a really cool speech&body='+ email_body;
+    window.location.href = mailto_string;
+    return false;
+}
 var onTagButtonClick = function() {
     var $this = $(this);
 
@@ -94,6 +104,9 @@ $(function() {
     $search = $('#search');
     $body = $('body');
     $refreshQuoteButton = $('#refresh-quote');
+    $sendMailButton = $('a.send-mail');
+
+    $sendMailButton.on('click', onSendMailClick);
 
     if ($body.hasClass('homepage')){
         $leadQuote = $('#lead-quote');

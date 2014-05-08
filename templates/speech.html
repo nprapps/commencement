@@ -36,13 +36,13 @@
 
 		<div class="speech-quotes">
 			{% if speech.money_quote %}
-                {% with quote=speech.money_quote, image=money_quote_image %}
+                {% with number=1, speech=speech, quote=speech.money_quote, image=money_quote_image %}
                     {% include '_money_quote.html' %}
                 {% endwith %}
 			{% endif %}
 
 			{% if speech.money_quote2 %}
-                {% with quote=speech.money_quote2, image=money_quote2_image %}
+                {% with number=2, speech=speech, quote=speech.money_quote2, image=money_quote2_image %}
                     {% include '_money_quote.html' %}
                 {% endwith %}
 			{% endif %}
@@ -60,7 +60,7 @@
 			  <i class="fa fa-align-justify fa-stack-1x fa-inverse"></i>
 	        </span> {{ COPY.content.source_link}}</a></li>
 			{% endif %}
-			
+
 
 			{% if speech.video_url and not speech.youtube_id and not speech.vimeo_id %}
 			<li class="video-link"><a href="{{ speech.video_url }}"><span class="fa-stack fa-lg">
@@ -84,11 +84,7 @@
 		</div>
 		{% endif %}
 	</div>
-
-
 </div>
-
-
 {% endblock %}
 
 {% block comments %}
@@ -123,6 +119,7 @@
 
 
 {% block extra_foot_js %}
+    {{ JS.push('js/app.js') }}
     {{ JS.push('js/comments.js') }}
     {{ JS.render('js/app-footer-speech.min.js') }}
 {% endblock %}

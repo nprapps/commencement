@@ -3,7 +3,6 @@
 import csv
 import datetime
 import json
-import math
 import re
 
 from urlparse import urlparse, parse_qs
@@ -118,7 +117,7 @@ def parse():
                 continue
 
             if tag not in app_config.TAGS:
-                print 'Unrecognized tag: "%s"' % t
+                print 'Unrecognized tag: "%s"' % tag 
                 continue
 
             row['tags'].append(tag)
@@ -155,6 +154,9 @@ def parse():
     # Render complete data
     with open('www/static-data/data.json', 'w') as f:
         f.write(json.dumps(speeches))
+
+    for tag, speeches in speeches_by_tag.items():
+        print '%s: %i' % (tag, len(speeches))
 
     thin_speeches = []
 
