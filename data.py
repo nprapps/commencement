@@ -142,8 +142,7 @@ def parse():
             'name': speech['name'],
             'school': speech['school'],
             'tags': speech['tags'],
-            'year': speech['year'],
-            'decade': speech['decade']
+            'year': speech['year']
         })
 
     # Render thin data for index
