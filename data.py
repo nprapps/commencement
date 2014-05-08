@@ -103,14 +103,15 @@ def parse():
                 continue
 
             if tag not in app_config.TAGS:
-                print 'Unrecognized tag: %s' % t
-            else:
-                row['tags'].append(tag)
+                print 'Unrecognized tag: "%s"' % t
+                continue
 
-                if tag not in speeches_by_tag:
-                    speeches_by_tag[tag] = [] 
-            
-                speeches_by_tag[tag].append(row)
+            row['tags'].append(tag)
+
+            if tag not in speeches_by_tag:
+                speeches_by_tag[tag] = [] 
+        
+            speeches_by_tag[tag].append(row)
 
         row['slug'] = slugify(row)
 
@@ -129,6 +130,12 @@ def parse():
                         'slug': tag_speech['slug'],
                         'name': tag_speech['name']
                     })
+
+    # Strip unused fields to keep filesize down
+    del row['take_homes']
+    del row['former_labels_ref']
+    del row['former_field_ref']
+    del row['former_mood_ref']
 
     # Render complete data
     with open('www/static-data/data.json', 'w') as f:
