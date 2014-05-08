@@ -61,21 +61,36 @@ def parse():
             row[k] = v.strip()
 
         row['year'] = None
-        row['decade'] = None
         row['youtube_id'] = None
         row['vimeo_id'] = None
 
-        if row['date']: 
-            try:
-                month, day, year = map(int, row['date'].split('/'))
-                row['year'] = year
-                row['decade'] = math.floor(year / 10) * 10
+        if not row['name']:
+            print 'Skipping row without name'
+            continue
 
-                d = datetime.date(year, month, day)
+        if row['date']: 
+            if re.match('\d{1,2}/\d{1,2}/\d{4}', row['date']):
+                try:
+                    month, day, year = map(int, row['date'].split('/'))
+                except:
+                    print 'Unrecognized date format: "%s"' % row['date']
+                    row['date'] = None
+
+                row['year'] = year
+
+                # NOTE: nonsense so month will format correctly
+                # (strftime doens't work on dates before 1900)
+                d = datetime.date(2000, month, day)
 
                 row['date'] = '%s %i, %i' % (d.strftime('%B'), day, year) 
-            except ValueError:
-                print 'Invalid date for %(name)s at %(school)s' % row
+            elif re.match('\d{4}', row['date']):
+                year = int(row['date'])
+
+                row['year'] = year
+                row['date'] = '%i' % year
+            else:
+                print 'Unrecognized date format: "%s"' % row['date']
+                row['date'] = None
         else:
             print 'No date for %(name)s at %(school)s' % row 
             row['date'] = None
