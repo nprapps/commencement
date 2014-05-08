@@ -137,13 +137,21 @@ def parse():
 
         for tag in speech['tags']:
             speech['related'][tag] = []
+            next_speech = None
 
-            for tag_speech in speeches_by_tag[tag]:
-                if tag_speech['slug'] != speech['slug']:
-                    speech['related'][tag].append({
-                        'slug': tag_speech['slug'],
-                        'name': tag_speech['name']
-                    })
+            for index, tag_speech in enumerate(speeches_by_tag[tag]):
+                if tag_speech['slug'] == speech['slug']:
+                    if index + 1 < len(speeches_by_tag[tag]):
+                        next_speech = index + 1
+                    else:
+                        next_speech = 0
+
+            speech['related'][tag].append({
+                'slug': speeches_by_tag[tag][next_speech]['slug'],
+                'name': speeches_by_tag[tag][next_speech]['name'],
+                'img': speeches_by_tag[tag][next_speech]['img']
+            })
+
 
     # Strip unused fields to keep filesize down
     del row['take_homes']

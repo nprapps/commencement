@@ -99,13 +99,13 @@
 <div class="more-speeches">
 	<div class="container">
 		<div class="row">
-			<h2>More Speeches</h2>
 			<div class="next-speech">
                 {% for tag, tag_name in TAGS.items() %}
                     {% if tag in speech['tags'] %}
-                        {% for related in speech['related'][tag] %}
+                        {% for related in speech['related'][tag][0:1] %}
                         <a class="topic" href="{{ S3_BASE_URL }}/speech/{{ related.slug }}/">
-                                <h3>See another &ldquo;<span>{{ tag_name }}</span>&rdquo; speech&nbsp;<i class="fa fa-angle-right"></i></h3>
+		                        <h3>Next &ldquo;<span>{{ tag_name }}</span>&rdquo; speech <i class="fa fa-angle-right"></i></h3>
+                        		{% if related.img %}<img class="img-circle" src="{{ S3_BASE_URL }}/assets/mugs/{{ related.img }}">{% endif %}
                                 <h4>{{ related.name }}</h4>
                             </a>
                         {% endfor %}

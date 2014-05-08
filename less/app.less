@@ -433,6 +433,7 @@ h1 + #story-meta { margin-top: -11px; }
 						h2 {
 							width: 60%;
 							font-size: @font-size-base * 1.777777778;
+							padding-left: 0;
 						}
 
 						p {
@@ -472,7 +473,8 @@ h1 + #story-meta { margin-top: -11px; }
 	}
 
 	.header-wrapper {
-		.make-sm-column(12);
+		.make-sm-column(10);
+		.make-sm-column-push(1);
 	}
 
 	header {
@@ -480,12 +482,15 @@ h1 + #story-meta { margin-top: -11px; }
 		padding-bottom: @line-height-computed;
 
 		h1 {
-			font-size: @font-size-base * 2;
 			font-family: @font-family-sans-serif;
 			margin-bottom: 0;
 
 			a {
 				color: @text-color;
+			}
+
+			@media screen and (min-width: @screen-sm){
+				font-size: 3vw;
 			}
 		}
 	}
@@ -504,7 +509,6 @@ h1 + #story-meta { margin-top: -11px; }
 		.make-sm-column(10);
 		.make-sm-column-push(1);
 
-
 		padding-top: @line-height-computed / 2;
 		margin-bottom: @line-height-computed;
 		text-align: center;
@@ -513,6 +517,7 @@ h1 + #story-meta { margin-top: -11px; }
 			text-transform: uppercase;
 			color: #fff;
 			font-size: @font-size-base * 1.777777778;
+			font-size: 8vw;
 			margin-bottom: 0;
 
 			@media screen and (min-width: @screen-sm){
@@ -663,35 +668,30 @@ h1 + #story-meta { margin-top: -11px; }
 		background: #fff;
 		padding: @line-height-computed 0;
 
-		h2 {
-			.make-sm-column(10);
-			.make-sm-column-push(2);
-
-			text-transform: uppercase;
-			color: #222;
-			font-size: @font-size-base * 1.333333333;
-		}
-
 		.next-speech {
 			.make-sm-column(8);
 			.make-sm-column-push(2);
-			display: table;
 		}
 
-		.mood,
 		.topic {
-			display: table-cell;
 			width: 50%;
+			float: left;
 			min-height: 44px;
 			background: @yellow;
 			color: #333;
 			padding: @grid-gutter-width / 2;
+			text-align: center;
+
 			// text-align: center;
 
 			&:hover {
 				background: #333;
 				color: @yellow;
 				text-decoration: none;
+			}
+
+			img {
+				width: 25%;
 			}
 
 			h3 {
@@ -705,11 +705,9 @@ h1 + #story-meta { margin-top: -11px; }
 			}
 		}
 
-		.mood {
-			border-right: 1px solid #fff;
-		}
 		.topic {
 			border-left:  1px solid #fff;
+			border-bottom:  1px solid #fff;
 		}
 	}
 
