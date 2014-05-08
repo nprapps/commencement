@@ -95,10 +95,13 @@ def parse():
             if row[k]:
                 row[k] = smartypants(row[k].strip('"'))
 
-        tags = [t.strip().lower() for t in row['tags'].replace(',', ';').split(';')]
+        tags = [t.strip().lower() for t in row['take_homes'].replace(',', ';').split(';')]
         row['tags'] = []
 
         for tag in tags:
+            if not tag:
+                continue
+
             if tag not in app_config.TAGS:
                 print 'Unrecognized tag: %s' % t
             else:
