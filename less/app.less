@@ -110,7 +110,9 @@ header {
 
 	h1 {
 		font-family: Gotham, @font-family-sans-serif;
-		font-size: @font-size-base * 4;
+		font-size: @font-size-base * 3.333333333;
+		font-size: 8vw;
+		text-transform: uppercase;
 	}
 }
 
@@ -169,17 +171,23 @@ h1 + #story-meta { margin-top: -11px; }
 		background: #111;
 		padding-top: @line-height-computed * 2;
 		padding-bottom: @line-height-computed * 2;
+		text-align: center;
 
 		.lead-quote-wrapper {
 			.make-sm-column(10);
 			.make-sm-column-push(1);
 		}
 
+		.mug {
+			margin-bottom: @line-height-computed;
+			max-width: 33.3333333%;
+		}
+
 		#refresh-quote {
 			background: transparent;
 			border: 1px solid @yellow;
 			color: @yellow;
-			float: right;
+			margin: 0 auto;
 
 			&:hover {
 				background: @yellow;
@@ -235,6 +243,7 @@ h1 + #story-meta { margin-top: -11px; }
 			cite {
 				display: block;
 				margin-bottom: @line-height-computed;
+				text-align: center;
 
 				a {
 					background: @yellow;
@@ -254,6 +263,8 @@ h1 + #story-meta { margin-top: -11px; }
 			}
 
 			.sharing {
+				text-align: center;
+
 				li {
 					display: inline-block;
 				}
@@ -373,7 +384,10 @@ h1 + #story-meta { margin-top: -11px; }
 					font-style: italic;
 					font-size: @font-size-small;
 					color: @gray-light;
-					display: inline-block;
+					display: inline;
+					line-height: 1;
+					margin-bottom: 0;
+					vertical-align: baseline;
 
 					&.speech-features {
 						.fa-circle {
@@ -383,12 +397,21 @@ h1 + #story-meta { margin-top: -11px; }
 						.fa-inverse {
 							color: #333;
 						}
+
+						@media screen and (max-width: @screen-xs-max){
+							position: absolute;
+							top: @line-height-computed / 2;
+							right: 0;
+						}
 					}
 				}
 
 				.speech-info {
-					// padding: @line-height-computed / 2 0;
+					position: relative;
 
+					@media screen and (max-width: @screen-xs-max){
+						padding: @line-height-computed / 2 @grid-gutter-width * 3 @line-height-computed / 2 0;
+					}
 				}
 
 				.speech-school:after {
@@ -401,7 +424,7 @@ h1 + #story-meta { margin-top: -11px; }
 						padding: 0;
 						width: 100%;
 
-						h2,p {
+						h2,p,.mug {
 							display: table-cell;
 							padding: @line-height-computed / 2 @grid-gutter-width / 2;
 							vertical-align: top;
@@ -409,7 +432,6 @@ h1 + #story-meta { margin-top: -11px; }
 
 						h2 {
 							width: 60%;
-							padding-left: 0;
 							font-size: @font-size-base * 1.777777778;
 						}
 
@@ -442,14 +464,15 @@ h1 + #story-meta { margin-top: -11px; }
 // Speech
 .speech {
 	.main-content {
+		padding-top: @line-height-computed;
+
 		a {
 			color: @yellow;
 		}
 	}
 
 	.header-wrapper {
-		.make-sm-column(10);
-		.make-sm-column-push(1);
+		.make-sm-column(12);
 	}
 
 	header {
@@ -467,14 +490,24 @@ h1 + #story-meta { margin-top: -11px; }
 		}
 	}
 
+	.mug {
+		margin-bottom: @line-height-computed;
+
+		img {
+			.img-circle;
+			max-width: 33.333333%;
+		}
+	}
 
 
 	.speech-header {
 		.make-sm-column(10);
 		.make-sm-column-push(1);
-		padding-top: @line-height-computed;
+
+
+		padding-top: @line-height-computed / 2;
 		margin-bottom: @line-height-computed;
-		// text-align: center;
+		text-align: center;
 
 		h1 {
 			text-transform: uppercase;

@@ -1,3 +1,6 @@
+<% if (img) { %>
+<img class="mug img-circle" src="<%= APP_CONFIG.S3_BASE_URL %>/assets/mugs/<%= img %>">
+<% } %>
 <blockquote>
 	<p><%= money_quote %></p>
 	<cite><a href="<%= APP_CONFIG.S3_BASE_URL %>/speech/<%= slug %>/"><%= name %></a></cite>
