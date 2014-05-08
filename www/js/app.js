@@ -1,6 +1,7 @@
 var $speeches = null;
 var $tags = null;
 var $tagButtons = null;
+var $resetTagsButton = null;
 var $search = null;
 var $body = null;
 var $leadQuote = null;
@@ -30,7 +31,7 @@ var filterSpeeches = function() {
     $visibleSpeeches.show();
 }
 
-var newSpeech = function(key, value){
+var newSpeech = function(key, value) {
     var speech = null;
 
     return {
@@ -39,7 +40,7 @@ var newSpeech = function(key, value){
 
             return speech;
         },
-        setSpeech: function(key, value){
+        setSpeech: function(key, value) {
             speech = _.chain(SPEECHES)
                       .shuffle()
                       .filter(function(pair){
@@ -53,7 +54,7 @@ var newSpeech = function(key, value){
     };
 }
 
-var renderLeadQuote = function(quote){
+var renderLeadQuote = function(quote) {
     var context = typeof(quote['data']) !== 'undefined' ? quote['data'].getSpeech() : quote.getSpeech();
     var html = JST.quote(context);
 
@@ -63,11 +64,24 @@ var renderLeadQuote = function(quote){
     });
 }
 
-var onTagButtonClick = function(){
+var onTagButtonClick = function() {
     var $this = $(this);
 
+    $tagButtons.not($this).removeClass('active');
+    $this.toggleClass('active');
+
+    if ($this.hasClass('active')){
+        $resetTagsButton.show();
+    } else {
+        $resetTagsButton.hide();
+    }
+
+    filterSpeeches();
+}
+
+var onResetTagsButtonClick = function() {
     $tagButtons.removeClass('active');
-    $this.addClass('active');
+    $(this).hide();
 
     filterSpeeches();
 }
@@ -75,7 +89,8 @@ var onTagButtonClick = function(){
 $(function() {
     $speeches = $('.speeches li');
     $tags = $('.tags');
-    $tagButtons = $('.tags .btn');
+    $tagButtons = $('.tags .btn').not('.reset-tags');
+    $resetTagsButton = $('.reset-tags');
     $search = $('#search');
     $body = $('body');
     $refreshQuoteButton = $('#refresh-quote');
@@ -98,6 +113,7 @@ $(function() {
         });
 
         $tagButtons.on('click', onTagButtonClick);
+        $resetTagsButton.on('click', onResetTagsButtonClick);
         $search.on('keyup', filterSpeeches);
         $refreshQuoteButton.on('click', quote, renderLeadQuote);
     }

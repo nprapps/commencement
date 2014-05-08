@@ -312,11 +312,22 @@ h1 + #story-meta { margin-top: -11px; }
             	border: 1px solid @yellow;
             	color: @yellow;
             	font-size: @font-size-base * 0.777777778;
+            	position: relative;
 
             	&:hover,
             	&.active {
             		background: @yellow;
             		color: #333;
+            	}
+
+            	&.reset-tags {
+            		color: @gray-light;
+            		border-color: @gray-light;
+
+            		&:hover {
+            			background: @gray-light;
+            			color: #333;
+            		}
             	}
             }
         }
