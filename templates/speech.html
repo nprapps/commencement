@@ -42,6 +42,28 @@
 			{% endif %}
 		</div>
 
+		<ul class="external-links">
+			{% if speech.full_text %}
+			<li class="full-text"><a href="{{ speech.full_text }}"><span class="fa-stack fa-lg">
+			  <i class="fa fa-circle fa-stack-2x"></i>
+			  <i class="fa fa-align-justify fa-stack-1x fa-inverse"></i>
+	        </span> {{ COPY.content.full_text_link}}</a></li>
+			{% elif speech.source_url %}
+			<li class="full-text"><a href="{{ speech.source_url }}"><span class="fa-stack fa-lg">
+			  <i class="fa fa-circle fa-stack-2x"></i>
+			  <i class="fa fa-align-justify fa-stack-1x fa-inverse"></i>
+	        </span> {{ COPY.content.source_link}}</a></li>
+			{% endif %}
+			
+
+			{% if speech.video_url and not speech.youtube_id and not speech.vimeo_id %}
+			<li class="video-link"><a href="{{ speech.video_url }}"><span class="fa-stack fa-lg">
+			  <i class="fa fa-circle fa-stack-2x"></i>
+			  <i class="fa fa-video-camera fa-stack-1x fa-inverse"></i>
+	        </span> {{ COPY.content.watch_link }}</a></li>
+			{% endif %}
+		</ul>
+
 		{% if speech.youtube_id or speech.vimeo_id %}
 		<div class="speech-video">
 			<div class="video-wrapper">
@@ -57,27 +79,7 @@
 		{% endif %}
 	</div>
 
-	<ul class="external-links">
-		{% if speech.full_text %}
-		<li class="full-text"><a href="{{ speech.full_text }}"><span class="fa-stack fa-lg">
-		  <i class="fa fa-circle fa-stack-2x"></i>
-		  <i class="fa fa-align-justify fa-stack-1x fa-inverse"></i>
-        </span> {{ COPY.content.full_text_link}}</a></li>
-		{% elif speech.source_url %}
-		<li class="full-text"><a href="{{ speech.source_url }}"><span class="fa-stack fa-lg">
-		  <i class="fa fa-circle fa-stack-2x"></i>
-		  <i class="fa fa-align-justify fa-stack-1x fa-inverse"></i>
-        </span> {{ COPY.content.source_link}}</a></li>
-		{% endif %}
-		
 
-		{% if speech.video_url and not speech.youtube_id and not speech.vimeo_id %}
-		<li class="video-link"><a href="{{ speech.video_url }}"><span class="fa-stack fa-lg">
-		  <i class="fa fa-circle fa-stack-2x"></i>
-		  <i class="fa fa-video-camera fa-stack-1x fa-inverse"></i>
-        </span> {{ COPY.content.watch_link }}</a></li>
-		{% endif %}
-	</ul>
 </div>
 
 

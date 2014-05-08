@@ -60,18 +60,24 @@
     {% for speech in speeches %}
     <li id="{{ speech.slug }}" class="{% for tag in speech.tags %}tag-{{ tag }} {% endfor %}">
         <a href="speech/{{ speech.slug }}/">
-            <div class="speech-info">
-                <h2 class="speech-name">{{ speech.name }}</h2>
-                <p class="speech-features">
-                    {% if speech.video_url %}
-                    <span class="fa-stack fa-lg">
-                      <i class="fa fa-circle fa-stack-2x"></i>
-                      <i class="fa fa-video-camera fa-stack-1x fa-inverse"></i>
-                    </span>
-                    {% endif %}
-                </p>
-                <p class="speech-school">{{ speech.school }}</p>
-                <p class="speech-year">{{ speech.year }}</p>
+            <div class="container">
+                <div class="row">
+                    <div class="speech-wrapper">
+                        <div class="speech-info">
+                            <h2 class="speech-name">{{ speech.name }}</h2>
+                            <p class="speech-features">
+                                {% if speech.video_url %}
+                                <span class="fa-stack fa-lg">
+                                  <i class="fa fa-circle fa-stack-2x"></i>
+                                  <i class="fa fa-video-camera fa-stack-1x fa-inverse"></i>
+                                </span>
+                                {% endif %}
+                            </p>
+                            <p class="speech-school">{{ speech.school }}</p>
+                            <p class="speech-year">{{ speech.year }}</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </a>
     </li>
