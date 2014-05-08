@@ -39,7 +39,7 @@
 
 <div class="filters container">
     <form role="form" class="row">
-        <div class="form-group tags">
+<!--         <div class="form-group tags">
             <label for="tags-filter" class="control-label">Find speeches</label>
             <select class="form-control" id="tags-filter">
                 <option value=""></option>
@@ -47,11 +47,20 @@
                 <option value="{{ tag }}">{{ name }}</option>
                 {% endfor %}
             </select>
-        </div>
+        </div> -->
 
         <div class="form-group search">
             <label for="search" class="control-label">Search by name, school or year</label>
             <input type="text" class="form-control" id="search" placeholder="Lisa Kudrow, Vassar, 2010">
+        </div>
+
+        <div class="tags">
+            <ul class="list-unstyled list-inline">
+                {% for tag, name in TAGS.items() %}
+                <li><a class="btn" data-tag="{{ tag }}" href="javascript:void(0)">{{ name }}</a></li>
+                {% endfor %}
+                <li><a class="btn reset-tags" style="display: none;" href="javascript:void(0)">Reset Tags</a>
+            </ul>
         </div>
     </form>
 </div>

@@ -3,7 +3,6 @@
 import csv
 import datetime
 import json
-import math
 import re
 
 from urlparse import urlparse, parse_qs
@@ -61,21 +60,36 @@ def parse():
             row[k] = v.strip()
 
         row['year'] = None
-        row['decade'] = None
         row['youtube_id'] = None
         row['vimeo_id'] = None
 
-        if row['date']: 
-            try:
-                month, day, year = map(int, row['date'].split('/'))
-                row['year'] = year
-                row['decade'] = math.floor(year / 10) * 10
+        if not row['name']:
+            print 'Skipping row without name'
+            continue
 
-                d = datetime.date(year, month, day)
+        if row['date']: 
+            if re.match('\d{1,2}/\d{1,2}/\d{4}', row['date']):
+                try:
+                    month, day, year = map(int, row['date'].split('/'))
+                except:
+                    print 'Unrecognized date format: "%s"' % row['date']
+                    row['date'] = None
+
+                row['year'] = year
+
+                # NOTE: nonsense so month will format correctly
+                # (strftime doens't work on dates before 1900)
+                d = datetime.date(2000, month, day)
 
                 row['date'] = '%s %i, %i' % (d.strftime('%B'), day, year) 
-            except ValueError:
-                print 'Invalid date for %(name)s at %(school)s' % row
+            elif re.match('\d{4}', row['date']):
+                year = int(row['date'])
+
+                row['year'] = year
+                row['date'] = '%i' % year
+            else:
+                print 'Unrecognized date format: "%s"' % row['date']
+                row['date'] = None
         else:
             print 'No date for %(name)s at %(school)s' % row 
             row['date'] = None
@@ -95,19 +109,23 @@ def parse():
             if row[k]:
                 row[k] = smartypants(row[k].strip('"'))
 
-        tags = [t.strip().lower() for t in row['tags'].replace(',', ';').split(';')]
+        tags = [t.strip().lower() for t in row['take_homes'].replace(',', ';').split(';')]
         row['tags'] = []
 
         for tag in tags:
-            if tag not in app_config.TAGS:
-                print 'Unrecognized tag: %s' % t
-            else:
-                row['tags'].append(tag)
+            if not tag:
+                continue
 
-                if tag not in speeches_by_tag:
-                    speeches_by_tag[tag] = [] 
-            
-                speeches_by_tag[tag].append(row)
+            if tag not in app_config.TAGS:
+                print 'Unrecognized tag: "%s"' % tag 
+                continue
+
+            row['tags'].append(tag)
+
+            if tag not in speeches_by_tag:
+                speeches_by_tag[tag] = [] 
+        
+            speeches_by_tag[tag].append(row)
 
         row['slug'] = slugify(row)
 
@@ -127,9 +145,18 @@ def parse():
                         'name': tag_speech['name']
                     })
 
+    # Strip unused fields to keep filesize down
+    del row['take_homes']
+    del row['former_labels_ref']
+    del row['former_field_ref']
+    del row['former_mood_ref']
+
     # Render complete data
     with open('www/static-data/data.json', 'w') as f:
         f.write(json.dumps(speeches))
+
+    for tag, speeches in speeches_by_tag.items():
+        print '%s: %i' % (tag, len(speeches))
 
     thin_speeches = []
 
@@ -139,8 +166,7 @@ def parse():
             'name': speech['name'],
             'school': speech['school'],
             'tags': speech['tags'],
-            'year': speech['year'],
-            'decade': speech['decade']
+            'year': speech['year']
         })
 
     # Render thin data for index

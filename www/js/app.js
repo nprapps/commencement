@@ -1,5 +1,7 @@
 var $speeches = null;
-var $tagsFilter = {};
+var $tags = null;
+var $tagButtons = null;
+var $resetTagsButton = null;
 var $search = null;
 var $body = null;
 var $leadQuote = null;
@@ -13,7 +15,7 @@ var filterSpeeches = function() {
 
     var $visibleSpeeches = $speeches;
     var query = $search.val();
-    var tags = $tagsFilter.val();
+    var tags = $tags.find('.active').first().data('tag');
 
     if (query) {
         var results = searchIndex.search(query);
@@ -30,7 +32,7 @@ var filterSpeeches = function() {
     $visibleSpeeches.show();
 }
 
-var newSpeech = function(key, value){
+var newSpeech = function(key, value) {
     var speech = null;
 
     return {
@@ -39,7 +41,7 @@ var newSpeech = function(key, value){
 
             return speech;
         },
-        setSpeech: function(key, value){
+        setSpeech: function(key, value) {
             speech = _.chain(SPEECHES)
                       .shuffle()
                       .filter(function(pair){
@@ -53,7 +55,7 @@ var newSpeech = function(key, value){
     };
 }
 
-var renderLeadQuote = function(quote){
+var renderLeadQuote = function(quote) {
     var context = typeof(quote['data']) !== 'undefined' ? quote['data'].getSpeech() : quote.getSpeech();
     var html = JST.quote(context);
 
@@ -72,10 +74,33 @@ var onSendMailClick = function() {
     window.location.href = mailto_string;
     return false;
 }
+var onTagButtonClick = function() {
+    var $this = $(this);
+
+    $tagButtons.not($this).removeClass('active');
+    $this.toggleClass('active');
+
+    if ($this.hasClass('active')){
+        $resetTagsButton.show();
+    } else {
+        $resetTagsButton.hide();
+    }
+
+    filterSpeeches();
+}
+
+var onResetTagsButtonClick = function() {
+    $tagButtons.removeClass('active');
+    $(this).hide();
+
+    filterSpeeches();
+}
 
 $(function() {
     $speeches = $('.speeches li');
-    $tagsFilter = $('#tags-filter');
+    $tags = $('.tags');
+    $tagButtons = $('.tags .btn').not('.reset-tags');
+    $resetTagsButton = $('.reset-tags');
     $search = $('#search');
     $body = $('body');
     $refreshQuoteButton = $('#refresh-quote');
@@ -100,7 +125,8 @@ $(function() {
             searchIndex.add(speech);
         });
 
-        $tagsFilter.on('change', filterSpeeches);
+        $tagButtons.on('click', onTagButtonClick);
+        $resetTagsButton.on('click', onResetTagsButtonClick);
         $search.on('keyup', filterSpeeches);
         $refreshQuoteButton.on('click', quote, renderLeadQuote);
     }
