@@ -698,8 +698,8 @@ App-specific tasks.
 """
 @task
 def deploy_live_data():
-    _gzip('www/live-data', '.live-data-gzip')
-    _deploy_to_s3('.live-data-gzip')
+    _gzip('www/live-data', '.live_data_gzip')
+    _deploy_to_s3('.live_data_gzip')
 
 @task
 def get_most_viewed():
