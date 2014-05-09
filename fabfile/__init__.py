@@ -10,6 +10,7 @@ from jinja2 import Template
 
 import app
 import app_config
+import analytics
 import data
 from etc import github
 from etc.gdocs import GoogleDoc
@@ -18,7 +19,7 @@ from etc.gdocs import GoogleDoc
 import assets
 import utils
 
-NPM_INSTALL_COMMAND = 'npm install less universal-jst -g --prefix node_modules' 
+NPM_INSTALL_COMMAND = 'npm install less universal-jst -g --prefix node_modules'
 
 """
 Base configuration
@@ -196,7 +197,7 @@ def render():
     app_config_js()
     copy_js()
 
-    compiled_includes = {} 
+    compiled_includes = {}
 
     for rule in app.app.url_map.iter_rules():
         rule_string = rule.rule
@@ -252,9 +253,9 @@ def render_speeches(compiled_includes):
 
     local('rm -rf .speeches_html')
 
-    speeches = data.load()  
+    speeches = data.load()
 
-    compiled_includes = compiled_includes or {} 
+    compiled_includes = compiled_includes or {}
 
     for speech in speeches:
         slug = speech['slug']
@@ -371,7 +372,7 @@ def install_requirements():
     require('settings', provided_by=[production, staging])
 
     run('%(SERVER_VIRTUALENV_PATH)s/bin/pip install -U -r %(SERVER_REPOSITORY_PATH)s/requirements.txt' % app_config.__dict__)
-    run('cd %s; %s' % (app_config.SERVER_REPOSITORY_PATH, NPM_INSTALL_COMMAND)) 
+    run('cd %s; %s' % (app_config.SERVER_REPOSITORY_PATH, NPM_INSTALL_COMMAND))
 
 @task
 def install_crontab():
@@ -691,3 +692,11 @@ def app_template_bootstrap(github_username='nprapps', project_name=None, reposit
     local('git push -u origin master')
 
     bootstrap()
+
+"""
+App-specific tasks.
+"""
+
+@task
+def get_most_viewed():
+    analytics.query_results()
