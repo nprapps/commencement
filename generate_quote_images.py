@@ -90,14 +90,18 @@ def render(quote, name, slug):
     draw = ImageDraw.Draw(img)
 
     parse = HTMLParser.HTMLParser()
+
     text = u'“%s”' % quote
     text = parse.unescape(text)
+
     size, wrap_count = optimize_text(text)
     font = fonts['bold'][size]
     lines = textwrap.wrap(text, wrap_count)
+
     mask =  Image.open('www/assets/mug-mask.png')
     mask = mask.resize((150,150),1)
-    mug =  Image.open('www/assets/mugs/schwartz.jpg')
+
+    mug = Image.open('www/assets/mugs/schwartz.jpg')
     mug = mug.resize((150,150),1)
 
     y = TEXT_MARGIN[0]
