@@ -270,16 +270,30 @@ h1 + #story-meta { margin-top: -11px; }
 				}
 
 				a {
-					.fa-stack-1x {
-						color: #111;
+					float: left;
+					clear: both;
+					color: @yellow;
+					background: #111;
+					.border-radius(30px);
+					border: 1px solid @yellow;
+					margin-bottom: @line-height-computed / 4;
+
+					.fa-inverse {
+						color: @yellow;
 					}
 					.fa-circle {
-						color: @gray-light;
+						color: #111;
 					}
 
 					&:hover {
+						background: @yellow;
+
 						.fa-circle {
 							color: @yellow;
+						}
+
+						.fa-inverse {
+							color: #111;
 						}
 					}
 				}
@@ -355,6 +369,11 @@ h1 + #story-meta { margin-top: -11px; }
 		margin-bottom: 0;
 
 		li {
+			.speech-wrapper {
+				.make-sm-column(10);
+				.make-sm-column-push(1);
+			}
+
 			a {
 				color: #eee;
 				display: block;
@@ -368,10 +387,6 @@ h1 + #story-meta { margin-top: -11px; }
 					}
 				}
 
-				.speech-wrapper {
-					.make-sm-column(10);
-					.make-sm-column-push(1);
-				}
 
 				h2 {
 					text-transform: uppercase;
@@ -459,6 +474,13 @@ h1 + #story-meta { margin-top: -11px; }
 				}
 			}
 		}
+
+		#no-results h3 {
+			font-family: @font-family-serif;
+			font-style: italic;
+			color: @gray-light;
+			font-size: @font-size-base * 1.333333333;
+		}
 	}
 }
 
@@ -466,7 +488,7 @@ h1 + #story-meta { margin-top: -11px; }
 .speech {
 	.main-content {
 		padding-top: @line-height-computed;
-
+		background: #111;
 		a {
 			color: @yellow;
 		}
@@ -504,6 +526,11 @@ h1 + #story-meta { margin-top: -11px; }
 		}
 	}
 
+	.video-container {
+		padding: @line-height-computed * 2 0;
+		background: #333;
+	}
+
 
 	.speech-header {
 		.make-sm-column(10);
@@ -518,7 +545,7 @@ h1 + #story-meta { margin-top: -11px; }
 			color: #fff;
 			font-size: @font-size-base * 1.777777778;
 			font-size: 8vw;
-			margin-bottom: 0;
+			margin-bottom: @line-height-computed / 2;
 
 			@media screen and (min-width: @screen-sm){
 				font-size: @font-size-base * 2.333333333;
@@ -565,6 +592,8 @@ h1 + #story-meta { margin-top: -11px; }
 	.speech-quotes {
 		.clearfix;
 		.make-sm-column(12);
+		padding-top: @line-height-computed * 2;
+
 
 		.quote {
 			.make-row();
@@ -577,16 +606,27 @@ h1 + #story-meta { margin-top: -11px; }
 
 			a {
 				display: block;
-				color: @gray-light;
-				padding-bottom: @line-height-computed / 4;
+				float: left;
+				clear: both;
+				color: #111;
+				border: 1px solid @yellow;
+				.border-radius(30px);
+				margin-bottom: @line-height-computed / 4;
 
-				&:hover {
+				.fa-inverse {
 					color: @yellow;
 				}
 
-				.fa-inverse {
-					color: #333;
+				&:hover {
+					color: @yellow;
+					background: @yellow;
+
+					.fa-inverse {
+						color: #111;
+					}
 				}
+
+
 			}
 
 			@media screen and (max-width: @screen-xs-max){
@@ -617,7 +657,7 @@ h1 + #story-meta { margin-top: -11px; }
 
 				@media screen and (min-width: @screen-sm){
 					font-size: @font-size-base * 1.777777778;
-					-webkit-font-smoothing: antialiased;
+					// -webkit-font-smoothing: antialiased;
 				}
 			}
 
@@ -650,7 +690,7 @@ h1 + #story-meta { margin-top: -11px; }
 			.make-sm-column-push(1);
 
 			.fa-inverse {
-				color: #333;
+				color: #111;
 			}
 
 			a:hover {
