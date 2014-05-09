@@ -115,6 +115,7 @@
 		                        <h3>Next &ldquo;<span>{{ tag_name }}</span>&rdquo; speech <i class="fa fa-angle-right"></i></h3>
                         		{% if related.img %}<img class="img-circle" src="{{ S3_BASE_URL }}/assets/mugs/{{ related.img }}">{% endif %}
                                 <h4>{{ related.name }}</h4>
+                                <p>{{ related.school }}, {{ related.year }}</p>
                             </a>
                         {% endfor %}
                     {% endif %}
