@@ -4,6 +4,9 @@
 import json
 import os
 import textwrap
+import HTMLParser
+
+from typogrify.filters import smartypants
 
 from PIL import Image, ImageDraw, ImageFont
 
@@ -11,7 +14,7 @@ OUT_DIR = 'www/quote-images'
 
 CANVAS_WIDTH = 640
 CANVAS_HEIGHT = 640
-TEXT_MARGIN = (40, 40, 200, 40)
+TEXT_MARGIN = (230, 40, 200, 40)
 TEXT_MAX_WIDTH = CANVAS_WIDTH - (TEXT_MARGIN[1] + TEXT_MARGIN[3])
 TEXT_MAX_HEIGHT = CANVAS_WIDTH - (TEXT_MARGIN[0] + TEXT_MARGIN[2])
 
@@ -24,7 +27,7 @@ LINE_MAX = 40
 LINE_DELTA = 5
 LINE_OPTIMAL = (30, 35)
 
-LOGO = Image.open('www/assets/npr-home.png')
+LOGO = Image.open('www/assets/npr-white.png')
 
 fonts = {}
 fonts['book'] = {}
@@ -83,23 +86,29 @@ def optimize_text(text):
     return optimal
 
 def render(quote, name, slug):
-    img = Image.new('RGB', (640, 640), (255, 255, 255))
+    img = Image.new('RGB', (640, 640), (17, 17, 17))
     draw = ImageDraw.Draw(img)
 
-    text = u'“%s”' % quote 
+    parse = HTMLParser.HTMLParser()
+    text = u'“%s”' % quote
+    text = parse.unescape(text)
     size, wrap_count = optimize_text(text)
-    font = fonts['bold'][size]    
+    font = fonts['bold'][size]
     lines = textwrap.wrap(text, wrap_count)
+    mask =  Image.open('www/assets/mug-mask.png')
+    mask = mask.resize((150,150),1)
+    mug =  Image.open('www/assets/mugs/schwartz.jpg')
+    mug = mug.resize((150,150),1)
 
     y = TEXT_MARGIN[0]
 
     for i, line in enumerate(lines):
         x = TEXT_MARGIN[1]
-    
+
         if i > 0:
             x += quote_width[size]
 
-        draw.text((x, y), line, font=fonts['bold'][size], fill=(0, 0, 0))
+        draw.text((x, y), line, font=fonts['bold'][size], fill=(255, 255, 255))
 
         y += size
 
@@ -111,14 +120,20 @@ def render(quote, name, slug):
     width, height = font.getsize(text)
     x = (CANVAS_WIDTH - TEXT_MARGIN[1]) - width
 
-    draw.text((x, y), text, font=font, fill=(0, 0, 0))
+    draw.text((x, y), text, font=font, fill=(255, 255, 255))
 
     logo_xy = (
         (CANVAS_WIDTH - 40) - LOGO.size[0],
         (CANVAS_HEIGHT - 40) - LOGO.size[1]
     )
 
+    mug_xy = (
+        (CANVAS_WIDTH / 2) - mug.size[0] / 2,
+        40
+    )
+
     img.paste(LOGO, logo_xy)
+    img.paste(mug, mug_xy, mask)
 
     img.save('%s/%s.png' % (OUT_DIR, slug), 'PNG')
 
