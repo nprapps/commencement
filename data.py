@@ -149,6 +149,8 @@ def parse():
             speech['related'][tag].append({
                 'slug': speeches_by_tag[tag][next_speech]['slug'],
                 'name': speeches_by_tag[tag][next_speech]['name'],
+                'school': speeches_by_tag[tag][next_speech]['school'],
+                'year': speeches_by_tag[tag][next_speech]['year'],
                 'img': speeches_by_tag[tag][next_speech]['img']
             })
 
