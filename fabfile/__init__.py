@@ -704,4 +704,8 @@ def deploy_live_data():
 @task
 def get_most_viewed():
     analytics.query_results()
+
+@task
+def deploy_most_viewed():
+    get_most_viewed()
     deploy_live_data()
