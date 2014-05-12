@@ -63,6 +63,7 @@ var onTagButtonClick = function() {
     }
 
     filterSpeeches();
+    $.scrollTo('.tags', { duration: 250, offset: { top: -10, left:0 } });
 }
 
 var onResetTagsButtonClick = function() {
@@ -70,6 +71,7 @@ var onResetTagsButtonClick = function() {
     $(this).hide();
 
     filterSpeeches();
+    $.scrollTo('.tags', { duration: 250, offset: { top: -10, left:0 } });
 }
 
 var onRefreshQuoteButtonClick = function() {
