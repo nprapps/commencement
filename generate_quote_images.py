@@ -14,7 +14,7 @@ OUT_DIR = 'www/quote-images'
 
 CANVAS_WIDTH = 640
 CANVAS_HEIGHT = 640
-TEXT_MARGIN = (230, 40, 200, 40)
+TEXT_MARGIN = (40, 40, 200, 40)
 TEXT_MAX_WIDTH = CANVAS_WIDTH - (TEXT_MARGIN[1] + TEXT_MARGIN[3])
 TEXT_MAX_HEIGHT = CANVAS_WIDTH - (TEXT_MARGIN[0] + TEXT_MARGIN[2])
 
@@ -78,29 +78,39 @@ def optimize_text(text):
 
     return optimal
 
-def render(quote, name, slug):
+def render(quote, name, slug, mug_src):
     img = Image.new('RGB', (640, 640), (17, 17, 17))
     draw = ImageDraw.Draw(img)
+    text_margin = TEXT_MARGIN
 
     parse = HTMLParser.HTMLParser()
 
     text = u'“%s”' % quote
     text = parse.unescape(text)
 
+    if mug_src != "":
+        text_margin = (230, 40, 200, 40)
+
+        mask =  Image.open('www/assets/mug-mask.png')
+        mask = mask.resize((150,150),1)
+
+        mug = Image.open('www/assets/mugs/%s' % mug_src)
+        mug = mug.resize((150,150),1)
+        mug_xy = (
+            (CANVAS_WIDTH / 2) - mug.size[0] / 2,
+            40
+        )
+
+        img.paste(mug, mug_xy, mask)
+
     size, wrap_count = optimize_text(text)
     font = fonts['bold'][size]
     lines = textwrap.wrap(text, wrap_count)
 
-    mask =  Image.open('www/assets/mug-mask.png')
-    mask = mask.resize((150,150),1)
-
-    mug = Image.open('www/assets/mugs/schwartz.jpg')
-    mug = mug.resize((150,150),1)
-
-    y = TEXT_MARGIN[0]
+    y = text_margin[0]
 
     for i, line in enumerate(lines):
-        x = TEXT_MARGIN[1]
+        x = text_margin[1]
 
         if i > 0:
             x += quote_width[size]
@@ -115,7 +125,7 @@ def render(quote, name, slug):
     size = min(size, 32)
     font = fonts['book'][size]
     width, height = font.getsize(text)
-    x = (CANVAS_WIDTH - TEXT_MARGIN[1]) - width
+    x = (CANVAS_WIDTH - text_margin[1]) - width
 
     draw.text((x, y), text, font=font, fill=(255, 255, 255))
 
@@ -124,13 +134,7 @@ def render(quote, name, slug):
         (CANVAS_HEIGHT - 40) - LOGO.size[1]
     )
 
-    mug_xy = (
-        (CANVAS_WIDTH / 2) - mug.size[0] / 2,
-        40
-    )
-
     img.paste(LOGO, logo_xy)
-    img.paste(mug, mug_xy, mask)
 
     img.save('%s/%s.png' % (OUT_DIR, slug), 'PNG')
 
@@ -150,13 +154,13 @@ def main():
         print speech['slug']
 
         if speech['money_quote']:
-            render(speech['money_quote'], speech['name'], speech['slug'])
+            render(speech['money_quote'], speech['name'], speech['slug'], speech['img'])
 
         if speech['money_quote2']:
             slug = '%s-2' % speech['slug']
 
             print slug
-            render(speech['money_quote2'], speech['name'], '%s-2' % slug)
+            render(speech['money_quote2'], speech['name'], '%s-2' % slug, speech['img'])
 
 if __name__ == '__main__':
     main()
