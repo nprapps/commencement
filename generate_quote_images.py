@@ -16,16 +16,14 @@ CANVAS_WIDTH = 640
 CANVAS_HEIGHT = 640
 TEXT_MARGIN = (40, 40, 200, 40)
 TEXT_MAX_WIDTH = CANVAS_WIDTH - (TEXT_MARGIN[1] + TEXT_MARGIN[3])
-TEXT_MAX_HEIGHT = CANVAS_WIDTH - (TEXT_MARGIN[0] + TEXT_MARGIN[2])
 
 SIZE_MIN = 16
 SIZE_MAX = 64
 SIZE_DELTA = 4
 
-LINE_MIN = 15
-LINE_MAX = 40
-LINE_DELTA = 5
-LINE_OPTIMAL = (30, 35)
+LINE_MIN = 16
+LINE_MAX = 50
+LINE_DELTA = 2 
 
 LOGO = Image.open('www/assets/npr-white.png')
 
@@ -48,7 +46,7 @@ def compute_size(lines, fontsize):
     
     return width, height
 
-def optimize_text(text):
+def optimize_text(text, max_height):
     permutations = {}
     
     for size in fonts['bold'].keys():
@@ -60,28 +58,22 @@ def optimize_text(text):
             if width > TEXT_MAX_WIDTH - quote_width[size]:
                 continue
 
-            if height > TEXT_MAX_HEIGHT:
+            if height > max_height:
                 continue
 
             permutations[(size, wrap_count)] = (width, height)
 
     optimal = (0, 0)
-    sub_optimal = (0, 0)
 
     # Find the largest font size that's in the butter zone
     for k, v in permutations.items():
         size, wrap_count = k
         width, height = v
 
-        if wrap_count in LINE_OPTIMAL:
-            if size > optimal[0]:
-                optimal = k
-        else:
-            if size > sub_optimal[0]:
-                sub_optimal = k
-
-    if optimal == (0, 0):
-        return sub_optimal
+        if size > optimal[0]:
+            optimal = k
+        elif size == optimal[0] and wrap_count > optimal[1]:
+            optimal = k
 
     return optimal
 
@@ -95,7 +87,7 @@ def render(quote, name, slug, mug_src):
     text = u'“%s”' % quote
     text = parse.unescape(text)
 
-    if mug_src != "":
+    if mug_src != '' and os.path.exists('www/assets/mugs/%s' % mug_src):
         text_margin = (230, 40, 200, 40)
 
         mask =  Image.open('www/assets/mug-mask.png')
@@ -110,7 +102,8 @@ def render(quote, name, slug, mug_src):
 
         img.paste(mug, mug_xy, mask)
 
-    size, wrap_count = optimize_text(text)
+    max_height = CANVAS_WIDTH - (text_margin[0] + text_margin[2]) 
+    size, wrap_count = optimize_text(text, max_height)
     font = fonts['bold'][size]
     lines = textwrap.wrap(text, wrap_count)
 
