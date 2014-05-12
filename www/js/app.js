@@ -7,6 +7,8 @@ var $body = null;
 var $leadQuote = null;
 var $refreshQuoteButton = null;
 var $noResults = null;
+var $speechCount = null;
+var $speechTotal = null;
 
 var searchIndex = null;
 
@@ -33,8 +35,14 @@ var filterSpeeches = function() {
 
     if ($visibleSpeeches.length > 0){
         $noResults.hide();
+        $speechCount.html($visibleSpeeches.length - 1);
+        $speechTotal.html(SPEECHES.length);
+        $speechCount.parent('p').show();
     } else {
         $noResults.show();
+        $speechCount.html(SPEECHES.length);
+        $speechTotal.html(SPEECHES.length);
+        $speechCount.parent('p').show();
     }
 }
 
@@ -61,7 +69,7 @@ var onResetTagsButtonClick = function() {
 
 var onRefreshQuoteButtonClick = function() {
     renderLeadQuote();
-    $.scrollTo('.big-quote', { duration: 250 });
+    $.scrollTo('.big-quote', { duration: 350 });
 }
 
 jQuery.fn.animateAuto = function(prop, speed, callback){
@@ -82,7 +90,9 @@ jQuery.fn.animateAuto = function(prop, speed, callback){
 }
 
 var onHashChanged = function(new_hash, old_hash) {
-    if (new_hash === '_') {
+    if (new_hash === '_') { new_hash = ''; }
+
+    if (new_hash === '') {
         $tagButtons.removeClass('active');
         $('a.reset-tags').hide();
     } else {
@@ -95,9 +105,10 @@ var onHashChanged = function(new_hash, old_hash) {
         } else {
             $resetTagsButton.hide();
         }
+        $.scrollTo('.tags', { duration: 350, offset: { top: -10, left:0 } });
     }
+
     filterSpeeches();
-    $.scrollTo('.tags', { duration: 250, offset: { top: -10, left:0 } });
 };
 
 $(function() {
@@ -108,6 +119,8 @@ $(function() {
     $search = $('#search');
     $body = $('body');
     $refreshQuoteButton = $('#refresh-quote');
+    $speechCount = $('.speech-count');
+    $speechTotal = $('.speech-total');
 
     if ($body.hasClass('homepage')){
         $leadQuote = $('#lead-quote');
