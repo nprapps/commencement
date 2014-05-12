@@ -47,6 +47,7 @@ var renderLeadQuote = function() {
 
     _.defer(function(){
         $leadQuote.find('blockquote').addClass('fadein');
+        $leadQuote.find('.mug').addClass('fadein');
     });
 }
 
@@ -77,6 +78,23 @@ var onResetTagsButtonClick = function() {
 var onRefreshQuoteButtonClick = function() {
     renderLeadQuote();
     $.scrollTo('.big-quote', { duration: 250 });
+}
+
+jQuery.fn.animateAuto = function(prop, speed, callback){
+    var elem, height, width;
+    return this.each(function(i, el){
+        el = jQuery(el), elem = el.clone().css({"height":"auto","width":"auto"}).appendTo("body");
+        height = elem.css("height"),
+        width = elem.css("width"),
+        elem.remove();
+        
+        if(prop === "height")
+            el.animate({"height":height}, speed, callback);
+        else if(prop === "width")
+            el.animate({"width":width}, speed, callback);  
+        else if(prop === "both")
+            el.animate({"width":width,"height":height}, speed, callback);
+    });  
 }
 
 $(function() {
