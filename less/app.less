@@ -28,11 +28,18 @@ h1,h2,h3,h4,h5,h6 {
 // Header
 header {
 	background-color: @yellow;
-	padding: @grid-gutter-width 0;
 	margin: 0;
 
+	.container {
+		padding: 0;
+	}
+
 	.header-wrapper {
-		.make-md-column(12);
+		padding: @grid-gutter-width / 2;
+
+		@media screen and (min-width: @screen-sm){
+			padding: @grid-gutter-width;
+		}
 	}
 
 	h1 {
@@ -49,6 +56,10 @@ header {
 		img {
 			width: 146px / 2;
 		}
+	}
+
+	@media screen and (min-width: @screen-sm){
+		padding: @grid-gutter-width 0;
 	}
 }
 
@@ -111,7 +122,6 @@ h1 + #story-meta { margin-top: -11px; }
 
 	> header {
 		display: table;
-		overflow: hidden;
 
 		> .container {
 			display: table-cell;
@@ -119,6 +129,14 @@ h1 + #story-meta { margin-top: -11px; }
 
 			@media screen and (min-width: @screen-lg){
 				width: auto;
+			}
+		}
+
+		.header-wrapper {
+			padding: @grid-gutter-width / 2;
+
+			@media screen and (min-width: @screen-sm){
+				padding: 0 @grid-gutter-width @grid-gutter-width;
 			}
 		}
 
@@ -493,13 +511,7 @@ h1 + #story-meta { margin-top: -11px; }
 		}
 	}
 
-	.header-wrapper {
-		.make-sm-column(12);
-	}
-
 	header {
-		padding-top: @grid-gutter-width;
-		padding-bottom: @grid-gutter-width;
 		display: table;
 
 		.container,
