@@ -80,7 +80,7 @@ def optimize_text(text):
             if size > sub_optimal[0]:
                 sub_optimal = k
 
-    if not optimal:
+    if optimal == (0, 0):
         return sub_optimal
 
     return optimal
@@ -155,7 +155,9 @@ def main():
 
     for speech in data:
         print speech['slug']
-        render(speech['money_quote'], speech['name'], speech['slug'])
+
+        if speech['money_quote']:
+            render(speech['money_quote'], speech['name'], speech['slug'])
 
         if speech['money_quote2']:
             slug = '%s-2' % speech['slug']
