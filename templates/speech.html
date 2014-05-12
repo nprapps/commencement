@@ -10,20 +10,20 @@
 <meta name="twitter:title" content="{{ share_text }}">
 
 {# Facebook #}
-<meta property="og:title" content="{{ COPY.sharing.facebook_title }}" />
+<meta property="og:title" content="{{ COPY.content.title }}" />
 <meta property="og:url" content="{{ share_url }}" />
 <meta property="og:type" content="article" />
-<meta property="og:description" content="{{ COPY.sharing.facebook_text }}" />
-<meta property="og:image" content="{{ FACEBOOK_IMAGE_URL }}" />
+<meta property="og:description" content="{{ share_text }}" />
+<meta property="og:image" content="{{ money_quote_image }}" />
 <meta property="og:site_name" content="NPR.org" />
 <meta property="fb:app_id" content="{{ FACEBOOK_APP_ID }}" />
 
 {# Google News #}
-<meta name="thumbnail" content="{{ GOOGLE_IMAGE_URL }}" />
+<meta name="thumbnail" content="{{ money_quote_image }}" />
 
 {# The speech #}
 <script>
-    var speechSlug = '{{ speech.slug}}';
+    var speechSlug = '{{ speech.slug }}';
 </script>
 {% endblock extra_head %}
 
