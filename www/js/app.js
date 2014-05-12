@@ -38,34 +38,13 @@ var filterSpeeches = function() {
     }
 }
 
-var newSpeech = function(key, value) {
-    var speech = null;
-
-    return {
-        getSpeech: function(){
-            this.setSpeech();
-
-            return speech;
-        },
-        setSpeech: function(key, value) {
-            speech = _.chain(SPEECHES)
-                      .shuffle()
-                      .filter(function(pair){
-                          return pair[key] == value;
-                      })
-                      .reject(function(pair){
-                          return speech !== null ? pair['slug'] == speech['slug'] : false;
-                      })
-                      .value()[0];
-        }
-    };
-}
-
-var renderLeadQuote = function(quote) {
-    var context = typeof(quote['data']) !== 'undefined' ? quote['data'].getSpeech() : quote.getSpeech();
+var renderLeadQuote = function() {
+    var featured = _.where(SPEECHES, {'featured': 'y'});
+    var context = _.shuffle(featured)[0];
     var html = JST.quote(context);
 
     $leadQuote.html(html);
+
     _.defer(function(){
         $leadQuote.find('blockquote').addClass('fadein');
     });
@@ -112,9 +91,8 @@ $(function() {
             this.field('year')
             this.ref('slug')
         })
-        var quote = newSpeech();
 
-        renderLeadQuote(quote);
+        renderLeadQuote();
 
         _.each(SPEECHES, function(speech) {
             searchIndex.add(speech);
@@ -123,6 +101,6 @@ $(function() {
         $tagButtons.on('click', onTagButtonClick);
         $resetTagsButton.on('click', onResetTagsButtonClick);
         $search.on('keyup', filterSpeeches);
-        $refreshQuoteButton.on('click', quote, renderLeadQuote);
+        $refreshQuoteButton.on('click', renderLeadQuote);
     }
 });
