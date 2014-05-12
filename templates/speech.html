@@ -83,9 +83,9 @@
 
         <ul class="external-links">
             {% if speech.full_text %}
-            <li class="full-text"><a href="{{ speech.full_text }}">{{ COPY.content.full_text_link}} <i class="fa fa-angle-right"></i></a></li>
+            <li class="full-text"><a href="{{ speech.full_text }}">Read the full text at {{ speech.web_source_credit }} <i class="fa fa-angle-right"></i></a></li>
             {% elif speech.source_url %}
-            <li class="full-text"><a href="{{ speech.source_url }}">{{ COPY.content.source_link}} <i class="fa fa-angle-right"></i></a></li>
+            <li class="full-text"><a href="{{ speech.source_url }}">Read the full text at {{ speech.web_source_credit }} <i class="fa fa-angle-right"></i></a></li>
             {% endif %}
 
 
