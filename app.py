@@ -22,7 +22,7 @@ def index():
     """
     context = make_context()
 
-    context['speeches'] = data.load() 
+    context['speeches'] = data.load()
 
     with open('www/static-data/data.json') as f:
         context['speeches_json'] = Markup(f.read())
@@ -36,7 +36,7 @@ def _speech(slug):
     """
     context = make_context()
 
-    context['speeches'] = data.load() 
+    context['speeches'] = sorted(data.load(), key=lambda x: x['name'])
     speech  = next(s for s in context['speeches'] if s['slug'] == slug)
     context['speech'] = speech
 
