@@ -156,11 +156,5 @@ def main():
         if speech['money_quote']:
             render(speech['money_quote'], speech['name'], speech['slug'], speech['img'])
 
-        if speech['money_quote2']:
-            slug = '%s-2' % speech['slug']
-
-            print slug
-            render(speech['money_quote2'], speech['name'], '%s-2' % slug, speech['img'])
-
 if __name__ == '__main__':
     main()

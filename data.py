@@ -105,9 +105,8 @@ def parse():
             elif o.netloc.find('vimeo') >= 0:
                 row['vimeo_id'] = o.path.split('/')[-1]
 
-        for k in ['money_quote', 'money_quote2']:
-            if row[k]:
-                row[k] = smartypants(row[k].strip('"'))
+        if row['money_quote']:
+            row['money_quote'] = smartypants(row['money_quote'].strip('"'))
 
         tags = [t.strip().lower() for t in row['take_homes'].replace(',', ';').split(';')]
         row['tags'] = []
@@ -160,6 +159,7 @@ def parse():
     del row['former_labels_ref']
     del row['former_field_ref']
     del row['former_mood_ref']
+    del row['money_quote2']
 
     # Render complete data
     with open('www/static-data/data.json', 'w') as f:
