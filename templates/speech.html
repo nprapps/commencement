@@ -114,7 +114,7 @@
                     {% if tag in speech['tags'] %}
                         {% for related in speech['related'][tag][0:1] %}
                         <a class="topic" href="{{ S3_BASE_URL }}/speech/{{ related.slug }}/">
-                                {% if related.img %}<img class="img-circle" src="{{ S3_BASE_URL }}/assets/mugs/{{ related.img }}">{% else %}<img class="img-circle" src="{{ S3_BASE_URL }}/assets/mugs/schwartz.jpg">{% endif %}
+                                {% if related.img %}<img class="img-circle" src="{{ S3_BASE_URL }}/assets/mugs/{{ related.img }}">{% endif %}
                                 <h3><span>Next &ldquo;{{ tag_name }}&rdquo; speech&nbsp;<i class="fa fa-angle-right"></i></span></h3>
 
                                 <h4><span>{{ related.name }}</span></h4>
