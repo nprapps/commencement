@@ -13,7 +13,7 @@
             </a>
         </li>
         <li>
-            <a href="https://www.facebook.com/dialog/feed?app_id={{ FACEBOOK_APP_ID }}&amp;link={{ share_url|urlencode }}&amp;name={{ share_text|urlencode }}&amp;picture={{ image|urlencode }}&amp;redirect_uri={{ share_url|urlencode }}" title="Share on Facebook" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Facebook In Navbar', '{{ PROJECT_NAME }}']);">
+            <a href="https://www.facebook.com/dialog/feed?app_id={{ FACEBOOK_APP_ID }}&amp;link={{ share_url|urlencode }}&amp;name={{ share_text|urlencode }}&amp;picture={{ image|urlencode }}&amp;redirect_uri={{ share_url|urlencode }}" title="Share on Facebook" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Facebook In Navbar', '{{ PROJECT_SLUG }}']);">
                 <span class="fa-stack">
                     <i class="fa fa-circle fa-stack-2x"></i>
                     <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -21,7 +21,7 @@
             </a>
         </li>
         <li>
-        <a href="http://twitter.com/share?text={{ share_text|urlencode }}&amp;url={{ share_url|urlencode }}" title="Share on Twitter" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Twitter In Speech', '{{ PROJECT_NAME }}']);">
+        <a href="http://twitter.com/share?text={{ share_text|urlencode }}&amp;url={{ share_url|urlencode }}" title="Share on Twitter" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Twitter In Speech', '{{ PROJECT_SLUG }}']);">
                 <span class="fa-stack">
                     <i class="fa fa-circle fa-stack-2x"></i>
                     <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
@@ -29,7 +29,7 @@
             </a>
         </li>
         <li>
-            <a href="https://pinterest.com/pin/create/button/?url={{ share_url|urlencode }}&media={{ image|urlencode }}&description={{ share_text|urlencode }}" title="Share on Pinterest" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Pinterest In Speech', '{{ PROJECT_NAME }}']);">
+            <a href="https://pinterest.com/pin/create/button/?url={{ share_url|urlencode }}&media={{ image|urlencode }}&description={{ share_text|urlencode }}" title="Share on Pinterest" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Pinterest In Speech', '{{ PROJECT_SLUG }}']);">
                 <span class="fa-stack">
                     <i class="fa fa-circle fa-stack-2x"></i>
                     <i class="fa fa-pinterest fa-stack-1x fa-inverse"></i>

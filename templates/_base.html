@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>{{ PROJECT_NAME }}</title>
+    <title>{{ COPY.content.title }}</title>
 
     <meta name="description" content="{{ COPY.content.meta }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -55,7 +55,7 @@
 
         <div class="main-content">
             {% block content %}
-            <h1>{{ COPY.content.header }}</h1>
+            <h1>{{ COPY.content.title }}</h1>
             App content goes here.
 
             <i class="icon icon-play"></i>
