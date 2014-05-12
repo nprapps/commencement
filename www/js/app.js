@@ -72,6 +72,11 @@ var onResetTagsButtonClick = function() {
     filterSpeeches();
 }
 
+var onRefreshQuoteButtonClick = function() {
+    renderLeadQuote();
+    $.scrollTo('.big-quote', { duration: 250 });
+}
+
 $(function() {
     $speeches = $('.speeches li');
     $tags = $('.tags');
@@ -101,6 +106,6 @@ $(function() {
         $tagButtons.on('click', onTagButtonClick);
         $resetTagsButton.on('click', onResetTagsButtonClick);
         $search.on('keyup', filterSpeeches);
-        $refreshQuoteButton.on('click', renderLeadQuote);
+        $refreshQuoteButton.on('click', onRefreshQuoteButtonClick);
     }
 });
