@@ -90,12 +90,12 @@
             <li class="full-text"><a href="{{ speech.full_text }}"><span class="fa-stack fa-lg">
               <i class="fa fa-circle fa-stack-2x"></i>
               <i class="fa fa-align-justify fa-stack-1x fa-inverse"></i>
-            </span> {{ COPY.content.full_text_link}}</a></li>
+            </span> Read the full text at {{ speech.web_source_credit }}</a></li>
             {% elif speech.source_url %}
             <li class="full-text"><a href="{{ speech.source_url }}"><span class="fa-stack fa-lg">
               <i class="fa fa-circle fa-stack-2x"></i>
               <i class="fa fa-align-justify fa-stack-1x fa-inverse"></i>
-            </span> {{ COPY.content.source_link}}</a></li>
+            </span> Read the full text at {{ speech.web_source_credit }}</a></li>
             {% endif %}
 
 

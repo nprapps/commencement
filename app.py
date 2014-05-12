@@ -2,6 +2,7 @@
 
 import argparse
 from flask import Flask, Markup, render_template
+from urlparse import urlparse
 
 from typogrify.templatetags import jinja_filters
 
@@ -36,9 +37,18 @@ def _speech(slug):
     """
     context = make_context()
 
-    context['speeches'] = sorted(data.load(), key=lambda x: x['name'])
-    speech  = next(s for s in context['speeches'] if s['slug'] == slug)
-    context['speech'] = speech
+    speeches = []
+    for speech in data.load():
+        if speech.get('full_text_link', None):
+            url = speech['full_text']
+        else:
+            url = speech['source_url']
+
+        speech['web_source_credit'] = urlparse(url).netloc.replace('www.', '')
+        speeches.append(speech)
+
+    context['speeches'] = sorted(speeches, key=lambda x: x['name'])
+    context['speech'] = next(s for s in context['speeches'] if s['slug'] == slug)
 
     context['share_url'] = 'http://%s/%s/speech/%s' % (app_config.PRODUCTION_S3_BUCKETS[0], app_config.PROJECT_SLUG, slug)
     context['money_quote_image'] = '%s/quote-images/%s.png' % (app_config.S3_BASE_URL, slug)
