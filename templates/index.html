@@ -9,19 +9,17 @@
 {% block header_content %}
 <header>
     <div class="container">
-        <div class="row">
-            <div class="header-wrapper">
+        <div class="header-wrapper">
+            <h2 class="npr"><a href="http://npr.org"><img src="{{ S3_BASE_URL }}/assets/npr-black.png" alt="NPR" /></a></h2>
+            <h1>{{ COPY.content.header|safe|typogrify }}</h1>
+            <p>{{ COPY.content.chatter }}</p>
 
-                <h1>{{ COPY.content.header }}</h1>
-                <p>{{ COPY.content.chatter }}</p>
-
-                <div id="story-meta">
-                    <p class="byline">by <span>{{ COPY.attribution.byline }}</span></p>
-                    <p class="dateblock">
-                        <span class="date">{{ COPY.attribution.pubdate }}</span>
-                        <span class="time"> {{ COPY.attribution.pubtime }}</span>
-                    </p>
-                </div>
+            <div id="story-meta">
+                <p class="byline">by <span>{{ COPY.attribution.byline }}</span></p>
+                <p class="dateblock">
+                    <span class="date">{{ COPY.attribution.pubdate }}</span>
+                    <span class="time"> {{ COPY.attribution.pubtime }}</span>
+                </p>
             </div>
         </div>
     </div>

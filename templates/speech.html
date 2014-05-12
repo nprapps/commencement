@@ -36,9 +36,15 @@
 {% block header_content %}
 <header>
     <div class="container">
-        <div class="row">
-            <div class="header-wrapper">
-                <h1><a href="{{ S3_BASE_URL }}"><h1>{{ COPY.content.header }}</h1></a></h1>
+        <div class="header-wrapper">
+        	<h2 class="npr"><a href="http://npr.org"><img src="{{ S3_BASE_URL }}/assets/npr-black.png" alt="NPR" /></a></h2>
+            <h1><a href="{{ S3_BASE_URL }}"><h1>{{ COPY.content.header|safe|typogrify }}</h1></a></h1>
+        </div>
+    </div>
+    <div id="bigbox">
+        {# 300x250 ad #}
+        <div class="adwrapper">
+            <div id="ad-desktop" class="sponsor300">
             </div>
         </div>
     </div>
@@ -51,16 +57,6 @@
 <div class="container">
     <div class="row">
         <div class="speech-header">
-            <div id="bigbox">
-                {# 300x250 ad #}
-                <div class="adwrapper">
-                    <div id="ad-desktop" class="sponsor300">
-                    </div>
-                    <p class="left">NPR thanks our sponsors</p>
-                    <p class="right"><a href="http://www.npr.org/about/place/corpsupport/">Become an NPR sponsor</a></p>
-                </div>
-            </div>
-
             {% if speech.img %}
             <div class="mug">
                 <img src="{{ S3_BASE_URL }}/assets/mugs/{{ speech.img }}">
@@ -87,23 +83,14 @@
 
         <ul class="external-links">
             {% if speech.full_text %}
-            <li class="full-text"><a href="{{ speech.full_text }}"><span class="fa-stack fa-lg">
-              <i class="fa fa-circle fa-stack-2x"></i>
-              <i class="fa fa-align-justify fa-stack-1x fa-inverse"></i>
-            </span> Read the full text at {{ speech.web_source_credit }}</a></li>
+            <li class="full-text"><a href="{{ speech.full_text }}">Read the full text at {{ speech.web_source_credit }} <i class="fa fa-angle-right"></i></a></li>
             {% elif speech.source_url %}
-            <li class="full-text"><a href="{{ speech.source_url }}"><span class="fa-stack fa-lg">
-              <i class="fa fa-circle fa-stack-2x"></i>
-              <i class="fa fa-align-justify fa-stack-1x fa-inverse"></i>
-            </span> Read the full text at {{ speech.web_source_credit }}</a></li>
+            <li class="full-text"><a href="{{ speech.source_url }}">Read the full text at {{ speech.web_source_credit }} <i class="fa fa-angle-right"></i></a></li>
             {% endif %}
 
 
             {% if speech.video_url and not speech.youtube_id and not speech.vimeo_id %}
-            <li class="video-link"><a href="{{ speech.video_url }}"><span class="fa-stack fa-lg">
-              <i class="fa fa-circle fa-stack-2x"></i>
-              <i class="fa fa-video-camera fa-stack-1x fa-inverse"></i>
-            </span> {{ COPY.content.watch_link }}</a></li>
+            <li class="video-link"><a href="{{ speech.video_url }}">{{ COPY.content.watch_link }} <i class="fa fa-angle-right"></i></a></li>
             {% endif %}
         </ul>
     </div>
@@ -131,14 +118,6 @@
 {% endblock %}
 
 {% block comments %}
-<div class="comments-wrapper">
-    <div class="container">
-        <div class="row">
-            <div id="comments"></div>
-        </div>
-    </div>
-</div>
-
 <div class="more-speeches">
     <div class="container">
         <div class="row">
@@ -157,6 +136,14 @@
                     {% endif %}
                 {% endfor %}
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="comments-wrapper">
+    <div class="container">
+        <div class="row">
+            <div id="comments"></div>
         </div>
     </div>
 </div>

@@ -14,7 +14,7 @@ import os
 NAMES
 """
 # Project name used for display
-PROJECT_NAME = 'commencement'
+PROJECT_NAME = 'The Best Commencement Speeches, Ever'
 
 # Project name to be used in urls
 # Use dashes, not underscores!
@@ -196,9 +196,9 @@ def configure_targets(deployment_target):
         DEBUG = True
     else:
         S3_BUCKETS = []
-        S3_BASE_URL = 'http://127.0.0.1:8000'
+        S3_BASE_URL = 'http://10.44.16.231:8000'
         SERVERS = []
-        SERVER_BASE_URL = 'http://127.0.0.1:8001/%s' % PROJECT_SLUG
+        SERVER_BASE_URL = 'http://10.44.16.231:8001/%s' % PROJECT_SLUG
         DISQUS_SHORTNAME = 'nprviz-test'
         DEBUG = True
         APP_LOG_PATH = '/tmp/%s.app.log' % PROJECT_SLUG

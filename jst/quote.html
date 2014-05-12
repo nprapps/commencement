@@ -1,10 +1,11 @@
 <% if (img) { %>
-<img class="mug img-circle" src="<%= APP_CONFIG.S3_BASE_URL %>/assets/mugs/<%= img %>">
+<a href="<%= APP_CONFIG.S3_BASE_URL %>/speech/<%= slug %>/"><img class="mug img-circle" src="<%= APP_CONFIG.S3_BASE_URL %>/assets/mugs/<%= img %>"></a>
 <% } %>
 <blockquote>
-    <p><%= money_quote %></p>
-    <cite><a href="<%= APP_CONFIG.S3_BASE_URL %>/speech/<%= slug %>/"><%= name %></a></cite>
-
+	<a href="<%= APP_CONFIG.S3_BASE_URL %>/speech/<%= slug %>/">
+	    <p><%= money_quote %></p>
+	    <cite><%= name %></cite>
+    </a>
     <ul class="sharing list-unstyled">
         <li>
 <!--            <a data-toggle="modal" data-target="#modal-{{ number }}" href="#">-->
