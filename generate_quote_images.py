@@ -22,10 +22,9 @@ SIZE_MIN = 16
 SIZE_MAX = 64
 SIZE_DELTA = 4
 
-LINE_MIN = 15
-LINE_MAX = 40
-LINE_DELTA = 5
-LINE_OPTIMAL = (30, 35)
+LINE_MIN = 16
+LINE_MAX = 50
+LINE_DELTA = 2 
 
 LOGO = Image.open('www/assets/npr-white.png')
 
@@ -66,22 +65,16 @@ def optimize_text(text):
             permutations[(size, wrap_count)] = (width, height)
 
     optimal = (0, 0)
-    sub_optimal = (0, 0)
 
     # Find the largest font size that's in the butter zone
     for k, v in permutations.items():
         size, wrap_count = k
         width, height = v
 
-        if wrap_count in LINE_OPTIMAL:
-            if size > optimal[0]:
-                optimal = k
-        else:
-            if size > sub_optimal[0]:
-                sub_optimal = k
-
-    if optimal == (0, 0):
-        return sub_optimal
+        if size > optimal[0]:
+            optimal = k
+        elif size == optimal[0] and wrap_count > optimal[1]:
+            optimal = k
 
     return optimal
 
