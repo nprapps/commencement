@@ -26,6 +26,16 @@
 <div class="container">
 	<div class="row">
 		<div class="speech-header">
+			<div id="bigbox">
+			    {# 300x250 ad #}
+			    <div class="adwrapper">
+			        <div id="ad-desktop" class="sponsor300">
+			        </div>
+			        <p class="left">NPR thanks our sponsors</p>
+			        <p class="right"><a href="http://www.npr.org/about/place/corpsupport/">Become an NPR sponsor</a></p>
+			    </div>
+			</div>
+		
 			{% if speech.img %}
 			<div class="mug">
 				<img src="{{ S3_BASE_URL }}/assets/mugs/{{ speech.img }}">
@@ -112,9 +122,10 @@
                     {% if tag in speech['tags'] %}
                         {% for related in speech['related'][tag][0:1] %}
                         <a class="topic" href="{{ S3_BASE_URL }}/speech/{{ related.slug }}/">
-		                        <h3>Next &ldquo;<span>{{ tag_name }}</span>&rdquo; speech <i class="fa fa-angle-right"></i></h3>
-                        		{% if related.img %}<img class="img-circle" src="{{ S3_BASE_URL }}/assets/mugs/{{ related.img }}">{% endif %}
-                                <h4>{{ related.name }}</h4>
+		                        {% if related.img %}<img class="img-circle" src="{{ S3_BASE_URL }}/assets/mugs/{{ related.img }}">{% else %}<img class="img-circle" src="{{ S3_BASE_URL }}/assets/mugs/schwartz.jpg">{% endif %}
+		                        <h3><span>Next &ldquo;{{ tag_name }}&rdquo; speech&nbsp;<i class="fa fa-angle-right"></i></span></h3>
+
+                                <h4><span>{{ related.name }}</span></h4>
                                 <p>{{ related.school }}, {{ related.year }}</p>
                             </a>
                         {% endfor %}
