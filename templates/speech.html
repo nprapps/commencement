@@ -3,6 +3,30 @@
 {% block body_class %}speech{% if speech.img %} has-mug{% endif %}{% endblock body_class %}
 
 {% block extra_head %}
+{# Twitter #}
+{% if speech.money_quote2 %}
+<meta name="twitter:card" content="gallery">
+<meta name="twitter:image0:src" content="{{ money_quote_image }}">
+<meta name="twitter:image1:src" content="{{ money_quote2_image }}">
+{% else %}
+<meta name="twitter:card" content="photo">
+<meta name="twitter:image" content="{{ money_quote_image }}" />
+{% endif %}
+<meta name="twitter:site" content="{{ TWITTER_HANDLE }}">
+
+{# Facebook #}
+<meta property="og:title" content="{{ COPY.sharing.facebook_title }}" />
+<meta property="og:url" content="{{ share_url }}" />
+<meta property="og:type" content="article" />
+<meta property="og:description" content="{{ COPY.sharing.facebook_text }}" />
+<meta property="og:image" content="{{ FACEBOOK_IMAGE_URL }}" />
+<meta property="og:site_name" content="NPR.org" />
+<meta property="fb:app_id" content="{{ FACEBOOK_APP_ID }}" />
+
+{# Google News #}
+<meta name="thumbnail" content="{{ GOOGLE_IMAGE_URL }}" />
+
+{# The speech #}
 <script>
     var speechSlug = '{{ speech.slug}}';
 </script>
