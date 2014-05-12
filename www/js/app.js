@@ -7,6 +7,8 @@ var $body = null;
 var $leadQuote = null;
 var $refreshQuoteButton = null;
 var $noResults = null;
+var $speechCount = null;
+var $speechTotal = null;
 
 var searchIndex = null;
 
@@ -33,8 +35,14 @@ var filterSpeeches = function() {
 
     if ($visibleSpeeches.length > 0){
         $noResults.hide();
+        $speechCount.html($visibleSpeeches.length - 1);
+        $speechTotal.html(SPEECHES.length);
+        $speechCount.parent('p').show();
     } else {
         $noResults.show();
+        $speechCount.html(SPEECHES.length);
+        $speechTotal.html(SPEECHES.length);
+        $speechCount.parent('p').show();
     }
 }
 
@@ -47,37 +55,61 @@ var renderLeadQuote = function() {
 
     _.defer(function(){
         $leadQuote.find('blockquote').addClass('fadein');
+        $leadQuote.find('.mug').addClass('fadein');
     });
 }
 
 var onTagButtonClick = function() {
-    var $this = $(this);
-
-    $tagButtons.not($this).removeClass('active');
-    $this.toggleClass('active');
-
-    if ($this.hasClass('active')){
-        $resetTagsButton.show();
-    } else {
-        $resetTagsButton.hide();
-    }
-
-    filterSpeeches();
-    $.scrollTo('.tags', { duration: 250, offset: { top: -10, left:0 } });
+    hasher.setHash($(this).data('tag'));
 }
 
 var onResetTagsButtonClick = function() {
-    $tagButtons.removeClass('active');
-    $(this).hide();
-
-    filterSpeeches();
-    $.scrollTo('.tags', { duration: 250, offset: { top: -10, left:0 } });
+    hasher.setHash('_');
 }
 
 var onRefreshQuoteButtonClick = function() {
     renderLeadQuote();
-    $.scrollTo('.big-quote', { duration: 250 });
+    $.scrollTo('.big-quote', { duration: 350 });
 }
+
+jQuery.fn.animateAuto = function(prop, speed, callback){
+    var elem, height, width;
+    return this.each(function(i, el){
+        el = jQuery(el), elem = el.clone().css({"height":"auto","width":"auto"}).appendTo("body");
+        height = elem.css("height"),
+        width = elem.css("width"),
+        elem.remove();
+
+        if(prop === "height")
+            el.animate({"height":height}, speed, callback);
+        else if(prop === "width")
+            el.animate({"width":width}, speed, callback);
+        else if(prop === "both")
+            el.animate({"width":width,"height":height}, speed, callback);
+    });
+}
+
+var onHashChanged = function(new_hash, old_hash) {
+    if (new_hash === '_') { new_hash = ''; }
+
+    if (new_hash === '') {
+        $tagButtons.removeClass('active');
+        $('a.reset-tags').hide();
+    } else {
+        var $this = $('div.tags li a[data-tag="' + new_hash + '"]');
+        $tagButtons.not($this).removeClass('active');
+        $this.toggleClass('active');
+
+        if ($this.hasClass('active')){
+            $resetTagsButton.show();
+        } else {
+            $resetTagsButton.hide();
+        }
+        $.scrollTo('.tags', { duration: 350, offset: { top: -10, left:0 } });
+    }
+
+    filterSpeeches();
+};
 
 $(function() {
     $speeches = $('.speeches li');
@@ -87,6 +119,8 @@ $(function() {
     $search = $('#search');
     $body = $('body');
     $refreshQuoteButton = $('#refresh-quote');
+    $speechCount = $('.speech-count');
+    $speechTotal = $('.speech-total');
 
     if ($body.hasClass('homepage')){
         $leadQuote = $('#lead-quote');
@@ -101,13 +135,15 @@ $(function() {
 
         renderLeadQuote();
 
-        _.each(SPEECHES, function(speech) {
-            searchIndex.add(speech);
-        });
+        _.each(SPEECHES, function(speech) { searchIndex.add(speech); });
 
         $tagButtons.on('click', onTagButtonClick);
         $resetTagsButton.on('click', onResetTagsButtonClick);
         $search.on('keyup', filterSpeeches);
         $refreshQuoteButton.on('click', onRefreshQuoteButtonClick);
+
+        hasher.changed.add(onHashChanged);
+        hasher.initialized.add(onHashChanged);
+        hasher.init();
     }
 });

@@ -2,13 +2,14 @@
 
 from datetime import date
 import json
+import app_config
 
 from apiclient.errors import HttpError
 from oauth2client import client
 
 from etc.ga import GoogleAnalytics
 
-path = '/playgrounds/playground'
+path = '/%s/speech' % app_config.PROJECT_SLUG
 
 def query_results():
     """
@@ -18,8 +19,8 @@ def query_results():
 
     try:
         results = ga.query(
-            start_date=date(2014, 4, 1),
-            end_date=date(2014, 4, 28),
+            start_date=date(2014, 5, 12),
+            end_date=date(2014, 5, 28),
             metrics='ga:pageviews',
             dimensions='ga:pagePath',
             filters='ga:pagePath=~^%s' % path,
