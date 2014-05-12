@@ -4,14 +4,8 @@
 
 {% block extra_head %}
 {# Twitter #}
-{% if speech.money_quote2 %}
-<meta name="twitter:card" content="gallery">
-<meta name="twitter:image0:src" content="{{ money_quote_image }}">
-<meta name="twitter:image1:src" content="{{ money_quote2_image }}">
-{% else %}
 <meta name="twitter:card" content="photo">
 <meta name="twitter:image" content="{{ money_quote_image }}" />
-{% endif %}
 <meta name="twitter:site" content="{{ TWITTER_HANDLE }}">
 <meta name="twitter:title" content="{{ share_text }}">
 
@@ -69,13 +63,7 @@
 
         <div class="speech-quotes">
             {% if speech.money_quote %}
-                {% with number=1, speech=speech, quote=speech.money_quote, image=money_quote_image %}
-                    {% include '_money_quote.html' %}
-                {% endwith %}
-            {% endif %}
-
-            {% if speech.money_quote2 %}
-                {% with number=2, speech=speech, quote=speech.money_quote2, image=money_quote2_image %}
+                {% with speech=speech, quote=speech.money_quote, image=money_quote_image %}
                     {% include '_money_quote.html' %}
                 {% endwith %}
             {% endif %}
