@@ -91,7 +91,6 @@ DATA_GOOGLE_DOC_KEY = '1a1SZvyycLpv4w8iyq-wvmT-eUERRGfzVkfliFkaQVnE'
 """
 SHARING
 """
-PROJECT_DESCRIPTION = 'An opinionated project template for (mostly) server-less apps.'
 SHARE_URL = 'http://%s/%s/' % (PRODUCTION_S3_BUCKETS[0], PROJECT_SLUG)
 
 # Will be resized to 120x120, can't be larger than 1MB
