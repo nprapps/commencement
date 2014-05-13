@@ -24,7 +24,6 @@ def index():
     """
     context = make_context()
 
-    featured = []
     speeches = []
     for speech in data.load():
         if speech.get('full_text_link', None):
@@ -35,11 +34,10 @@ def index():
         speech['web_source_credit'] = urlparse(url).netloc.replace('www.', '')
         speeches.append(speech)
 
-        if speech.get('featured', None) == 'y':
-            featured.append(speech)
+        if speech['slug'] == 'john-f-kennedy-american-1963':
+            context['featured'] = speech
 
     context['speeches'] = sorted(speeches, key=lambda x: x['name'])
-    context['featured'] = featured[random.randint(0, len(featured) - 1)]
 
     with open('www/static-data/data.json') as f:
         context['speeches_json'] = Markup(f.read())
@@ -53,12 +51,12 @@ def _speech(slug):
     """
     context = make_context()
 
-    speeches = data.load()
+    context['speeches'] = data.load()
     context['speech'] = next(s for s in context['speeches'] if s['slug'] == slug)
 
     context['share_url'] = 'http://%s/%s/speech/%s/' % (app_config.PRODUCTION_S3_BUCKETS[0], app_config.PROJECT_SLUG, slug)
     context['money_quote_image'] = '%s/quote-images/%s.png' % (app_config.S3_BASE_URL, slug)
-    context['share_text'] = '%(name)s\'s commencement address at %(school)s in %(year)s.' % speech
+    context['share_text'] = '%(name)s\'s commencement address at %(school)s in %(year)s.' % context['speech']
 
     with open('www/static-data/data-thin.json') as f:
         context['speeches_json'] = Markup(f.read())

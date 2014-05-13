@@ -10,6 +10,7 @@ var $noResults = null;
 var $speechCount = null;
 var $speechTotal = null;
 var FEATURED = _.where(SPEECHES, {'featured': 'y'});
+var featured_position = 0;
 
 var searchIndex = null;
 
@@ -48,7 +49,14 @@ var filterSpeeches = function() {
 }
 
 var renderLeadQuote = function() {
-    var context = _.shuffle(FEATURED)[0];
+    var context = FEATURED[featured_position];
+
+    if (featured_position == (FEATURED.length - 1)) {
+        featured_position = 0;
+    } else {
+        featured_position += 1;
+    }
+
     var html = JST.quote(context);
     $leadQuote.fadeOut('fast', function(){
         $leadQuote.html(html);
