@@ -120,7 +120,6 @@ GOOGLE_ANALYTICS = {
 }
 
 COMMENT_PROMPT = 'Leave a comment'
-DISQUS_UUID = '$NEW_DISQUS_UUID'
 
 """
 APP-SPECIFIC
@@ -132,7 +131,6 @@ TAGS = {
     'dont-give-up': 'Don\'t give up',
     'dream': 'Dream',
     'embrace-failure': 'Embrace failure',
-    'face-fear': 'Face fear',
     'fight-for-equality': 'Fight for equality',
     'inner-voice': 'Inner voice',
     'make-art': 'Make art',
