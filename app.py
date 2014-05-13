@@ -21,9 +21,6 @@ jinja_filters.register(app.jinja_env)
 
 @app.route('/')
 def index():
-    """
-    Example view demonstrating rendering a simple HTML page.
-    """
     context = make_context()
 
     speeches = []
@@ -44,9 +41,6 @@ def index():
 
 @app.route('/speech/<string:slug>/')
 def _speech(slug):
-    """
-    Example view demonstrating rendering a simple HTML page.
-    """
     context = make_context()
 
     speeches = data.load()
@@ -88,7 +82,10 @@ def _speech(slug):
 
             if speech['slug'] == context['speech']['slug']:
                 # The next speech should just be the one following this one in the list.
-                next_speech = speech_tags[tag][index + 1]
+                try:
+                    next_speech = speech_tags[tag][index + 1]
+                except IndexError:
+                    next_speech = speech_tags[tag][0]
 
                 # There is one exception to this rule.
                 # Loop over the speeches we've already grabbed using this logic
@@ -97,7 +94,10 @@ def _speech(slug):
                 for obj in context['tags']:
 
                     if obj['speech']['slug'] == next_speech['slug']:
-                        next_speech = speech_tags[tag][index + 2]
+                        try:
+                            next_speech = speech_tags[tag][index + 2]
+                        except IndexError:
+                            next_speech = speech_tags[tag][0]
 
                 context['tags'].append({ 'tag': tag.replace('-', ' ').title(), 'speech': next_speech })
                 break
