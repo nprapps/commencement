@@ -34,7 +34,7 @@ def index():
         speech['web_source_credit'] = urlparse(url).netloc.replace('www.', '')
         speeches.append(speech)
 
-        if speech['slug'] == 'john-f-kennedy-american-1963':
+        if speech['slug'] == app_config.INITIAL_SPEECH_SLUG:
             context['featured'] = speech
 
     context['speeches'] = sorted(speeches, key=lambda x: x['name'])

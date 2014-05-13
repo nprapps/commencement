@@ -9,7 +9,7 @@ var $refreshQuoteButton = null;
 var $noResults = null;
 var $speechCount = null;
 var $speechTotal = null;
-var FEATURED = _.where(SPEECHES, {'featured': 'y'});
+var FEATURED = null;
 var featured_position = 0;
 
 var searchIndex = null;
@@ -50,6 +50,8 @@ var filterSpeeches = function() {
 
 var renderLeadQuote = function() {
     var context = FEATURED[featured_position];
+
+    console.log(featured_position + ' ' + (FEATURED.length -1));
 
     if (featured_position == (FEATURED.length - 1)) {
         featured_position = 0;
@@ -138,6 +140,12 @@ $(function() {
         hasher.changed.add(onHashChanged);
         hasher.initialized.add(onHashChanged);
         hasher.init();
+
+        // Get the featured speeches.
+        FEATURED = _.where(SPEECHES, {'featured': 'y'});
+
+        // Add the initial speech slug to the list.
+        FEATURED.push(_.where(SPEECHES, {'slug': APP_CONFIG.INITIAL_SPEECH_SLUG })[0])
 
         searchIndex = lunr(function () {
             this.field('name', {boost: 10})
