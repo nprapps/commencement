@@ -80,6 +80,7 @@
             {% if speech.video_url and not speech.youtube_id and not speech.vimeo_id %}
             <li class="video-link"><a href="{{ speech.video_url }}">{{ COPY.content.watch_link }} <i class="fa fa-angle-right"></i></a></li>
             {% endif %}
+            <li class="tags"><i class="fa fa-tags"></i> {% for tag in speech.tags %}<a href="{{ S3_BASE_URL }}/#/{{ tag }}">{{ TAGS[tag] }}</a>{% endfor %}</li>
         </ul>
 
         {% if speech.img_source %}

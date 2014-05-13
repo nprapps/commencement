@@ -302,6 +302,14 @@ h1 + #story-meta { margin-top: -11px; }
 					display: inline-block;
 				}
 
+				.prompt {
+					display: block;
+					text-transform: uppercase;
+					margin-bottom: @line-height-computed / 4;
+					font-size: @font-size-base * 0.722222222;
+					color: #444;
+				}
+
 				a {
 					float: left;
 					clear: both;
@@ -751,7 +759,8 @@ h1 + #story-meta { margin-top: -11px; }
 		.clearfix;
 
 		.full-text,
-		.video-link {
+		.video-link,
+		.tags {
 			.make-sm-column(10);
 			.make-sm-column-push(1);
 
@@ -765,6 +774,23 @@ h1 + #story-meta { margin-top: -11px; }
 
 				.fa-stack-2x {
 					color: @yellow;
+				}
+			}
+		}
+
+		.tags {
+			padding-top: @line-height-computed / 2;
+
+			a {
+				font-size: @font-size-base * 0.777777778;
+				border: 1px solid @yellow;
+				padding: 6px 12px;
+				display: inline-block;
+				margin-right: 12px;
+
+				&:hover {
+					color: #111;
+					background: @yellow;
 				}
 			}
 		}
