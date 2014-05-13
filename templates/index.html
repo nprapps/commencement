@@ -116,13 +116,13 @@
                 {% for tag, name in TAGS.items() %}
                 <li><a class="btn" data-tag="{{ tag }}" href="javascript:void(0)">{{ name }}</a></li>
                 {% endfor %}
-                <li><a class="btn reset-tags" style="display: none;" href="javascript:void(0)">Reset Tags</a>
             </ul>
         </div>
+
+        <p class="speech-count-container" style="display:none;">
+            Showing <span class="speech-count">&nbsp;</span> of
+            <span class="speech-total">&nbsp;</span> speeches. <a class="btn reset-tags" style="display: none;" href="javascript:void(0)">Reset Tags</a></p>
     </form>
-    <p class="speech-count-container" style="display:none;">
-        Showing <span class="speech-count">&nbsp;</span> of
-        <span class="speech-total">&nbsp;</span> speeches.</p>
 </div>
 
 <ul class="speeches">

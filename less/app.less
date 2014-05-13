@@ -48,6 +48,11 @@ header {
 		font-size: 5vw;
 		font-weight: bold;
 		line-height: 1;
+
+		a:hover {
+			text-decoration: none;
+			opacity: 0.8;
+		}
 	}
 
 	.npr {
@@ -97,7 +102,7 @@ header {
 	p {
 		font-size: @font-size-base * 0.833333333;
 		margin: 0;
-		color: #555;
+		color: #333;
 
 		&.byline span { text-transform: uppercase; }
 		&.dateblock .date { margin-right: 0.8em; }	}
@@ -134,6 +139,20 @@ h1 + #story-meta { margin-top: -11px; }
 
 		.header-wrapper {
 			padding: @grid-gutter-width / 2;
+
+			p {
+				a {
+					color: @text-color;
+					padding: 2px;
+					text-decoration: underline;
+
+					&:hover {
+						background: #000;
+						color: @yellow;
+						text-decoration: none;
+					}
+				}
+			}
 
 			@media screen and (min-width: @screen-sm){
 				padding: 0 @grid-gutter-width @grid-gutter-width;
@@ -341,6 +360,13 @@ h1 + #story-meta { margin-top: -11px; }
 			}
 		}
 
+		.speech-count-container {
+			.make-sm-column(10);
+			.make-sm-column-push(1);
+
+			line-height: 34px;
+		}
+
         .tags {
             .make-sm-column(10);
             .make-sm-column-push(1);
@@ -349,29 +375,29 @@ h1 + #story-meta { margin-top: -11px; }
             	padding: 0 5px 0 0;
             	margin-bottom: 10px;
             }
+        }
 
-            .btn {
-            	border: 1px solid @yellow;
-            	color: @yellow;
-            	font-size: @font-size-base * 0.777777778;
-            	position: relative;
+        .btn {
+        	border: 1px solid @yellow;
+        	color: @yellow;
+        	font-size: @font-size-base * 0.777777778;
+        	position: relative;
 
-            	&:hover,
-            	&.active {
-            		background: @yellow;
-            		color: #333;
-            	}
+        	&:hover,
+        	&.active {
+        		background: @yellow;
+        		color: #333;
+        	}
 
-            	&.reset-tags {
-            		color: @gray-light;
-            		border-color: @gray-light;
+        	&.reset-tags {
+        		color: @gray-light;
+        		border-color: @gray-light;
 
-            		&:hover {
-            			background: @gray-light;
-            			color: #333;
-            		}
-            	}
-            }
+        		&:hover {
+        			background: @gray-light;
+        			color: #333;
+        		}
+        	}
         }
 
         .search {
