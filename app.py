@@ -24,7 +24,6 @@ def index():
     """
     context = make_context()
 
-    featured = []
     speeches = []
     for speech in data.load():
         if speech.get('full_text_link', None):
@@ -35,11 +34,10 @@ def index():
         speech['web_source_credit'] = urlparse(url).netloc.replace('www.', '')
         speeches.append(speech)
 
-        if speech.get('featured', None) == 'y':
-            featured.append(speech)
+        if speech['slug'] == app_config.INITIAL_SPEECH_SLUG:
+            context['featured'] = speech
 
     context['speeches'] = sorted(speeches, key=lambda x: x['name'])
-    context['featured'] = featured[random.randint(0, len(featured) - 1)]
 
     with open('www/static-data/data.json') as f:
         context['speeches_json'] = Markup(f.read())

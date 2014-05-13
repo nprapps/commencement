@@ -96,7 +96,7 @@ TWITTER_HANDLE = '@nprviz'
 
 # 16:9 ("wide") image. FB uses 16:9 in the newsfeed and crops to square in timelines.
 # No documented restrictions on size
-FACEBOOK_IMAGE_URL = TWITTER_IMAGE_URL 
+FACEBOOK_IMAGE_URL = TWITTER_IMAGE_URL
 FACEBOOK_APP_ID = '138837436154588'
 
 # Thumbnail image for Google News / Search.
@@ -143,6 +143,8 @@ TAGS = {
     'work-hard': 'Work hard',
     'yolo': 'YOLO'
 }
+
+INITIAL_SPEECH_SLUG = 'john-f-kennedy-american-1963'
 
 """
 Utilities
