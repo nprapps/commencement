@@ -9,6 +9,7 @@ var $refreshQuoteButton = null;
 var $noResults = null;
 var $speechCount = null;
 var $speechTotal = null;
+var FEATURED = _.where(SPEECHES, {'featured': 'y'});
 
 var searchIndex = null;
 
@@ -47,15 +48,11 @@ var filterSpeeches = function() {
 }
 
 var renderLeadQuote = function() {
-    var featured = _.where(SPEECHES, {'featured': 'y'});
-    var context = _.shuffle(featured)[0];
+    var context = _.shuffle(FEATURED)[0];
     var html = JST.quote(context);
-
-    $leadQuote.html(html);
-
-    _.defer(function(){
-        $leadQuote.find('blockquote').addClass('fadein');
-        $leadQuote.find('.mug').addClass('fadein');
+    $leadQuote.fadeOut('fast', function(){
+        $leadQuote.html(html);
+        $leadQuote.fadeIn();
     });
 }
 
@@ -69,7 +66,6 @@ var onResetTagsButtonClick = function() {
 
 var onRefreshQuoteButtonClick = function() {
     renderLeadQuote();
-    $.scrollTo('.big-quote', { duration: 350 });
 }
 
 jQuery.fn.animateAuto = function(prop, speed, callback){
@@ -105,7 +101,7 @@ var onHashChanged = function(new_hash, old_hash) {
         } else {
             $resetTagsButton.hide();
         }
-        $.scrollTo('.tags', { duration: 350, offset: { top: -10, left:0 } });
+        $.scrollTo('.filters', { duration: 350 });
     }
 
     filterSpeeches();
@@ -125,17 +121,6 @@ $(function() {
     if ($body.hasClass('homepage')){
         $leadQuote = $('#lead-quote');
         $noResults = $('#no-results');
-        searchIndex = lunr(function () {
-            this.field('name', {boost: 10})
-            this.field('mood')
-            this.field('school')
-            this.field('year')
-            this.ref('slug')
-        })
-
-        renderLeadQuote();
-
-        _.each(SPEECHES, function(speech) { searchIndex.add(speech); });
 
         $tagButtons.on('click', onTagButtonClick);
         $resetTagsButton.on('click', onResetTagsButtonClick);
@@ -145,5 +130,16 @@ $(function() {
         hasher.changed.add(onHashChanged);
         hasher.initialized.add(onHashChanged);
         hasher.init();
+
+        searchIndex = lunr(function () {
+            this.field('name', {boost: 10})
+            this.field('mood')
+            this.field('school')
+            this.field('year')
+            this.ref('slug')
+        })
+
+        _.each(SPEECHES, function(speech) { searchIndex.add(speech); });
+
     }
 });

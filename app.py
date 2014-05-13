@@ -2,6 +2,7 @@
 
 import argparse
 from flask import Flask, Markup, render_template
+import random
 from urlparse import urlparse
 
 from typogrify.templatetags import jinja_filters
@@ -23,7 +24,22 @@ def index():
     """
     context = make_context()
 
-    context['speeches'] = data.load()
+    featured = []
+    speeches = []
+    for speech in data.load():
+        if speech.get('full_text_link', None):
+            url = speech['full_text']
+        else:
+            url = speech['source_url']
+
+        speech['web_source_credit'] = urlparse(url).netloc.replace('www.', '')
+        speeches.append(speech)
+
+        if speech.get('featured', None) == 'y':
+            featured.append(speech)
+
+    context['speeches'] = sorted(speeches, key=lambda x: x['name'])
+    context['featured'] = featured[random.randint(0, len(featured) - 1)]
 
     with open('www/static-data/data.json') as f:
         context['speeches_json'] = Markup(f.read())
@@ -37,17 +53,7 @@ def _speech(slug):
     """
     context = make_context()
 
-    speeches = []
-    for speech in data.load():
-        if speech.get('full_text_link', None):
-            url = speech['full_text']
-        else:
-            url = speech['source_url']
-
-        speech['web_source_credit'] = urlparse(url).netloc.replace('www.', '')
-        speeches.append(speech)
-
-    context['speeches'] = sorted(speeches, key=lambda x: x['name'])
+    speeches = data.load()
     context['speech'] = next(s for s in context['speeches'] if s['slug'] == slug)
 
     context['share_url'] = 'http://%s/%s/speech/%s/' % (app_config.PRODUCTION_S3_BUCKETS[0], app_config.PROJECT_SLUG, slug)
