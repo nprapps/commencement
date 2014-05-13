@@ -52,7 +52,7 @@
                         <ul class="sharing list-unstyled">
                             <li>
                     <!--            <a data-toggle="modal" data-target="#modal-{{ number }}" href="#">-->
-                                <a title="Share via email" href="mailto:?body=&quot;{{ featured.money_quote }}&quot;%0A%0A&mdash; {{ featured.name }}, {{ featured.school }}, {{ featured.date }}%0A%0ARead more: http://apps.npr.org/speech/{{ featured.slug }}/">
+                                <a title="Share via email" href="mailto:?body=&quot;{{ featured.money_quote }}&quot;%0A%0A&mdash; {{ featured.name }}, {{ featured.school }}, {{ featured.date }}%0A%0ARead more: http://apps.npr.org/speech/{{ featured.slug }}/" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Email From Featured Quote', '{{ PROJECT_NAME }}']);">
                                     <span class="fa-stack">
                                         <i class="fa fa-circle fa-stack-2x"></i>
                                         <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
@@ -60,7 +60,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="https://www.facebook.com/dialog/feed?app_id={{ FACEBOOK_APP_ID }}&amp;link={{ share_url|urlencode }}&amp;name={{ share_text|urlencode }}&amp;picture={{ image|urlencode }}&amp;redirect_uri={{ share_url|urlencode }}" title="Share on Facebook" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Facebook In Navbar', '{{ PROJECT_NAME }}']);">
+                                <a href="https://www.facebook.com/dialog/feed?app_id={{ FACEBOOK_APP_ID }}&amp;link={{ S3_BASE_URL|urlencode }}%2fspeech%2f{{ featured.slug }}%2f&amp;name={{ FACEBOOK_SHARE_TEXT|urlencode }}&amp;picture={{ S3_BASE_URL|urlencode }}%2fquote-images%2f{{ featured.slug|urlencode }}.png&amp;redirect_uri={{ SHARE_URL|urlencode }}" title="Share on Facebook" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Facebook From Featured Quote', '{{ PROJECT_NAME }}']);">
                                     <span class="fa-stack">
                                         <i class="fa fa-circle fa-stack-2x"></i>
                                         <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -68,7 +68,7 @@
                                 </a>
                             </li>
                             <li>
-                            <a href="http://twitter.com/share?text={{ share_text|urlencode }}+{{ image|urlencode }}&amp;url={{ share_url|urlencode }}" title="Share on Twitter" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Twitter In Speech', '{{ PROJECT_NAME }}']);">
+                            <a href="http://twitter.com/share?text={{ TWITTER_SHARE_TEXT|urlencode }}+{{ S3_BASE_URL|urlencode }}%2fquote-images%2f{{ featured.slug }}.png&amp;url={{ S3_BASE_URL|urlencode }}%2fspeech%2f{{ featured.slug }}%2f" title="Share on Twitter" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Twitter From Featured Quote', '{{ PROJECT_NAME }}']);">
                                     <span class="fa-stack">
                                         <i class="fa fa-circle fa-stack-2x"></i>
                                         <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
@@ -76,7 +76,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="https://pinterest.com/pin/create/button/?url={{ share_url|urlencode }}&media={{ image|urlencode }}&description={{ share_text|urlencode }}" title="Share on Pinterest" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Pinterest In Speech', '{{ PROJECT_NAME }}']);">
+                                <a href="https://pinterest.com/pin/create/button/?url={{ S3_BASE_URL|urlencode }}%2fspeech%2f{{ featured.slug|urlencode }}&media={{ S3_BASE_URL|urlencode }}%2fquote-images%2f{{ featured.slug|urlencode }}.png&description={{ SHARE_TEXT|urlencode }}" title="Share on Pinterest" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Pinterest From Featured Quote', '{{ PROJECT_NAME }}']);">
                                     <span class="fa-stack">
                                         <i class="fa fa-circle fa-stack-2x"></i>
                                         <i class="fa fa-pinterest fa-stack-1x fa-inverse"></i>
