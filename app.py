@@ -94,7 +94,10 @@ def _speech(slug):
                 for obj in context['tags']:
 
                     if obj['speech']['slug'] == next_speech['slug']:
-                        next_speech = speech_tags[tag][index + 2]
+                        try:
+                            next_speech = speech_tags[tag][index + 2]
+                        except IndexError:
+                            next_speech = speech_tags[tag][0]
 
                 context['tags'].append({ 'tag': tag.replace('-', ' ').title(), 'speech': next_speech })
                 break
