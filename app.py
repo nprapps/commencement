@@ -36,11 +36,9 @@ def index():
         if speech['slug'] == app_config.INITIAL_SPEECH_SLUG:
             context['featured'] = speech
 
-
-    context['speeches'] = sorted(speeches, key=lambda x: x['name'])
-
-    with open('www/static-data/data.json') as f:
-        context['speeches_json'] = json.dumps(speeches)
+    speeches = sorted(speeches, key=lambda x: x['name'])
+    context['speeches'] = speeches
+    context['speeches_json'] = json.dumps(speeches)
 
     return render_template('index.html', **context)
 
