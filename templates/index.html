@@ -52,7 +52,7 @@
                         <ul class="sharing list-unstyled">
                             <li>
                     <!--            <a data-toggle="modal" data-target="#modal-{{ number }}" href="#">-->
-                                <a title="Share via email" href="mailto:?body=&quot;{{ featured.money_quote }}&quot;%0A%0A&mdash; {{ featured.name }}, {{ featured.school }}, {{ featured.date }}%0A%0ARead more: http://apps.npr.org/speech/{{ featured.slug }}/" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Email From Featured Quote', '{{ PROJECT_NAME }}']);">
+                                <a title="Share via email" href="mailto:?body=&quot;{{ featured.money_quote|safe }}&quot;%0A%0A&mdash; {{ featured.name }}, {{ featured.school }}, {{ featured.date }}%0A%0ARead more: http://apps.npr.org/speech/{{ featured.slug }}/" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Email From Featured Quote', '{{ PROJECT_NAME }}']);">
                                     <span class="fa-stack">
                                         <i class="fa fa-circle fa-stack-2x"></i>
                                         <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
