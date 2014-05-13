@@ -76,11 +76,16 @@
             <li class="full-text"><a href="{{ speech.source_url }}">Read the full text at {{ speech.web_source_credit }} <i class="fa fa-angle-right"></i></a></li>
             {% endif %}
 
-
             {% if speech.video_url and not speech.youtube_id and not speech.vimeo_id %}
             <li class="video-link"><a href="{{ speech.video_url }}">{{ COPY.content.watch_link }} <i class="fa fa-angle-right"></i></a></li>
             {% endif %}
         </ul>
+
+        {% if speech.img_source %}
+        <div class="img-source">
+            Photo: {% if speech.img_credit %}{{ speech.img_credit }}/{% endif %}{{ speech.img_source }}
+        </div>
+        {% endif %}
     </div>
 </div>
 
