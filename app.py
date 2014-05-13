@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import argparse
+from collections import defaultdict
 from flask import Flask, Markup, render_template
 import json
 import random
@@ -27,16 +28,9 @@ def index():
 
     speeches = []
     for speech in data.load():
-        if speech.get('full_text_link', None):
-            url = speech['full_text']
-        else:
-            url = speech['source_url']
-
         speech['share_url'] = 'http://%s/%s/speech/%s/' % (app_config.PRODUCTION_S3_BUCKETS[0], app_config.PROJECT_SLUG, speech['slug'])
         speech['money_quote_image'] = '%s/quote-images/%s.png' % (app_config.S3_BASE_URL, speech['slug'])
         speech['share_text'] = '%(name)s, %(year)s. From NPR\'s The Best Commencement Speeches, Ever.' % speech
-
-        speech['web_source_credit'] = urlparse(url).netloc.replace('www.', '')
         speeches.append(speech)
 
         if speech['slug'] == app_config.INITIAL_SPEECH_SLUG:
@@ -57,15 +51,54 @@ def _speech(slug):
     """
     context = make_context()
 
-    context['speeches'] = data.load()
-    context['speech'] = next(s for s in context['speeches'] if s['slug'] == slug)
+    speeches = data.load()
 
+    context['speech'] = next(s for s in speeches if s['slug'] == slug)
     context['share_url'] = 'http://%s/%s/speech/%s/' % (app_config.PRODUCTION_S3_BUCKETS[0], app_config.PROJECT_SLUG, slug)
     context['money_quote_image'] = '%s/quote-images/%s.png' % (app_config.S3_BASE_URL, slug)
     context['share_text'] = '%(name)s, %(year)s. From NPR\'s The Best Commencement Speeches, Ever.' % context['speech']
 
-    with open('www/static-data/data-thin.json') as f:
-        context['speeches_json'] = Markup(f.read())
+    # Fancy web source credit line, e.g., See full text at graduationwisdom.com.
+    if context['speech'].get('full_text_link', None):
+        url = context['speech']['full_text']
+    else:
+        url = context['speech']['source_url']
+
+    context['speech']['web_source_credit'] = urlparse(url).netloc.replace('www.', '')
+
+    # Horizontal nav.
+    context['tags'] = []
+    speech_tags = defaultdict(list)
+
+    # Build a dictionary of tags; for each tag, get me a list of the speeches.
+    for speech in speeches:
+        for tag in speech['tags']:
+            if tag in context['speech']['tags']:
+                speech_tags[tag].append(speech)
+
+    # Get the list of speeches that share tags with this speech on a tag-by-tag basis.
+    # Sort the list by name. Find the speech that follows this one in the list.
+    for tag in context['speech']['tags']:
+
+        speech_tags[tag] = sorted(speech_tags[tag], key=lambda x: x['name'])
+
+        for index, speech in enumerate(speech_tags[tag]):
+
+            if speech['slug'] == context['speech']['slug']:
+
+                # The next speech should just be the one following this one in the list.
+                next_speech = speech_tags[tag][index + 1]
+
+                # There is one exception to this rule.
+                # Loop over the speeches we've already grabbed using this logic
+                # and make sure we don't have the same speech showing up twice.
+                # Duplicates are evil.
+                for obj in context['tags']:
+                    if obj['speech']['slug'] == next_speech['slug']:
+                        next_speech = speech_tags[tag][index + 2]
+
+                context['tags'].append({ 'tag': tag.replace('-', ' ').title(), 'speech': next_speech })
+                break
 
     return render_template('speech.html', **context)
 

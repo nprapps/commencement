@@ -110,19 +110,17 @@
     <div class="container">
         <div class="row">
             <div class="next-speech">
-                {% for tag, tag_name in TAGS.items() %}
-                    {% if tag in speech['tags'] %}
-                        {% for related in speech['related'][tag][0:1] %}
-                        <a class="topic" href="{{ S3_BASE_URL }}/speech/{{ related.slug }}/">
-                                {% if related.img %}<img class="img-circle" src="{{ S3_BASE_URL }}/assets/mugs/{{ related.img }}">{% endif %}
-                                <h3><span>Next &ldquo;{{ tag_name }}&rdquo; speech&nbsp;<i class="fa fa-angle-right"></i></span></h3>
+            {% for related in tags %}
 
-                                <h4><span>{{ related.name }}</span></h4>
-                                <p>{{ related.school }}, {{ related.year }}</p>
-                            </a>
-                        {% endfor %}
-                    {% endif %}
-                {% endfor %}
+                <a class="topic" href="{{ S3_BASE_URL }}/speech/{{ related.speech.slug }}/">
+                    {% if related.speech.img %}<img class="img-circle" src="{{ S3_BASE_URL }}/assets/mugs/{{ related.speech.img }}">{% endif %}
+                    <h3><span>Next &ldquo;{{ related.tag }}&rdquo; speech&nbsp;<i class="fa fa-angle-right"></i></span></h3>
+
+                    <h4><span>{{ related.speech.name }}</span></h4>
+                    <p>{{ related.speech.school }}, {{ related.speech.year }}</p>
+                </a>
+
+            {% endfor %}
             </div>
         </div>
     </div>
