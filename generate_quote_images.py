@@ -52,7 +52,9 @@ def optimize_text(text, max_height):
     for size in fonts['bold'].keys():
         for wrap_count in xrange(LINE_MIN, LINE_MAX + 1, LINE_DELTA):
             lines = textwrap.wrap(text, wrap_count)
+
             width, height = compute_size(lines, size)
+            height += height / len(lines) * 2
 
             # Throw away any that exceed canvas space
             if width > TEXT_MAX_WIDTH - quote_width[size]:
@@ -117,12 +119,12 @@ def render(quote, name, slug, mug_src):
 
         draw.text((x, y), line, font=fonts['bold'][size], fill=(255, 255, 255))
 
-        y += size
+        y += size * 1.2
 
     y += size 
 
     text = u'— %s' % name 
-    size = min(size, 32)
+    size = min(size, 24)
     font = fonts['book'][size]
     width, height = font.getsize(text)
     x = (CANVAS_WIDTH - text_margin[1]) - width
