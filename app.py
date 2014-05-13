@@ -69,21 +69,24 @@ def _speech(slug):
     speech_tags = defaultdict(list)
 
     # Build a dictionary of tags; for each tag, get me a list of the speeches.
+    # Loop over all speeches.
     for speech in speeches:
+
+        # Loop over the tags in this speech.
         for tag in speech['tags']:
+
+            # If this speech shares a tag with the page we're on, append it to the list.
             if tag in context['speech']['tags']:
                 speech_tags[tag].append(speech)
 
     # Get the list of speeches that share tags with this speech on a tag-by-tag basis.
     # Sort the list by name. Find the speech that follows this one in the list.
     for tag in context['speech']['tags']:
-
         speech_tags[tag] = sorted(speech_tags[tag], key=lambda x: x['name'])
 
         for index, speech in enumerate(speech_tags[tag]):
 
             if speech['slug'] == context['speech']['slug']:
-
                 # The next speech should just be the one following this one in the list.
                 next_speech = speech_tags[tag][index + 1]
 
@@ -92,6 +95,7 @@ def _speech(slug):
                 # and make sure we don't have the same speech showing up twice.
                 # Duplicates are evil.
                 for obj in context['tags']:
+
                     if obj['speech']['slug'] == next_speech['slug']:
                         next_speech = speech_tags[tag][index + 2]
 
