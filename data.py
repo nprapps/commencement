@@ -64,7 +64,7 @@ def parse():
         row['vimeo_id'] = None
 
         if not row['name']:
-            print 'Skipping row without name'
+            #print 'Skipping row without name'
             continue
 
         if row['date']: 
@@ -116,7 +116,7 @@ def parse():
                 continue
 
             if tag not in app_config.TAGS:
-                print 'Unrecognized tag: "%s"' % tag 
+                print 'Unrecognized tag: "%s" (%s)' % (tag, row['name']) 
                 continue
 
             row['tags'].append(tag)
