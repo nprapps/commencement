@@ -2,6 +2,7 @@
 
 import argparse
 from flask import Flask, Markup, render_template
+import json
 import random
 from urlparse import urlparse
 
@@ -31,16 +32,21 @@ def index():
         else:
             url = speech['source_url']
 
+        speech['share_url'] = 'http://%s/%s/speech/%s/' % (app_config.PRODUCTION_S3_BUCKETS[0], app_config.PROJECT_SLUG, speech['slug'])
+        speech['money_quote_image'] = '%s/quote-images/%s.png' % (app_config.S3_BASE_URL, speech['slug'])
+        speech['share_text'] = '%(name)s, %(year)s. From NPR\'s The Best Commencement Speeches, Ever.' % speech
+
         speech['web_source_credit'] = urlparse(url).netloc.replace('www.', '')
         speeches.append(speech)
 
         if speech['slug'] == app_config.INITIAL_SPEECH_SLUG:
             context['featured'] = speech
 
+
     context['speeches'] = sorted(speeches, key=lambda x: x['name'])
 
     with open('www/static-data/data.json') as f:
-        context['speeches_json'] = Markup(f.read())
+        context['speeches_json'] = json.dumps(speeches)
 
     return render_template('index.html', **context)
 
