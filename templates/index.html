@@ -182,6 +182,6 @@
 
 {% block extra_foot %}
 <script type="text/javascript">
-    var SPEECHES = {{ speeches_json }};
+    var SPEECHES = {{ speeches_json|safe }};
 </script>
 {% endblock %}
