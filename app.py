@@ -36,6 +36,9 @@ def index():
 
         if speech['slug'] == app_config.INITIAL_SPEECH_SLUG:
             context['featured'] = speech
+            context['featured']['share_url'] = 'http://%s/%s/speech/%s/' % (app_config.PRODUCTION_S3_BUCKETS[0], app_config.PROJECT_SLUG, context['featured']['slug'])
+            context['featured']['money_quote_image'] = '%s/quote-images/%s.png' % (app_config.S3_BASE_URL, context['featured']['slug'])
+            context['featured']['share_text'] = '%(name)s, %(year)s. From NPR\'s The Best Commencement Speeches, Ever.' % context['featured']
 
     context['speeches'] = sorted(speeches, key=lambda x: x['name'])
 
