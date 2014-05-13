@@ -49,8 +49,27 @@ def write_results(results):
 
     payload['results'] = []
 
+    with open('www/static-data/data.json') as f:
+        data = json.load(f)
+
     for url, count in results.get('rows', []):
-        payload['results'].append({'slug': url.replace(path, '').replace('.html', '').replace('/', ''), 'count': count })
+        slug = url.replace(path, '').replace('.html', '').replace('/', '')
+        speech_data = {}
+
+        for speech in data:
+            print speech['slug']
+
+            if speech['slug'] == slug:
+                speech_data = speech
+
+                speech = {
+                    'slug': slug,
+                    'count': count,
+                    'name': speech_data['name'],
+                    'img': '%s/assets/mugs/%s' % (app_config.S3_BASE_URL, speech_data['img'])
+                }
+
+                payload['results'].append(speech)
 
     with open('www/live-data/most-viewed.json', 'wb') as writefile:
         writefile.write(json.dumps(payload))
