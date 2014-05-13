@@ -82,7 +82,10 @@ def _speech(slug):
 
             if speech['slug'] == context['speech']['slug']:
                 # The next speech should just be the one following this one in the list.
-                next_speech = speech_tags[tag][index + 1]
+                try:
+                    next_speech = speech_tags[tag][index + 1]
+                except IndexError:
+                    next_speech = speech_tags[tag][0]
 
                 # There is one exception to this rule.
                 # Loop over the speeches we've already grabbed using this logic
