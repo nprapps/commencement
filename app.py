@@ -21,9 +21,6 @@ jinja_filters.register(app.jinja_env)
 
 @app.route('/')
 def index():
-    """
-    Example view demonstrating rendering a simple HTML page.
-    """
     context = make_context()
 
     speeches = []
@@ -44,9 +41,6 @@ def index():
 
 @app.route('/speech/<string:slug>/')
 def _speech(slug):
-    """
-    Example view demonstrating rendering a simple HTML page.
-    """
     context = make_context()
 
     speeches = data.load()
