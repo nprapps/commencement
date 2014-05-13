@@ -49,16 +49,17 @@ var filterSpeeches = function() {
 }
 
 var renderLeadQuote = function() {
+
+    // Indexes into the list of featured quotes using the global state
+    // of where you are in the list.
     var context = FEATURED[featured_position];
-
-    console.log(featured_position + ' ' + (FEATURED.length -1));
-
     if (featured_position == (FEATURED.length - 1)) {
         featured_position = 0;
     } else {
         featured_position += 1;
     }
 
+    // Loads the identified quote with some easing animation.
     var html = JST.quote(context);
     $leadQuote.fadeOut('fast', function(){
         $leadQuote.html(html);
@@ -147,6 +148,7 @@ $(function() {
         // Add the initial speech slug to the list.
         FEATURED.push(_.where(SPEECHES, {'slug': APP_CONFIG.INITIAL_SPEECH_SLUG })[0])
 
+        // Set up the search index.
         searchIndex = lunr(function () {
             this.field('name', {boost: 10})
             this.field('mood')
@@ -154,7 +156,6 @@ $(function() {
             this.field('year')
             this.ref('slug')
         })
-
         _.each(SPEECHES, function(speech) { searchIndex.add(speech); });
 
     }
