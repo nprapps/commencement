@@ -771,7 +771,6 @@ h1 + #story-meta { margin-top: -11px; }
 
 	.external-links {
 		.list-unstyled;
-		padding-bottom: @line-height-computed;
 		.clearfix;
 
 		.full-text,
@@ -793,6 +792,14 @@ h1 + #story-meta { margin-top: -11px; }
 			}
 		}
 	}
+
+    .img-source {
+        .make-sm-column(10);
+        .make-sm-column-push(1);
+		padding-bottom: @line-height-computed;
+
+        color: #444;
+    }
 
 	.more-speeches {
 		background: @gray-lighter;
