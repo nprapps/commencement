@@ -38,13 +38,11 @@ var filterSpeeches = function() {
 
     if ($visibleSpeeches.length > 0){
         $noResults.hide();
-        $speechCount.html($visibleSpeeches.length - 1);
-        $speechTotal.html(SPEECHES.length);
+        $speechCount.html($visibleSpeeches.length);
         $speechCount.parent('p').show();
     } else {
         $noResults.show();
-        $speechCount.html(SPEECHES.length);
-        $speechTotal.html(SPEECHES.length);
+        $speechCount.html(0);
         $speechCount.parent('p').show();
     }
 }
@@ -133,20 +131,20 @@ var onHashChanged = function(new_hash, old_hash) {
 };
 
 $(function() {
-    $speeches = $('.speeches li');
+    $speeches = $('.speeches .speech');
     $tags = $('.tags');
     $tagButtons = $('.tags .btn').not('.reset-tags');
     $resetTagsButton = $('.reset-tags');
     $search = $('#search');
     $body = $('body');
     $refreshQuoteButton = $('#refresh-quote');
-    $speechCount = $('.speech-count');
-    $speechTotal = $('.speech-total');
 
     if ($body.hasClass('homepage')){
         $leadQuote = $('#lead-quote');
         $imgSource = $('.img-source');
         $noResults = $('#no-results');
+        $speechCount = $('.speech-count');
+        $speechTotal = $('.speech-total');
 
         $tagButtons.on('click', onTagButtonClick);
         $resetTagsButton.on('click', onResetTagsButtonClick);
@@ -173,5 +171,6 @@ $(function() {
         })
         _.each(SPEECHES, function(speech) { searchIndex.add(speech); });
 
+        $speechTotal.html(SPEECHES.length);
     }
 });
