@@ -58,7 +58,7 @@ def _speech(slug):
 
     context['share_url'] = 'http://%s/%s/speech/%s/' % (app_config.PRODUCTION_S3_BUCKETS[0], app_config.PROJECT_SLUG, slug)
     context['money_quote_image'] = '%s/quote-images/%s.png' % (app_config.S3_BASE_URL, slug)
-    context['share_text'] = '%(name)s\'s commencement address at %(school)s in %(year)s.' % context['speech']
+    context['share_text'] = '%(name)s, %(year)s. From NPR\'s The Best Commencement Speeches, Ever.' % context['speech']
 
     with open('www/static-data/data-thin.json') as f:
         context['speeches_json'] = Markup(f.read())

@@ -133,6 +133,7 @@ TAGS = {
     'dream': 'Dream',
     'embrace-failure': 'Embrace failure',
     'face-fear': 'Face fear',
+    'fight-for-equality': 'Fight for equality',
     'inner-voice': 'Inner voice',
     'make-art': 'Make art',
     'play': 'Play',
