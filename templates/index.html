@@ -90,6 +90,11 @@
                 <a class="btn btn-warning" id="refresh-quote"><i class="fa fa-refresh"></i> Show Another Quote</a>
             </div>
 
+            <div class="img-source">
+                {% if featured.img_source %}
+                    Photo: {% if featured.img_credit %}{{ featured.img_credit }}/{% endif %}{{ featured.img_source }}
+                {% endif %}
+            </div>
         </div>
     </div>
 </div>

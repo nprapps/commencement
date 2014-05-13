@@ -5,6 +5,7 @@ var $resetTagsButton = null;
 var $search = null;
 var $body = null;
 var $leadQuote = null;
+var $imgSource = null;
 var $refreshQuoteButton = null;
 var $noResults = null;
 var $speechCount = null;
@@ -61,9 +62,22 @@ var renderLeadQuote = function() {
 
     // Loads the identified quote with some easing animation.
     var html = JST.quote(context);
+    var src = context['img_source'];
+
+    if (context['img_credit']) {
+        src = context['img_credit'] + '/' + src;
+    }
+
+    src = 'Photo: ' + src;
+
     $leadQuote.fadeOut('fast', function(){
         $leadQuote.html(html);
         $leadQuote.fadeIn();
+    });
+
+    $imgSource.fadeOut('fast', function() {
+        $imgSource.html(src);
+        $imgSource.fadeIn();
     });
 }
 
@@ -131,6 +145,7 @@ $(function() {
 
     if ($body.hasClass('homepage')){
         $leadQuote = $('#lead-quote');
+        $imgSource = $('.img-source');
         $noResults = $('#no-results');
 
         $tagButtons.on('click', onTagButtonClick);
