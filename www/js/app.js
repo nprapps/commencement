@@ -1,7 +1,7 @@
 var $speeches = null;
 var $tags = null;
 var $tagButtons = null;
-var $resetTagsButton = null;
+var $resetSearchButton = null;
 var $search = null;
 var $body = null;
 var $leadQuote = null;
@@ -21,6 +21,7 @@ var filterSpeeches = function() {
     var $visibleSpeeches = $speeches;
     var query = $search.val();
     var tags = $tags.find('.active').first().data('tag');
+    var showReset = false;
 
     if (query) {
         var results = searchIndex.search(query);
@@ -28,10 +29,20 @@ var filterSpeeches = function() {
         var ids = _.map(slugs, function(s) { return '#' + s });
 
         $visibleSpeeches = $(ids.join(','));
+
+        showReset = true;
     }
 
     if (tags) {
         $visibleSpeeches = $visibleSpeeches.filter('.tag-' + tags)
+
+        showReset = true;
+    }
+            
+    if (showReset) {
+        $resetSearchButton.show();
+    } else {
+        $resetSearchButton.hide();
     }
 
     $visibleSpeeches.show();
@@ -83,7 +94,8 @@ var onTagButtonClick = function() {
     hasher.setHash($(this).data('tag'));
 }
 
-var onResetTagsButtonClick = function() {
+var onResetSearchButtonClick = function() {
+    $search.val('');
     hasher.setHash('_');
 }
 
@@ -113,17 +125,11 @@ var onHashChanged = function(new_hash, old_hash) {
 
     if (new_hash === '') {
         $tagButtons.removeClass('active');
-        $('a.reset-tags').hide();
     } else {
         var $this = $('div.tags li a[data-tag="' + new_hash + '"]');
         $tagButtons.not($this).removeClass('active');
         $this.toggleClass('active');
 
-        if ($this.hasClass('active')){
-            $resetTagsButton.show();
-        } else {
-            $resetTagsButton.hide();
-        }
         $.scrollTo('.filters', { duration: 350 });
     }
 
@@ -134,7 +140,7 @@ $(function() {
     $speeches = $('.speeches .speech');
     $tags = $('.tags');
     $tagButtons = $('.tags .btn').not('.reset-tags');
-    $resetTagsButton = $('.reset-tags');
+    $resetSearchButton = $('.reset-tags');
     $search = $('#search');
     $body = $('body');
     $refreshQuoteButton = $('#refresh-quote');
@@ -147,7 +153,7 @@ $(function() {
         $speechTotal = $('.speech-total');
 
         $tagButtons.on('click', onTagButtonClick);
-        $resetTagsButton.on('click', onResetTagsButtonClick);
+        $resetSearchButton.on('click', onResetSearchButtonClick);
         $search.on('keyup', filterSpeeches);
         $refreshQuoteButton.on('click', onRefreshQuoteButtonClick);
 
