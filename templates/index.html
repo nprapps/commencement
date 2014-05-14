@@ -54,13 +54,12 @@
                             {% endif %}
                         </div>
                         <a href="{{ S3_BASE_URL }}/speech/{{ featured.slug }}/">
-                            <cite>{{ featured.name|safe }}</cite>
+                            <cite>{{ featured.name }}, {{ featured.school }}, {{ featured.date }}</cite>
                         </a>
                         <ul class="sharing list-unstyled">
                             <li class="prompt">Share an image of this quote</li>
                             <li>
-                    <!--            <a data-toggle="modal" data-target="#modal-{{ number }}" href="#">-->
-                                <a title="Share via email" href="mailto:?body=&quot;{{ featured.money_quote|safe }}&quot;%0A%0A&mdash; {{ featured.name }}, {{ featured.school }}, {{ featured.date }}%0A%0ARead more: http://apps.npr.org/speech/{{ featured.slug }}/" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Email From Featured Quote', '{{ PROJECT_NAME }}']);">
+                                <a title="Share via email" href="mailto:?body=&quot;{{ featured.money_quote|safe }}&quot;%0A%0A&mdash; {{ featured.name }}, {{ featured.school }}, {{ featured.date }}%0A%0ANPR's Best Commencement Speeches, Ever: http://apps.npr.org/speech/{{ featured.slug }}/&subject=NPR's Best Commencement Speeches, Ever" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Email From Featured Quote', '{{ PROJECT_NAME }}']);">
                                     <span class="fa-stack">
                                         <i class="fa fa-circle fa-stack-2x"></i>
                                         <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
@@ -118,7 +117,7 @@
 
         <p class="speech-count-container" style="display:none;">
             Showing <span class="speech-count">&nbsp;</span> of
-            <span class="speech-total">&nbsp;</span> speeches. <a class="btn reset-tags" style="display: none;" href="javascript:void(0)">Reset Tags</a></p>
+            <span class="speech-total">&nbsp;</span> speeches. <a class="btn reset-tags" style="display: none;" href="javascript:void(0)">Reset Search</a></p>
     </form>
 </div>
 
