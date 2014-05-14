@@ -92,7 +92,7 @@ SHARE_URL = 'http://%s/%s/' % (PRODUCTION_S3_BUCKETS[0], PROJECT_SLUG)
 
 # Will be resized to 120x120, can't be larger than 1MB
 TWITTER_IMAGE_URL = '%squote-images/john-f-kennedy-yale-university-1962.png' % SHARE_URL
-TWITTER_HANDLE = '@nprviz'
+TWITTER_HANDLE = '@npr_ed'
 
 # 16:9 ("wide") image. FB uses 16:9 in the newsfeed and crops to square in timelines.
 # No documented restrictions on size
