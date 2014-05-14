@@ -3,16 +3,17 @@
 
 import json
 import os
+import random
 
 from PIL import Image, ImageDraw
 
 OUT_DIR = 'www/assets/'
 
-CANVAS_WIDTH = 1024
-CANVAS_HEIGHT = 576
-SIZE = 64
+CANVAS_WIDTH = 800
+CANVAS_HEIGHT = 480
+SIZE = 160
 
-img = Image.new('RGB', (1024, 576), (17, 17, 17))
+img = Image.new('RGB', (CANVAS_WIDTH, CANVAS_HEIGHT), (17, 17, 17))
 draw = ImageDraw.Draw(img)
 
 def add_grid_mug(mug_src, x, y):
@@ -27,31 +28,47 @@ def add_grid_mug(mug_src, x, y):
 def main():
     x = 0
     y = 0
-    last_mug = ''
 
-    with open('www/static-data/data.json') as f:
-        data = json.load(f)
+    # with open('www/static-data/data.json') as f:
+    #     data = json.load(f)
+
+    mugs = [
+        'michelle-obama.jpg',
+        'adam-savage.jpg',
+        'arnold-schwarzenegger.jpg',
+        'david-byrne.jpg',
+        'ellen-degeneres.jpg',
+        'james-carville.jpg',
+        'kermit-the-frog.jpg',
+        'john-f-kennedy.jpg',
+        'neil-degrasse-tyson.jpg',
+        'peter-dinklage.jpg',
+        'stephen-colbert.jpg',
+        'whoopi-goldberg.jpg',
+        'franklin-d-roosevelt.jpg',
+        'ruth-westheimer.jpg',
+        'meryl-streep.jpg'
+    ]
+
+    random.shuffle(mugs, random.random)
 
     if not os.path.exists(OUT_DIR):
         os.mkdir(OUT_DIR)
 
 
 
-    for speech in data:
-        print speech['slug']
+    for mug in mugs:
+        print mug
 
-        if speech['img'] and speech['name'] != last_mug:
-            add_grid_mug(speech['img'], x, y)
+        add_grid_mug(mug, x, y)
 
-            last_mug = speech['name']
-
-            if x < CANVAS_WIDTH:
-                x += SIZE
-            elif y < CANVAS_HEIGHT:
-                x = 0
-                y += SIZE
-            else:
-                continue
+        if x < CANVAS_WIDTH - SIZE:
+            x += SIZE
+        elif y < CANVAS_HEIGHT - SIZE:
+            x = 0
+            y += SIZE
+        else:
+            continue
 
 
     img.save('%spromo_art.png' % OUT_DIR, 'PNG')
