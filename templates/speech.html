@@ -72,9 +72,9 @@
 
         <ul class="external-links">
             {% if speech.full_text %}
-            <li class="full-text"><a href="{{ speech.full_text }}">Read more{% if speech.web_source_credit %} at {{ speech.web_source_credit }}{% endif %} <i class="fa fa-angle-right"></i></a></li>
+            <li class="full-text"><a href="{{ speech.full_text }}">Read the speech{% if speech.web_source_credit %} at {{ speech.web_source_credit }}{% endif %} <i class="fa fa-angle-right"></i></a></li>
             {% elif speech.source_url %}
-            <li class="full-text"><a href="{{ speech.source_url }}">Read more{% if speech.web_source_credit %} at {{ speech.web_source_credit }}{% endif %} <i class="fa fa-angle-right"></i></a></li>
+            <li class="full-text"><a href="{{ speech.source_url }}">Read the speech{% if speech.web_source_credit %} at {{ speech.web_source_credit }}{% endif %} <i class="fa fa-angle-right"></i></a></li>
             {% endif %}
 
             {% if speech.video_url and not speech.youtube_id and not speech.vimeo_id %}
