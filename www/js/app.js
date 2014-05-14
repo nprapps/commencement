@@ -38,7 +38,7 @@ var filterSpeeches = function() {
 
         showReset = true;
     }
-            
+
     if (showReset) {
         $resetSearchButton.show();
     } else {
@@ -102,7 +102,7 @@ var onHashChanged = function(new_hash, old_hash) {
         $tagButtons.not($this).removeClass('active');
         $this.toggleClass('active');
 
-        $.scrollTo('.filters', { duration: 350 });
+        $.scrollTo('.speech-count-container', { duration: 350 });
     }
 
     filterSpeeches();
