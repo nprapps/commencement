@@ -52,7 +52,7 @@ def write_results(results):
     with open('www/static-data/data.json') as f:
         data = json.load(f)
 
-    for url, count in results.get('rows', [])[0:11]:
+    for url, count in results.get('rows', [])[0:5]:
         slug = url.replace(path, '').replace('.html', '').replace('/', '')
         speech_data = {}
 
