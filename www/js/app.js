@@ -139,10 +139,15 @@ $(function() {
         // Add the initial speech slug to the list.
         FEATURED.push(_.where(SPEECHES, {'slug': APP_CONFIG.INITIAL_SPEECH_SLUG })[0])
 
+        for (i = 0; i < SPEECHES.length; i++) {
+            SPEECHES[i]['simple_name'] = SPEECHES[i]['name'].replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()']/g, '')
+            console.log(SPEECHES[i]['simple_name']);
+        }
+
         // Set up the search index.
         searchIndex = lunr(function () {
             this.field('name', {boost: 10})
-            this.field('mood')
+            this.field('simple_name', {boost: 10})
             this.field('school')
             this.field('year')
             this.ref('slug')
