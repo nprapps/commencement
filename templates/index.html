@@ -46,7 +46,7 @@
                     {% endif %}
                     <blockquote>
                         <a href="{{ S3_BASE_URL }}/speech/{{ featured.slug }}/">
-                            <p>{{ featured.money_quote|safe }}</p>
+                            <p class="money-quote">{{ featured.money_quote|safe }}</p>
                         </a>
                         <div class="img-source">
                             {% if featured.img_source %}
@@ -54,7 +54,8 @@
                             {% endif %}
                         </div>
                         <a href="{{ S3_BASE_URL }}/speech/{{ featured.slug }}/">
-                            <cite>{{ featured.name }}, {{ featured.school }}, {{ featured.date }}</cite>
+                            <cite>{{ featured.name }}</cite>
+                            <p class="speech-meta">{{ featured.school }}, {{ featured.date }}</p>
                         </a>
                         <ul class="sharing list-unstyled">
                             <li class="prompt">Share an image of this quote</li>

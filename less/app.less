@@ -228,7 +228,7 @@ h1 + #story-meta { margin-top: -11px; }
 			position: relative;
 			margin-bottom: @line-height-computed;
 
-			p {
+			.money-quote {
 				font-size: @font-size-base;
 				position: relative;
 				margin-bottom: 5px;
@@ -289,6 +289,14 @@ h1 + #story-meta { margin-top: -11px; }
 						background: #111;
 						color: @yellow;
 					}
+				}
+
+				.speech-meta {
+					color: #999;
+					font-family: @font-family-serif;
+					font-style: italic;
+					font-size: @font-size-base * 0.833333333;
+					padding: @line-height-computed / 2 0 0;
 				}
 
 				&:hover {

@@ -3,7 +3,7 @@
 <% } %>
 <blockquote>
 	<a href="<%= APP_CONFIG.S3_BASE_URL %>/speech/<%= slug %>/">
-	    <p><%= money_quote %></p>
+	    <p class="money-quote"><%= money_quote %></p>
     </a>
     <div class="img-source">
         <% if (img_source){ %>
@@ -12,6 +12,7 @@
     </div>
 	<a href="<%= APP_CONFIG.S3_BASE_URL %>/speech/<%= slug %>/">
 	    <cite><%= name %></cite>
+	    <p class="speech-meta"><%= school %>, <%= date %></p>
     </a>
     <ul class="sharing list-unstyled">
         <li class="prompt">Share an image of this quote</li>

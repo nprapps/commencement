@@ -142,7 +142,7 @@ TAGS = {
     'yolo': 'YOLO'
 }
 
-INITIAL_SPEECH_SLUG = 'john-f-kennedy-american-1963'
+INITIAL_SPEECH_SLUG = 'john-f-kennedy-american-university-1963'
 
 """
 Utilities
