@@ -141,7 +141,6 @@ $(function() {
 
         for (i = 0; i < SPEECHES.length; i++) {
             SPEECHES[i]['simple_name'] = SPEECHES[i]['name'].replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()']/g, '')
-            console.log(SPEECHES[i]['simple_name']);
         }
 
         // Set up the search index.
