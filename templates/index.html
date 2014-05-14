@@ -47,7 +47,14 @@
                     <blockquote>
                         <a href="{{ S3_BASE_URL }}/speech/{{ featured.slug }}/">
                             <p>{{ featured.money_quote|safe }}</p>
-                            <cite>{{ featured.name }}</cite>
+                        </a>
+                        <div class="img-source">
+                            {% if featured.img_source %}
+                                Photo: {% if featured.img_credit %}{{ featured.img_credit }}/{% endif %}{{ featured.img_source }}
+                            {% endif %}
+                        </div>
+                        <a href="{{ S3_BASE_URL }}/speech/{{ featured.slug }}/">
+                            <cite>{{ featured.name|safe }}</cite>
                         </a>
                         <ul class="sharing list-unstyled">
                             <li class="prompt">Share an image of this quote</li>
@@ -90,12 +97,6 @@
 
                 <a class="btn btn-warning" id="refresh-quote"><i class="fa fa-refresh"></i> Show Another Quote</a>
             </div>
-
-            <div class="img-source">
-                {% if featured.img_source %}
-                    Photo: {% if featured.img_credit %}{{ featured.img_credit }}/{% endif %}{{ featured.img_source }}
-                {% endif %}
-            </div>
         </div>
     </div>
 </div>
@@ -129,7 +130,7 @@
                 <div class="row">
                     <div class="speech-wrapper">
                         <div class="speech-info">
-                            <h2 class="speech-name">{{ speech.name }}</h2>
+                            <h2 class="speech-name">{{ speech.name|safe }}</h2>
                             <p class="speech-features">
                                 {% if speech.video_url %}
                                 <span class="fa-stack">
@@ -138,7 +139,7 @@
                                 </span>
                                 {% endif %}
                             </p>
-                            <p class="speech-school">{{ speech.school }}</p>
+                            <p class="speech-school">{{ speech.school|safe }}</p>
                             <p class="speech-year">{{ speech.year }}</p>
                         </div>
                     </div>

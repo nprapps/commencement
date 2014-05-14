@@ -4,6 +4,13 @@
 <blockquote>
 	<a href="<%= APP_CONFIG.S3_BASE_URL %>/speech/<%= slug %>/">
 	    <p><%= money_quote %></p>
+    </a>
+    <div class="img-source">
+        <% if (img_source){ %>
+            Photo: <% if (img_credit) { %><%= img_credit %>/<% } %><%= img_source %>
+        <% } %>
+    </div>
+	<a href="<%= APP_CONFIG.S3_BASE_URL %>/speech/<%= slug %>/">
 	    <cite><%= name %></cite>
     </a>
     <ul class="sharing list-unstyled">

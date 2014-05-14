@@ -57,7 +57,7 @@
                 <img src="{{ S3_BASE_URL }}/assets/mugs/{{ speech.img }}">
             </div>
             {% endif %}
-            <h1>{{ speech.name }}</h1>
+            <h1>{{ speech.name|safe }}</h1>
             <p class="speech-info">{{ speech.school }}, {{ speech.date }}</p>
         </div>
 
@@ -80,14 +80,10 @@
             {% if speech.video_url and not speech.youtube_id and not speech.vimeo_id %}
             <li class="video-link"><a href="{{ speech.video_url }}">{{ COPY.content.watch_link }} <i class="fa fa-angle-right"></i></a></li>
             {% endif %}
-            <li class="tags"><i class="fa fa-tags"></i> {% for tag in speech.tags %}<a href="{{ S3_BASE_URL }}/#/{{ tag }}">{{ TAGS[tag] }}</a>{% endfor %}</li>
+            <li class="tags"><strong>Tagged:</strong> {% for tag in speech.tags %}<a href="{{ S3_BASE_URL }}/#/{{ tag }}">{{ TAGS[tag] }}</a>{% endfor %}</li>
         </ul>
 
-        {% if speech.img_source %}
-        <div class="img-source">
-            Photo: {% if speech.img_credit %}{{ speech.img_credit }}/{% endif %}{{ speech.img_source }}
-        </div>
-        {% endif %}
+        
     </div>
 </div>
 
@@ -123,8 +119,8 @@
                     {% if related.speech.img %}<img class="img-circle" src="{{ S3_BASE_URL }}/assets/mugs/{{ related.speech.img }}">{% endif %}
                     <h3><span>Next &ldquo;{{ related.tag }}&rdquo; speech&nbsp;<i class="fa fa-angle-right"></i></span></h3>
 
-                    <h4><span>{{ related.speech.name }}</span></h4>
-                    <p>{{ related.speech.school }}, {{ related.speech.year }}</p>
+                    <h4><span>{{ related.speech.name|safe }}</span></h4>
+                    <p>{{ related.speech.school|safe }}, {{ related.speech.year }}</p>
                 </a>
 
             {% endfor %}

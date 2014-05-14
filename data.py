@@ -127,6 +127,8 @@ def parse():
             speeches_by_tag[tag].append(row)
 
         row['slug'] = slugify(row)
+        row['name'] = smartypants(row['name'])
+        row['school'] = smartypants(row['school'])
 
         speeches.append(row)
 
