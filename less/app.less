@@ -552,11 +552,18 @@ h1 + #story-meta { margin-top: -11px; }
 
 	header {
 		display: table;
+		width: 100%;
 
 		.container,
 		#bigbox {
 			display: table-cell;
 			vertical-align: top;
+		}
+
+		.container {
+			@media screen and (min-width: @screen-lg){
+				width: 100%;
+			}
 		}
 
 		#bigbox {
