@@ -10,7 +10,7 @@
     {% endif %}
 
     <ul class="sharing">
-        <li class="prompt">Share an image of this quote (<a href="{{ image }}" target="_blank">link</a>)</li>
+        <li class="prompt">Share an image of this quote</li>
         <li>
             <a class="share" title="Share via email" href="mailto:?body=&quot;{{ quote|safe }}&quot;%0A%0A&mdash; {{ speech.name}}, {{ speech.school }}, {{ speech.date }}%0A%0ANPR's Best Commencement Speeches, Ever: http://apps.npr.org/speech/{{ speech.slug }}/&subject=NPR's Best Commencement Speeches, Ever">
                 <span class="fa-stack">
@@ -40,6 +40,14 @@
                 <span class="fa-stack">
                     <i class="fa fa-circle fa-stack-2x"></i>
                     <i class="fa fa-pinterest fa-stack-1x fa-inverse"></i>
+                </span>
+            </a>
+        </li>
+        <li>
+            <a class="share" href="{{ image }}" target="_blank">
+                <span class="fa-stack">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-link fa-stack-1x fa-inverse"></i>
                 </span>
             </a>
         </li>
