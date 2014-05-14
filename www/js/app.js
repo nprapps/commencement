@@ -170,7 +170,6 @@ $(function() {
             crossDomain: false,
             jsonp: false,
             success: function(data){
-                console.log(data);
                 renderMostViewed(data);
             },
             error: function(error){
