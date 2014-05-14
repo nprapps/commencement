@@ -33,24 +33,22 @@ def main():
     #     data = json.load(f)
 
     mugs = [
-        'michelle-obama.jpg',
+        'meryl-streep.jpg',
         'adam-savage.jpg',
-        'arnold-schwarzenegger.jpg',
+        'ruth-westheimer.jpg',
         'david-byrne.jpg',
-        'ellen-degeneres.jpg',
-        'james-carville.jpg',
-        'kermit-the-frog.jpg',
+        'michelle-obama.jpg',
         'john-f-kennedy.jpg',
         'neil-degrasse-tyson.jpg',
+        'kermit-the-frog.jpg',
+        'ellen-degeneres.jpg',
+        'james-carville.jpg',
         'peter-dinklage.jpg',
         'stephen-colbert.jpg',
         'whoopi-goldberg.jpg',
         'franklin-d-roosevelt.jpg',
-        'ruth-westheimer.jpg',
-        'meryl-streep.jpg'
+        'arnold-schwarzenegger.jpg'
     ]
-
-    random.shuffle(mugs, random.random)
 
     if not os.path.exists(OUT_DIR):
         os.mkdir(OUT_DIR)
