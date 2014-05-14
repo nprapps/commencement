@@ -76,7 +76,7 @@
                                 </a>
                             </li>
                             <li>
-                            <a href="http://twitter.com/share?text={{ featured.share_text|urlencode }}&amp;url={{ featured.share_url|urlencode }}" title="Share on Twitter" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Twitter From Featured Quote', '{{ PROJECT_NAME }}']);">
+                            <a href="http://twitter.com/share?text={{ featured.share_text|urlencode }}+{{ featured.money_quote_image|urlencode }}&amp;url={{ featured.share_url|urlencode }}" title="Share on Twitter" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Twitter From Featured Quote', '{{ PROJECT_NAME }}']);">
                                     <span class="fa-stack">
                                         <i class="fa fa-circle fa-stack-2x"></i>
                                         <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
@@ -91,14 +91,6 @@
                                     </span>
                                 </a>
                             </li>
-                            <li>
-                                <a class="share" href="{{ featured.money_quote_image }}" target="_blank">
-                                    <span class="fa-stack">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-link fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
                         </ul>
                     </blockquote>
                 </div>
@@ -108,6 +100,8 @@
         </div>
     </div>
 </div>
+
+<div id="most-viewed"></div>
 
 <div class="filters container">
     <form role="form" class="row">

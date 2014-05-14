@@ -66,6 +66,8 @@ def write_results(results):
                     'slug': slug,
                     'count': count,
                     'name': speech_data['name'],
+                    'school': speech_data['school'],
+                    'year': speech_data['year'],
                     'img': '%s/assets/mugs/%s' % (app_config.S3_BASE_URL, speech_data['img'])
                 }
 

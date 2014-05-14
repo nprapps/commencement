@@ -353,6 +353,80 @@ h1 + #story-meta { margin-top: -11px; }
 		}
 	}
 
+	#most-viewed {
+		background: #222;
+		padding: @line-height-computed * 2 0;
+
+		h2,
+		.most-viewed-speeches {
+			.make-sm-column(10);
+			.make-sm-column-push(1);
+		}
+
+		h2 {
+			text-transform: uppercase;
+			color: #fff;
+			font-size: @font-size-base * 2;
+			text-align: center;
+			margin-bottom: @line-height-computed * 2;
+		}
+
+		.most-viewed-speeches {
+			list-style: none;
+		}
+
+		li {
+			margin-bottom: @line-height-computed;
+			overflow: hidden;
+
+			a {
+				h3 {
+					text-transform: uppercase;
+					font-size: @font-size-base * 1.333333333;
+					color: #fff;
+					margin-bottom: 5px;
+					line-height: 1;
+				}
+
+				.speech-meta {
+					font-family: @font-family-serif;
+					font-style: italic;
+					color: #999;
+					font-size: @font-size-base * 0.833333333;
+				}
+
+				&:hover {
+					text-decoration: none;
+
+					h3 {
+						color: @yellow;
+					}
+				}
+			}
+
+			img {
+				.img-circle;
+				width: 100px;
+				max-width: 25%;
+				float: left;
+				margin-right: @grid-gutter-width;
+			}
+
+			@media screen and (min-width: @screen-sm){
+				width: 50%;
+				float: left;
+				clear: left;
+				padding-right: @grid-gutter-width / 2;
+
+				&:nth-child(even){
+					clear: right;
+					padding-right: 0;
+					padding-left: @grid-gutter-width / 2;
+				}
+			}
+		}
+	}
+
 	.filters {
 		padding-top: @line-height-computed * 2;
 		padding-bottom: @line-height-computed;

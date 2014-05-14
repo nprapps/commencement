@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="row">
+
+        <h2>Most Viewed Speeches</h2>
+
+        <ul class="most-viewed-speeches">
+            <% _.each(results, function(speech){ %>
+                <li>
+                    <a href="<%= APP_CONFIG.S3_BASE_URL + '/speech/' + speech['slug'] %>">
+                        <img src="<%= speech['img'] %>">
+                        <h3><%= speech['name'] %></h3>
+                        <p class="speech-meta"><%= speech['school'] %>, <%= speech['year'] %></p>
+                    </a>
+                </li>
+            <% }); %>
+        </ul>
+    </div>
+</div>

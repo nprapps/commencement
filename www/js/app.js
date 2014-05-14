@@ -79,6 +79,14 @@ var renderLeadQuote = function() {
     });
 }
 
+var renderMostViewed = function(data) {
+    var context = data;
+
+    // Loads the identified quote with some easing animation.
+    var html = JST.most_viewed(context);
+    $('#most-viewed').html(html);
+}
+
 var onTagButtonClick = function() {
     hasher.setHash($(this).data('tag'));
 }
@@ -154,5 +162,20 @@ $(function() {
         _.each(SPEECHES, function(speech) { searchIndex.add(speech); });
 
         $speechTotal.html(SPEECHES.length);
+
+        $.ajax({
+            url: APP_CONFIG.S3_BASE_URL + '/live-data/most-viewed.json',
+            dataType: 'json',
+            async: false,
+            crossDomain: false,
+            jsonp: false,
+            success: function(data){
+                console.log(data);
+                renderMostViewed(data);
+            },
+            error: function(error){
+                console.log('No most-viewed data');
+            }
+        })
     }
 });
