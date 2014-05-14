@@ -53,6 +53,8 @@ def _speech(slug):
     # Fancy web source credit line, e.g., See full text at graduationwisdom.com.
     if context['speech'].get('full_text_link', None):
         url = context['speech']['full_text']
+    elif context['speech'].get('full_text', None):
+        url = context['speech']['full_text']
     else:
         url = context['speech']['source_url']
 
