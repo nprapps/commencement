@@ -164,7 +164,7 @@ $(function() {
         $speechTotal.html(SPEECHES.length);
     }
 
-    $.ajax({
+    /*$.ajax({
         url: APP_CONFIG.S3_BASE_URL + '/live-data/most-viewed.json',
         dataType: 'json',
         async: false,
@@ -176,5 +176,5 @@ $(function() {
         error: function(error){
             console.log('No most-viewed data');
         }
-    })
+    });*/
 });
