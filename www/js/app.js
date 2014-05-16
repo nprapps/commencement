@@ -110,7 +110,9 @@ var onHashChanged = function(new_hash, old_hash) {
         $tagButtons.not($this).removeClass('active');
         $this.toggleClass('active');
 
-        $.scrollTo('.speech-count-container', { duration: 350 });
+        _.defer(function(){
+            $.scrollTo('.tags', { duration: 350 })
+        });
     }
 
     filterSpeeches();
