@@ -311,14 +311,31 @@ h1 + #story-meta { margin-top: -11px; }
 
 				li {
 					display: inline-block;
-				}
 
-				.prompt {
-					display: block;
-					text-transform: uppercase;
-					margin-bottom: @line-height-computed / 4;
-					font-size: @font-size-base * 0.722222222;
-					color: #999;
+					&.prompt {
+						display: block;
+						text-transform: uppercase;
+						margin-bottom: @line-height-computed / 2;
+						font-size: @font-size-base * 0.722222222;
+						color: #999;
+
+						a {
+							float: none;
+							color: #999;
+							border-top: none;
+							border-left: none;
+							border-right: none;
+							border-bottom: 2px solid rgba(255, 194, 53, 0.8);
+							.border-radius(0);
+
+							&:hover {
+								text-decoration: none;
+								border: none;
+								color: #111;
+								background: @yellow;
+							}
+						}
+					}
 				}
 
 				a {
@@ -706,10 +723,22 @@ h1 + #story-meta { margin-top: -11px; }
 			.prompt {
 				display: block;
 				text-transform: uppercase;
-				margin-bottom: @line-height-computed / 4;
+				margin-bottom: @line-height-computed / 2;
 				// font-weight: bold;
 				font-size: @font-size-base * 0.722222222;
 				color: #999;
+
+				a {
+					color: #999;
+					border-bottom: 2px solid rgba(255, 194, 53, 0.8);
+
+					&:hover {
+						text-decoration: none;
+						border: none;
+						color: #111;
+						background: @yellow;
+					}
+				}
 			}
 
 			li {
@@ -836,6 +865,7 @@ h1 + #story-meta { margin-top: -11px; }
 				padding: 6px 12px;
 				display: inline-block;
 				margin-right: 12px;
+				margin-bottom: 12px;
 
 				&:hover {
 					color: #111;

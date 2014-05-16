@@ -15,7 +15,7 @@
 	    <p class="speech-meta"><%= school %>, <%= date %></p>
     </a>
     <ul class="sharing list-unstyled">
-        <li class="prompt">Share an image of this quote</li>
+        <li class="prompt">Share this <a href="<%= money_quote_image %>" target="_blank">quote image</a></li>
         <li>
             <a title="Share via email" href="mailto:?body=&quot;<%= money_quote %>&quot;%0A%0A&mdash; <%= name %>, <%= school %>, <%= date %>%0A%0ANPR's Best Commencement Speeches, Ever: http://apps.npr.org/speech/<%= slug %>/&subject=NPR's Best Commencement Speeches, Ever">
                 <span class="fa-stack">
@@ -45,14 +45,6 @@
                 <span class="fa-stack">
                     <i class="fa fa-circle fa-stack-2x"></i>
                     <i class="fa fa-pinterest fa-stack-1x fa-inverse"></i>
-                </span>
-            </a>
-        </li>
-        <li>
-            <a class="share" href="<%= money_quote_image %>" target="_blank">
-                <span class="fa-stack">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-link fa-stack-1x fa-inverse"></i>
                 </span>
             </a>
         </li>

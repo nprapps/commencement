@@ -58,7 +58,7 @@
                             <p class="speech-meta">{{ featured.school }}, {{ featured.date }}</p>
                         </a>
                         <ul class="sharing list-unstyled">
-                            <li class="prompt">Share an image of this quote</li>
+                            <li class="prompt">Share this <a href="{{ featured.money_quote_image }}" target="_blank">quote image</a></li>
                             <li>
                                 <a title="Share via email" href="mailto:?body=&quot;{{ featured.money_quote|safe }}&quot;%0A%0A&mdash; {{ featured.name }}, {{ featured.school }}, {{ featured.date }}%0A%0ANPR's Best Commencement Speeches, Ever: http://apps.npr.org/speech/{{ featured.slug }}/&subject=NPR's Best Commencement Speeches, Ever" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Email From Featured Quote', '{{ PROJECT_NAME }}']);">
                                     <span class="fa-stack">
@@ -88,14 +88,6 @@
                                     <span class="fa-stack">
                                         <i class="fa fa-circle fa-stack-2x"></i>
                                         <i class="fa fa-pinterest fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                            <a class="share" href="{{ featured.money_quote_image }}" target="_blank">
-                                    <span class="fa-stack">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-link fa-stack-1x fa-inverse"></i>
                                     </span>
                                 </a>
                             </li>
