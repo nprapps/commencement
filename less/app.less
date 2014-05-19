@@ -180,6 +180,10 @@ h1 + #story-meta { margin-top: -11px; }
 			padding-right: @grid-gutter-width;
 			vertical-align: top;
 
+			.touch & {
+				display: none !important;
+			}
+
 			@media screen and (max-width: @screen-sm-max){
 				display: none;
 			}
@@ -602,6 +606,10 @@ h1 + #story-meta { margin-top: -11px; }
 
 			.adwrapper {
 				padding-bottom: 0;
+			}
+
+			.touch & {
+				display: none !important;
 			}
 
 			.hidden-xs;
