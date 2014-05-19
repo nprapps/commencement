@@ -58,9 +58,9 @@
                             <p class="speech-meta">{{ featured.school }}, {{ featured.date }}</p>
                         </a>
                         <ul class="sharing list-unstyled">
-                            <li class="prompt">Share this <a href="{{ featured.money_quote_image }}" target="_blank">quote image</a></li>
+                            <li class="prompt">Share this <a href="{{ featured.money_quote_image }}" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Image Link From Featured Quote', '{{ PROJECT_SLUG }}']);">quote image</a></li>
                             <li>
-                                <a title="Share via email" href="mailto:?body=&quot;{{ featured.money_quote|safe }}&quot;%0A%0A&mdash; {{ featured.name }}, {{ featured.school }}, {{ featured.date }}%0A%0ANPR's Best Commencement Speeches, Ever: http://apps.npr.org/speech/{{ featured.slug }}/&subject=NPR's Best Commencement Speeches, Ever" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Email From Featured Quote', '{{ PROJECT_NAME }}']);">
+                                <a title="Share via email" href="mailto:?body=&quot;{{ featured.money_quote|safe }}&quot;%0A%0A&mdash; {{ featured.name }}, {{ featured.school }}, {{ featured.date }}%0A%0ANPR's Best Commencement Speeches, Ever: http://apps.npr.org/speech/{{ featured.slug }}/&subject=NPR's Best Commencement Speeches, Ever" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Email From Featured Quote', '{{ PROJECT_SLUG }}']);">
                                     <span class="fa-stack">
                                         <i class="fa fa-circle fa-stack-2x"></i>
                                         <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
@@ -68,7 +68,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="https://www.facebook.com/dialog/feed?app_id={{ FACEBOOK_APP_ID }}&amp;link={{ featured.share_url|urlencode }}&amp;name={{ featured.share_text|urlencode }}&amp;picture={{ featured.money_quote_image|urlencode }}&amp;redirect_uri={{ featured.share_url|urlencode }}" title="Share on Facebook" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Facebook From Featured Quote', '{{ PROJECT_NAME }}']);">
+                                <a href="https://www.facebook.com/dialog/feed?app_id={{ FACEBOOK_APP_ID }}&amp;link={{ featured.share_url|urlencode }}&amp;name={{ featured.share_text|urlencode }}&amp;picture={{ featured.money_quote_image|urlencode }}&amp;redirect_uri={{ featured.share_url|urlencode }}" title="Share on Facebook" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Facebook From Featured Quote', '{{ PROJECT_SLUG }}']);">
                                     <span class="fa-stack">
                                         <i class="fa fa-circle fa-stack-2x"></i>
                                         <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -76,7 +76,7 @@
                                 </a>
                             </li>
                             <li>
-                            <a href="http://twitter.com/share?text={{ featured.share_text|urlencode }}&amp;url={{ featured.share_url|urlencode }}" title="Share on Twitter" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Twitter From Featured Quote', '{{ PROJECT_NAME }}']);">
+                            <a href="http://twitter.com/share?text={{ featured.share_text|urlencode }}&amp;url={{ featured.share_url|urlencode }}" title="Share on Twitter" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Twitter From Featured Quote', '{{ PROJECT_SLUG }}']);">
                                     <span class="fa-stack">
                                         <i class="fa fa-circle fa-stack-2x"></i>
                                         <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
@@ -84,7 +84,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="https://pinterest.com/pin/create/button/?url={{ featured.share_url|urlencode }}&amp;media={{ featured.money_quote_image|urlencode }}&amp;description={{ featured.share_text|urlencode }}" title="Share on Pinterest" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Pinterest From Featured Quote', '{{ PROJECT_NAME }}']);">
+                                <a href="https://pinterest.com/pin/create/button/?url={{ featured.share_url|urlencode }}&amp;media={{ featured.money_quote_image|urlencode }}&amp;description={{ featured.share_text|urlencode }}" title="Share on Pinterest" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Pinterest From Featured Quote', '{{ PROJECT_SLUG }}']);">
                                     <span class="fa-stack">
                                         <i class="fa fa-circle fa-stack-2x"></i>
                                         <i class="fa fa-pinterest fa-stack-1x fa-inverse"></i>

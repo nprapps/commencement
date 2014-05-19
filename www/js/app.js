@@ -89,15 +89,18 @@ var renderMostViewed = function(data) {
 
 var onTagButtonClick = function() {
     hasher.setHash($(this).data('tag'));
+    _gaq.push(['_trackEvent', APP_CONFIG.PROJECT_NAME, 'onTagButtonClick', $(this).data('tag')]);
 }
 
 var onResetSearchButtonClick = function() {
     $search.val('');
     hasher.setHash('_');
+    _gaq.push(['_trackEvent', APP_CONFIG.PROJECT_NAME, 'onResetSearchButtonClick']);
 }
 
 var onRefreshQuoteButtonClick = function() {
     renderLeadQuote();
+    _gaq.push(['_trackEvent', APP_CONFIG.PROJECT_NAME, 'onRefreshQuoteButtonClick']);
 }
 
 var onHashChanged = function(new_hash, old_hash) {
