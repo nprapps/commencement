@@ -1,5 +1,7 @@
 {% extends '_base.html' %}
 
+{% block title %}{{ speech.name|safe }} at {{ speech.school|safe }}, {{ speech.date }} : {{ COPY.content.title }}{% endblock title %}
+
 {% block body_class %}speech{% if speech.img %} has-mug{% endif %}{% endblock body_class %}
 
 {% block extra_head %}
