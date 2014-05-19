@@ -180,6 +180,10 @@ h1 + #story-meta { margin-top: -11px; }
 			padding-right: @grid-gutter-width;
 			vertical-align: top;
 
+			.touch & {
+				display: none !important;
+			}
+
 			@media screen and (max-width: @screen-sm-max){
 				display: none;
 			}
@@ -506,7 +510,12 @@ h1 + #story-meta { margin-top: -11px; }
 					position: relative;
 
 					@media screen and (max-width: @screen-xs-max){
-						padding: @line-height-computed / 2 @grid-gutter-width * 3 @line-height-computed / 2 0;
+						padding: @line-height-computed / 2 0;
+
+						.speech-name {
+							padding-right: 45px;
+							padding-top: 4px;
+						}
 					}
 				}
 
@@ -604,6 +613,10 @@ h1 + #story-meta { margin-top: -11px; }
 				padding-bottom: 0;
 			}
 
+			.touch & {
+				display: none !important;
+			}
+
 			.hidden-xs;
 			.hidden-sm;
 		}
@@ -688,7 +701,7 @@ h1 + #story-meta { margin-top: -11px; }
 		.make-sm-column(8);
 		.make-sm-column-push(2);
 
-		margin-bottom: @line-height-computed;
+		margin-bottom: 0;
 
 		.video-wrapper {
 			overflow: hidden;

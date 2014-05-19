@@ -115,7 +115,7 @@
             <div class="next-speech">
             {% for related in tags %}
 
-                <a class="topic" href="{{ S3_BASE_URL }}/speech/{{ related.speech.slug }}/">
+                <a class="topic" href="{{ S3_BASE_URL }}/speech/{{ related.speech.slug }}/"  onclick="_gaq.push(['_trackEvent', 'Filters', 'Click Tag Link From Speech', '{{ PROJECT_SLUG }}']);">
                     {% if related.speech.img %}<img class="img-circle" src="{{ S3_BASE_URL }}/assets/mugs/{{ related.speech.img }}">{% endif %}
                     <h3><span>Next &ldquo;{{ related.tag }}&rdquo; speech&nbsp;<i class="fa fa-angle-right"></i></span></h3>
 

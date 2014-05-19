@@ -10,9 +10,9 @@
     {% endif %}
 
     <ul class="sharing">
-        <li class="prompt">Share this <a href="{{ image }}" target="_blank">quote image</a></li>
+        <li class="prompt">Share this <a href="{{ image }}" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Image Link From Speech Detail', '{{ PROJECT_SLUG }}']);">quote image</a></li>
         <li>
-            <a class="share" title="Share via email" href="mailto:?body=&quot;{{ quote|safe }}&quot;%0A%0A&mdash; {{ speech.name|replace('&#8217;','%27')|replace('&#8216;', '%27') }}, {{ speech.school }}, {{ speech.date }}%0A%0ANPR's Best Commencement Speeches, Ever: http://apps.npr.org/speech/{{ speech.slug }}/&subject=NPR's Best Commencement Speeches, Ever">
+            <a class="share" title="Share via email" href="mailto:?body=&quot;{{ quote|safe }}&quot;%0A%0A&mdash; {{ speech.name|replace('&#8217;','%27')|replace('&#8216;', '%27') }}, {{ speech.school }}, {{ speech.date }}%0A%0ANPR's Best Commencement Speeches, Ever: http://apps.npr.org/speech/{{ speech.slug }}/&subject=NPR's Best Commencement Speeches, Ever" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Email From Speech Detail', '{{ PROJECT_SLUG }}']);">
                 <span class="fa-stack">
                     <i class="fa fa-circle fa-stack-2x"></i>
                     <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
@@ -20,7 +20,7 @@
             </a>
         </li>
         <li>
-            <a class="share" href="https://www.facebook.com/dialog/feed?app_id={{ FACEBOOK_APP_ID }}&amp;link={{ share_url|urlencode }}&amp;name={{ share_text|urlencode|replace('%26%238217%3B','%27')|replace('%26%238216%3B', '%27') }}&amp;picture={{ image|urlencode }}&amp;redirect_uri={{ share_url|urlencode }}" title="Share on Facebook" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Facebook In Navbar', '{{ PROJECT_SLUG }}']);">
+            <a class="share" href="https://www.facebook.com/dialog/feed?app_id={{ FACEBOOK_APP_ID }}&amp;link={{ share_url|urlencode }}&amp;name={{ share_text|urlencode|replace('%26%238217%3B','%27')|replace('%26%238216%3B', '%27') }}&amp;picture={{ image|urlencode }}&amp;redirect_uri={{ share_url|urlencode }}" title="Share on Facebook" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Facebook From Speech Detail', '{{ PROJECT_SLUG }}']);">
                 <span class="fa-stack">
                     <i class="fa fa-circle fa-stack-2x"></i>
                     <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -28,7 +28,7 @@
             </a>
         </li>
         <li>
-        <a class="share" href="http://twitter.com/share?text={{ share_text|urlencode|replace('%26%238217%3B','%27')|replace('%26%238216%3B', '%27') }}&amp;url={{ share_url|urlencode }}" title="Share on Twitter" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Twitter In Speech', '{{ PROJECT_SLUG }}']);">
+            <a class="share" href="http://twitter.com/share?text={{ share_text|urlencode|replace('%26%238217%3B','%27')|replace('%26%238216%3B', '%27') }}&amp;url={{ share_url|urlencode }}" title="Share on Twitter" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Twitter From Speech Detail', '{{ PROJECT_SLUG }}']);">
                 <span class="fa-stack">
                     <i class="fa fa-circle fa-stack-2x"></i>
                     <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
@@ -36,7 +36,7 @@
             </a>
         </li>
         <li>
-            <a class="share" href="https://pinterest.com/pin/create/button/?url={{ share_url|urlencode }}&amp;media={{ image|urlencode }}&amp;description={{ share_text|urlencode|replace('%26%238217%3B','%27')|replace('%26%238216%3B', '%27') }}" title="Share on Pinterest" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Pinterest In Speech', '{{ PROJECT_SLUG }}']);">
+            <a class="share" href="https://pinterest.com/pin/create/button/?url={{ share_url|urlencode }}&amp;media={{ image|urlencode }}&amp;description={{ share_text|urlencode|replace('%26%238217%3B','%27')|replace('%26%238216%3B', '%27') }}" title="Share on Pinterest" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Pinterest From Speech Detail', '{{ PROJECT_SLUG }}']);">
                 <span class="fa-stack">
                     <i class="fa fa-circle fa-stack-2x"></i>
                     <i class="fa fa-pinterest fa-stack-1x fa-inverse"></i>
