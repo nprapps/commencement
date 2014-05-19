@@ -510,7 +510,12 @@ h1 + #story-meta { margin-top: -11px; }
 					position: relative;
 
 					@media screen and (max-width: @screen-xs-max){
-						padding: @line-height-computed / 2 @grid-gutter-width * 3 @line-height-computed / 2 0;
+						padding: @line-height-computed / 2 0;
+
+						.speech-name {
+							padding-right: 45px;
+							padding-top: 3px;
+						}
 					}
 				}
 
