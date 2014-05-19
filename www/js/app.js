@@ -142,10 +142,6 @@ $(function() {
         $search.on('keyup', filterSpeeches);
         $refreshQuoteButton.on('click', onRefreshQuoteButtonClick);
 
-        hasher.changed.add(onHashChanged);
-        hasher.initialized.add(onHashChanged);
-        hasher.init();
-
         // Get the featured speeches.
         FEATURED = _.where(SPEECHES, {'featured': 'y'});
 
@@ -165,6 +161,10 @@ $(function() {
             this.ref('slug')
         })
         _.each(SPEECHES, function(speech) { searchIndex.add(speech); });
+
+        hasher.changed.add(onHashChanged);
+        hasher.initialized.add(onHashChanged);
+        hasher.init();
 
         $speechTotal.html(SPEECHES.length);
     }
