@@ -89,18 +89,18 @@ var renderMostViewed = function(data) {
 
 var onTagButtonClick = function() {
     hasher.setHash($(this).data('tag'));
-    _gaq.push(['_trackEvent', APP_CONFIG.PROJECT_NAME, 'onTagButtonClick', $(this).data('tag')]);
+    _gaq.push(['_trackEvent', 'Filters', 'onTagButtonClick', APP_CONFIG.PROJECT_SLUG]);
 }
 
 var onResetSearchButtonClick = function() {
     $search.val('');
     hasher.setHash('_');
-    _gaq.push(['_trackEvent', APP_CONFIG.PROJECT_NAME, 'onResetSearchButtonClick']);
+    _gaq.push(['_trackEvent', 'Filters', 'onResetSearchButtonClick', APP_CONFIG.PROJECT_SLUG]);
 }
 
 var onRefreshQuoteButtonClick = function() {
     renderLeadQuote();
-    _gaq.push(['_trackEvent', APP_CONFIG.PROJECT_NAME, 'onRefreshQuoteButtonClick']);
+    _gaq.push(['_trackEvent', 'Featured Quote', 'onRefreshQuoteButtonClick', APP_CONFIG.PROJECT_SLUG]);
 }
 
 var onHashChanged = function(new_hash, old_hash) {
