@@ -12,7 +12,7 @@
     <ul class="sharing">
         <li class="prompt">Share this <a href="{{ image }}" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Image Link From Speech Detail', '{{ PROJECT_SLUG }}']);">quote image</a></li>
         <li>
-            <a class="share" title="Share via email" href="mailto:?body=&quot;{{ quote|safe }}&quot;%0A%0A&mdash; {{ speech.name|replace('&#8217;','%27')|replace('&#8216;', '%27') }}, {{ speech.school }}, {{ speech.date }}%0A%0ANPR's Best Commencement Speeches, Ever: http://apps.npr.org/speech/{{ speech.slug }}/&subject=NPR's Best Commencement Speeches, Ever" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Email From Speech Detail', '{{ PROJECT_SLUG }}']);">
+            <a class="share" title="Share via email" href="mailto:?body=&quot;{{ quote|safe }}&quot;%0A%0A&mdash; {{ speech.name|replace('&#8217;','%27')|replace('&#8216;', '%27') }}, {{ speech.school }}, {{ speech.date }}%0A%0ANPR's Best Commencement Speeches, Ever: http://apps.npr.org/commencement/speech/{{ speech.slug }}/&subject=NPR's Best Commencement Speeches, Ever" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Email From Speech Detail', '{{ PROJECT_SLUG }}']);">
                 <span class="fa-stack">
                     <i class="fa fa-circle fa-stack-2x"></i>
                     <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
