@@ -17,7 +17,7 @@ TEXT_MAX_WIDTH = CANVAS_WIDTH - (TEXT_MARGIN[1] + TEXT_MARGIN[3])
 
 SIZE_MIN = 16
 SIZE_MAX = 64
-SIZE_DELTA = 4
+SIZE_DELTA = 2
 
 LINE_MIN = 16
 LINE_MAX = 50
@@ -135,7 +135,7 @@ def render(quote, name, slug, school, year, mug_src):
 
     text = u'%s, %s' % (school, year)
     text = parse.unescape(text)
-    size = min(size, 20)
+    size = min(size, 18)
     font = fonts['serif'][size]
     width, height = font.getsize(text)
     x = text_margin[1]
