@@ -125,9 +125,9 @@ ADS
 """
 
 NPR_DFP = {
-    'STORY_ID': '1002',
-    'TARGET': 'homepage',
-    'ENVIRONMENT': 'NPRTEST',
+    'STORY_ID': '1013',
+    'TARGET': 'News_U_S__Education',
+    'ENVIRONMENT': 'NPR',
     'TESTSERVER': 'false'
 }
 
