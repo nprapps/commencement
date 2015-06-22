@@ -119,6 +119,10 @@ GOOGLE_ANALYTICS = {
     'TOPICS': '[1003,1013]' # e.g. '[1014,3,1003,1002,1001]'
 }
 
+VIZ_GOOGLE_ANALYTICS = {
+    'ACCOUNT_ID': 'UA-5828686-75'
+}
+
 COMMENT_PROMPT = 'Leave a comment'
 
 """
