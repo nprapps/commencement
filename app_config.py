@@ -107,6 +107,19 @@ SHARING
 """
 SHARE_URL = 'http://%s/%s/' % (PRODUCTION_S3_BUCKET['bucket_name'], PROJECT_SLUG)
 
+# Will be resized to 120x120, can't be larger than 1MB
+TWITTER_IMAGE_URL = '%squote-images/john-f-kennedy-yale-university-1962.png' % SHARE_URL
+TWITTER_HANDLE = '@npr_ed'
+
+# 16:9 ("wide") image. FB uses 16:9 in the newsfeed and crops to square in timelines.
+# No documented restrictions on size
+FACEBOOK_IMAGE_URL = TWITTER_IMAGE_URL
+FACEBOOK_APP_ID = '138837436154588'
+
+# Thumbnail image for Google News / Search.
+# No documented restrictions on resolution or size
+GOOGLE_IMAGE_URL = TWITTER_IMAGE_URL
+
 """
 ADS
 """
