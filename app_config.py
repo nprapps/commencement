@@ -10,6 +10,10 @@ See get_secrets() below for a fast way to access them.
 
 import os
 
+from authomatic.providers import oauth2
+from authomatic import Authomatic
+
+
 """
 NAMES
 """
@@ -17,27 +21,41 @@ NAMES
 # Use dashes, not underscores!
 PROJECT_SLUG = 'commencement'
 
+# Project name to be used in file paths
+PROJECT_FILENAME = 'commencement'
+
 # The name of the repository containing the source
 REPOSITORY_NAME = 'commencement'
-REPOSITORY_URL = 'git@github.com:nprapps/%s.git' % REPOSITORY_NAME
+GITHUB_USERNAME = 'nprapps'
+REPOSITORY_URL = 'git@github.com:%s/%s.git' % (GITHUB_USERNAME, REPOSITORY_NAME)
 REPOSITORY_ALT_URL = None # 'git@bitbucket.org:nprapps/%s.git' % REPOSITORY_NAME'
 
 # Project name used for assets rig
 # Should stay the same, even if PROJECT_SLUG changes
 ASSETS_SLUG = 'commencement'
 
-# Project name to be used in file paths
-PROJECT_FILENAME = 'commencement'
-
 """
 DEPLOYMENT
 """
-PRODUCTION_S3_BUCKETS = ['apps.npr.org', 'apps2.npr.org']
-STAGING_S3_BUCKETS = ['stage-apps.npr.org']
-ASSETS_S3_BUCKET = 'assets.apps.npr.org'
+PRODUCTION_S3_BUCKET = {
+    'bucket_name': 'apps.npr.org',
+    'region': 'us-east-1'
+}
+
+STAGING_S3_BUCKET = {
+    'bucket_name': 'stage-apps.npr.org',
+    'region': 'us-east-1'
+}
+
+ASSETS_S3_BUCKET = {
+    'bucket_name': 'assets.apps.npr.org',
+    'region': 'us-east-1'
+}
+
+DEFAULT_MAX_AGE = 20
 
 PRODUCTION_SERVERS = ['cron.nprapps.org']
-STAGING_SERVERS = ['50.112.92.131']
+STAGING_SERVERS = ['cron-staging.nprapps.org']
 
 # Should code be deployed to the web/cron servers?
 DEPLOY_TO_SERVERS = False
@@ -57,8 +75,6 @@ DEPLOY_CRONTAB = False
 DEPLOY_SERVICES = False
 
 UWSGI_SOCKET_PATH = '/tmp/%s.uwsgi.sock' % PROJECT_FILENAME
-UWSGI_LOG_PATH = '/var/log/%s.uwsgi.log' % PROJECT_FILENAME
-APP_LOG_PATH = '/var/log/%s.app.log' % PROJECT_FILENAME
 
 # Services are the server-side services we want to enable and configure.
 # A three-tuple following this format:
@@ -70,10 +86,12 @@ SERVER_SERVICES = [
 ]
 
 # These variables will be set at runtime. See configure_targets() below
-S3_BUCKETS = []
-S3_BASE_URL = ''
+S3_BUCKET = None
+S3_BASE_URL = None
+S3_DEPLOY_URL = None
 SERVERS = []
-SERVER_BASE_URL = ''
+SERVER_BASE_URL = None
+SERVER_LOG_PATH = None
 DEBUG = True
 
 """
@@ -83,43 +101,57 @@ COPY_GOOGLE_DOC_KEY = '0AlXMOHKxzQVRdFM0eHpucEdWRzRiMVFDdkY4amx6QkE'
 COPY_PATH = 'data/copy.xlsx'
 
 DATA_GOOGLE_DOC_KEY = '1a1SZvyycLpv4w8iyq-wvmT-eUERRGfzVkfliFkaQVnE'
-#DATA_GOOGLE_DOC_KEY = '1YJ0oc85wMuL9twZk1o3n8Qpz58lFTlyBpnOpBwlBe70'
 
 """
 SHARING
 """
-SHARE_URL = 'http://%s/%s/' % (PRODUCTION_S3_BUCKETS[0], PROJECT_SLUG)
+SHARE_URL = 'http://%s/%s/' % (PRODUCTION_S3_BUCKET['bucket_name'], PROJECT_SLUG)
 
-# Will be resized to 120x120, can't be larger than 1MB
-TWITTER_IMAGE_URL = '%squote-images/john-f-kennedy-yale-university-1962.png' % SHARE_URL
-TWITTER_HANDLE = '@npr_ed'
-
-# 16:9 ("wide") image. FB uses 16:9 in the newsfeed and crops to square in timelines.
-# No documented restrictions on size
-FACEBOOK_IMAGE_URL = TWITTER_IMAGE_URL
-FACEBOOK_APP_ID = '138837436154588'
-
-# Thumbnail image for Google News / Search.
-# No documented restrictions on resolution or size
-GOOGLE_IMAGE_URL = TWITTER_IMAGE_URL
+"""
+ADS
+"""
 
 NPR_DFP = {
-    'STORY_ID': '1013',
-    'TARGET': 'News_U_S__Education',
-    'ENVIRONMENT': 'NPR',
+    'STORY_ID': '1002',
+    'TARGET': 'homepage',
+    'ENVIRONMENT': 'NPRTEST',
     'TESTSERVER': 'false'
 }
 
 """
 SERVICES
 """
-GOOGLE_ANALYTICS = {
+NPR_GOOGLE_ANALYTICS = {
     'ACCOUNT_ID': 'UA-5828686-4',
-    'DOMAIN': PRODUCTION_S3_BUCKETS[0],
-    'TOPICS': '[1003,1013]' # e.g. '[1014,3,1003,1002,1001]'
+    'DOMAIN': PRODUCTION_S3_BUCKET['bucket_name'],
+    'TOPICS': '' # e.g. '[1014,3,1003,1002,1001]'
 }
 
-COMMENT_PROMPT = 'Leave a comment'
+VIZ_GOOGLE_ANALYTICS = {
+    'ACCOUNT_ID': 'UA-5828686-75'
+}
+
+DISQUS_API_KEY = 'tIbSzEhGBE9NIptbnQWn4wy1gZ546CsQ2IHHtxJiYAceyyPoAkDkVnQfCifmCaQW'
+DISQUS_UUID = '$NEW_DISQUS_UUID'
+
+"""
+OAUTH
+"""
+
+GOOGLE_OAUTH_CREDENTIALS_PATH = '~/.google_oauth_credentials'
+
+authomatic_config = {
+    'google': {
+        'id': 1,
+        'class_': oauth2.Google,
+        'consumer_key': os.environ.get('GOOGLE_OAUTH_CLIENT_ID'),
+        'consumer_secret': os.environ.get('GOOGLE_OAUTH_CONSUMER_SECRET'),
+        'scope': ['https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/userinfo.email'],
+        'offline': True,
+    },
+}
+
+authomatic = Authomatic(authomatic_config, os.environ.get('AUTHOMATIC_SALT'))
 
 """
 APP-SPECIFIC
@@ -151,15 +183,12 @@ def get_secrets():
     """
     A method for accessing our secrets.
     """
-    secrets = [
-        'EXAMPLE_SECRET'
-    ]
-
     secrets_dict = {}
 
-    for secret in secrets:
-        name = '%s_%s' % (PROJECT_FILENAME, secret)
-        secrets_dict[secret] = os.environ.get(name, None)
+    for k,v in os.environ.items():
+        if k.startswith(PROJECT_SLUG):
+            k = k[len(PROJECT_SLUG) + 1:]
+            secrets_dict[k] = v
 
     return secrets_dict
 
@@ -168,37 +197,47 @@ def configure_targets(deployment_target):
     Configure deployment targets. Abstracted so this can be
     overriden for rendering before deployment.
     """
-    global S3_BUCKETS
+    global S3_BUCKET
     global S3_BASE_URL
+    global S3_DEPLOY_URL
     global SERVERS
     global SERVER_BASE_URL
+    global SERVER_LOG_PATH
     global DEBUG
     global DEPLOYMENT_TARGET
-    global APP_LOG_PATH
     global DISQUS_SHORTNAME
+    global ASSETS_MAX_AGE
 
     if deployment_target == 'production':
-        S3_BUCKETS = PRODUCTION_S3_BUCKETS
-        S3_BASE_URL = 'http://%s/%s' % (S3_BUCKETS[0], PROJECT_SLUG)
+        S3_BUCKET = PRODUCTION_S3_BUCKET
+        S3_BASE_URL = 'http://%s/%s' % (S3_BUCKET['bucket_name'], PROJECT_SLUG)
+        S3_DEPLOY_URL = 's3://%s/%s' % (S3_BUCKET['bucket_name'], PROJECT_SLUG)
         SERVERS = PRODUCTION_SERVERS
         SERVER_BASE_URL = 'http://%s/%s' % (SERVERS[0], PROJECT_SLUG)
+        SERVER_LOG_PATH = '/var/log/%s' % PROJECT_FILENAME
         DISQUS_SHORTNAME = 'npr-news'
         DEBUG = False
+        ASSETS_MAX_AGE = 86400
     elif deployment_target == 'staging':
-        S3_BUCKETS = STAGING_S3_BUCKETS
-        S3_BASE_URL = 'http://%s/%s' % (S3_BUCKETS[0], PROJECT_SLUG)
+        S3_BUCKET = STAGING_S3_BUCKET
+        S3_BASE_URL = 'http://%s/%s' % (S3_BUCKET['bucket_name'], PROJECT_SLUG)
+        S3_DEPLOY_URL = 's3://%s/%s' % (S3_BUCKET['bucket_name'], PROJECT_SLUG)
         SERVERS = STAGING_SERVERS
         SERVER_BASE_URL = 'http://%s/%s' % (SERVERS[0], PROJECT_SLUG)
+        SERVER_LOG_PATH = '/var/log/%s' % PROJECT_FILENAME
         DISQUS_SHORTNAME = 'nprviz-test'
         DEBUG = True
+        ASSETS_MAX_AGE = 20
     else:
-        S3_BUCKETS = []
+        S3_BUCKET = None
         S3_BASE_URL = 'http://127.0.0.1:8000'
+        S3_DEPLOY_URL = None
         SERVERS = []
         SERVER_BASE_URL = 'http://127.0.0.1:8001/%s' % PROJECT_SLUG
+        SERVER_LOG_PATH = '/tmp'
         DISQUS_SHORTNAME = 'nprviz-test'
         DEBUG = True
-        APP_LOG_PATH = '/tmp/%s.app.log' % PROJECT_SLUG
+        ASSETS_MAX_AGE = 20
 
     DEPLOYMENT_TARGET = deployment_target
 
@@ -208,4 +247,3 @@ Run automated configuration
 DEPLOYMENT_TARGET = os.environ.get('DEPLOYMENT_TARGET', None)
 
 configure_targets(DEPLOYMENT_TARGET)
-

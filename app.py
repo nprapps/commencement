@@ -1,31 +1,40 @@
 #!/usr/bin/env python
+"""
+Example application views.
 
-import argparse
-from collections import defaultdict
-from flask import Flask, Markup, render_template
-import json
-import random
-from urlparse import urlparse
-
-from typogrify.templatetags import jinja_filters
+Note that `render_template` is wrapped with `make_response` in all application
+routes. While not necessary for most Flask apps, it is required in the
+App Template for static publishing.
+"""
 
 import app_config
-import data
-from render_utils import make_context, urlencode_filter
+import commencement_data
+import json
+import oauth
 import static
 
-app = Flask(app_config.PROJECT_SLUG)
+from collections import defaultdict
+from flask import Flask, make_response, render_template
+from render_utils import make_context, smarty_filter, urlencode_filter
+from typogrify.templatetags import jinja_filters
+from urlparse import urlparse, parse_qs
+from werkzeug.debug import DebuggedApplication
 
-app.jinja_env.filters['urlencode'] = urlencode_filter
+app = Flask(__name__)
+app.debug = app_config.DEBUG
+
+app.add_template_filter(smarty_filter, name='smarty')
+app.add_template_filter(urlencode_filter, name='urlencode')
 jinja_filters.register(app.jinja_env)
 
 @app.route('/')
+@oauth.oauth_required
 def index():
     context = make_context()
 
     speeches = []
-    for speech in data.load():
-        speech['share_url'] = 'http://%s/%s/speech/%s/' % (app_config.PRODUCTION_S3_BUCKETS[0], app_config.PROJECT_SLUG, speech['slug'])
+    for speech in commencement_data.load():
+        speech['share_url'] = 'http://%s/%s/speech/%s/' % (app_config.PRODUCTION_S3_BUCKET, app_config.PROJECT_SLUG, speech['slug'])
         speech['money_quote_image'] = '%s/quote-images/%s.png' % (app_config.S3_BASE_URL, speech['slug'])
         speech['share_text'] = '%(name)s, %(year)s. From NPR\'s The Best Commencement Speeches, Ever.' % speech
         speeches.append(speech)
@@ -37,16 +46,17 @@ def index():
     context['speeches'] = speeches
     context['speeches_json'] = json.dumps(speeches)
 
-    return render_template('index.html', **context)
+    return make_response(render_template('index.html', **context))
 
 @app.route('/speech/<string:slug>/')
+@oauth.oauth_required
 def _speech(slug):
     context = make_context()
 
-    speeches = data.load()
+    speeches = commencement_data.load()
 
     context['speech'] = next(s for s in speeches if s['slug'] == slug)
-    context['share_url'] = 'http://%s/%s/speech/%s/' % (app_config.PRODUCTION_S3_BUCKETS[0], app_config.PROJECT_SLUG, slug)
+    context['share_url'] = 'http://%s/%s/speech/%s/' % (app_config.PRODUCTION_S3_BUCKET, app_config.PROJECT_SLUG, slug)
     context['money_quote_image'] = '%s/quote-images/%s.png' % (app_config.S3_BASE_URL, slug)
     context['share_text'] = '%(name)s, %(year)s. From NPR\'s The Best Commencement Speeches, Ever.' % context['speech']
 
@@ -104,18 +114,18 @@ def _speech(slug):
                 context['tags'].append({ 'tag': tag.replace('-', ' ').title(), 'speech': next_speech })
                 break
 
-    return render_template('speech.html', **context)
+    return make_response(render_template('speech.html', **context))
+
 
 app.register_blueprint(static.static)
+app.register_blueprint(oauth.oauth)
 
-# Boilerplate
+# Enable Werkzeug debug pages
+if app_config.DEBUG:
+    wsgi_app = DebuggedApplication(app, evalex=False)
+else:
+    wsgi_app = app
+
+# Catch attempts to run the app directly
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-p', '--port')
-    args = parser.parse_args()
-    server_port = 8000
-
-    if args.port:
-        server_port = int(args.port)
-
-    app.run(host='0.0.0.0', port=server_port, debug=app_config.DEBUG)
+    print 'This command has been removed! Please run "fab app" instead!'

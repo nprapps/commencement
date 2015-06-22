@@ -1,16 +1,30 @@
 #!/usr/bin/env python
 
-import glob
-import os
+import codecs
+from datetime import datetime
+import json
 import time
 import urllib
+import subprocess
 
-from cssmin import cssmin
 from flask import Markup, g, render_template, request
 from slimit import minify
+from smartypants import smartypants
 
 import app_config
 import copytext
+
+class BetterJSONEncoder(json.JSONEncoder):
+    """
+    A JSON encoder that intelligently handles datetimes.
+    """
+    def default(self, obj):
+        if isinstance(obj, datetime):
+            encoded_object = obj.isoformat()
+        else:
+            encoded_object = json.JSONEncoder.default(self, obj)
+
+        return encoded_object
 
 class Includer(object):
     """
@@ -33,7 +47,7 @@ class Includer(object):
 
     def _relativize_path(self, path):
         relative_path = path
-        depth = len(request.path.split('/')) - (2 + self.asset_depth) 
+        depth = len(request.path.split('/')) - (2 + self.asset_depth)
 
         while depth > 0:
             relative_path = '../%s' % relative_path
@@ -46,27 +60,19 @@ class Includer(object):
             if path in g.compiled_includes:
                 timestamp_path = g.compiled_includes[path]
             else:
-                # Add a timestamp to the rendered filename to prevent caching
-                timestamp = int(time.time())
-                front, back = path.rsplit('.', 1)
-                timestamp_path = '%s.%i.%s' % (front, timestamp, back)
+                # Add a querystring to the rendered filename to prevent caching
+                timestamp_path = '%s?%i' % (path, int(time.time()))
 
-                # Delete old rendered versions, just to be tidy
-                old_versions = glob.glob('www/%s.*.%s' % (front, back))
+                out_path = 'www/%s' % path
 
-                for f in old_versions:
-                    os.remove(f)
+                if path not in g.compiled_includes:
+                    print 'Rendering %s' % out_path
 
-            out_path = 'www/%s' % timestamp_path
+                    with codecs.open(out_path, 'w', encoding='utf-8') as f:
+                        f.write(self._compress())
 
-            if path not in g.compiled_includes:
-                print 'Rendering %s' % out_path
-
-                with open(out_path, 'w') as f:
-                    f.write(self._compress().encode('utf-8'))
-
-            # See "fab render"
-            g.compiled_includes[path] = timestamp_path
+                # See "fab render"
+                g.compiled_includes[path] = timestamp_path
 
             markup = Markup(self.tag_string % self._relativize_path(timestamp_path))
         else:
@@ -98,9 +104,9 @@ class JavascriptIncluder(Includer):
         for src in self.includes:
             src_paths.append('www/%s' % src)
 
-            with open('www/%s' % src) as f:
+            with codecs.open('www/%s' % src, encoding='utf-8') as f:
                 print '- compressing %s' % src
-                output.append(minify(f.read().encode('utf-8')))
+                output.append(minify(f.read()))
 
         context = make_context()
         context['paths'] = src_paths
@@ -126,16 +132,14 @@ class CSSIncluder(Includer):
 
         for src in self.includes:
 
-            if src.endswith('less'):
-                src_paths.append('%s' % src)
-                src = src.replace('less', 'css') # less/example.less -> css/example.css
-                src = '%s.less.css' % src[:-4]   # css/example.css -> css/example.less.css
-            else:
-                src_paths.append('www/%s' % src)
+            src_paths.append('%s' % src)
 
-            with open('www/%s' % src) as f:
-                print '- compressing %s' % src
-                output.append(cssmin(f.read().encode('utf-8')))
+            try:
+                compressed_src = subprocess.check_output(["node_modules/less/bin/lessc", "-x", src])
+                output.append(compressed_src)
+            except:
+                print 'It looks like "lessc" isn\'t installed. Try running: "npm install"'
+                raise
 
         context = make_context()
         context['paths'] = src_paths
@@ -171,7 +175,11 @@ def make_context(asset_depth=0):
     """
     context = flatten_app_config()
 
-    context['COPY'] = copytext.Copy(app_config.COPY_PATH, cell_wrapper_cls=Markup)
+    try:
+        context['COPY'] = copytext.Copy(app_config.COPY_PATH)
+    except copytext.CopyException:
+        pass
+
     context['JS'] = JavascriptIncluder(asset_depth=asset_depth)
     context['CSS'] = CSSIncluder(asset_depth=asset_depth)
 
@@ -192,4 +200,25 @@ def urlencode_filter(s):
     s = urllib.quote_plus(s)
 
     return Markup(s)
+
+def smarty_filter(s):
+    """
+    Filter to smartypants strings.
+    """
+    if type(s) == 'Markup':
+        s = s.unescape()
+
+    # Evaulate COPY elements
+    if type(s) is not unicode:
+        s = unicode(s)
+
+
+    s = s.encode('utf-8')
+    s = smartypants(s)
+
+    try:
+        return Markup(s)
+    except:
+        print 'This string failed to encode: %s' % s
+        return Markup(s)
 
