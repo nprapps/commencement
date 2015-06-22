@@ -111,7 +111,8 @@ def parse():
         if row['money_quote']:
             row['money_quote'] = smartypants(row['money_quote'].strip('"'))
 
-        tags = [t.strip().lower() for t in row['take_homes'].replace(',', ';').split(';')]
+        tags = [t.strip().lower().replace(' ', '-').replace('\'', '')
+                for t in row['take_homes'].replace(',', ';').split(';')]
         row['tags'] = []
 
         for tag in tags:
@@ -126,7 +127,7 @@ def parse():
 
             if tag not in speeches_by_tag:
                 speeches_by_tag[tag] = [] 
-        
+
             speeches_by_tag[tag].append(row)
 
         row['slug'] = slugify(row)
@@ -161,10 +162,6 @@ def parse():
 
     # Strip unused fields to keep filesize down
     del row['take_homes']
-    del row['former_labels_ref']
-    del row['former_field_ref']
-    del row['former_mood_ref']
-    del row['money_quote2']
 
     # Render complete data
     with open('www/static-data/data.json', 'w') as f:
