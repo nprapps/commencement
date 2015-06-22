@@ -34,7 +34,7 @@ def index():
 
     speeches = []
     for speech in commencement_data.load():
-        speech['share_url'] = 'http://%s/%s/speech/%s/' % (app_config.PRODUCTION_S3_BUCKET, app_config.PROJECT_SLUG, speech['slug'])
+        speech['share_url'] = 'http://%s/%s/speech/%s/' % (app_config.PRODUCTION_S3_BUCKET['bucket_name'], app_config.PROJECT_SLUG, speech['slug'])
         speech['money_quote_image'] = '%s/quote-images/%s.png' % (app_config.S3_BASE_URL, speech['slug'])
         speech['share_text'] = '%(name)s, %(year)s. From NPR\'s The Best Commencement Speeches, Ever.' % speech
         speeches.append(speech)
@@ -56,7 +56,7 @@ def _speech(slug):
     speeches = commencement_data.load()
 
     context['speech'] = next(s for s in speeches if s['slug'] == slug)
-    context['share_url'] = 'http://%s/%s/speech/%s/' % (app_config.PRODUCTION_S3_BUCKET, app_config.PROJECT_SLUG, slug)
+    context['share_url'] = 'http://%s/%s/speech/%s/' % (app_config.PRODUCTION_S3_BUCKET['bucket_name'], app_config.PROJECT_SLUG, slug)
     context['money_quote_image'] = '%s/quote-images/%s.png' % (app_config.S3_BASE_URL, slug)
     context['share_text'] = '%(name)s, %(year)s. From NPR\'s The Best Commencement Speeches, Ever.' % context['speech']
 
