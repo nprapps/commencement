@@ -175,18 +175,4 @@ $(function() {
 
         $speechTotal.html(SPEECHES.length);
     }
-
-    /*$.ajax({
-        url: APP_CONFIG.S3_BASE_URL + '/live-data/most-viewed.json',
-        dataType: 'json',
-        async: false,
-        crossDomain: false,
-        jsonp: false,
-        success: function(data){
-            renderMostViewed(data);
-        },
-        error: function(error){
-            console.log('No most-viewed data');
-        }
-    });*/
 });
