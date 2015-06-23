@@ -11,6 +11,10 @@ var $refreshQuoteButton = null;
 var $noResults = null;
 var $speechCount = null;
 var $speechTotal = null;
+var $emailShare = null;
+var $facebookShare = null;
+var $twitterShare = null;
+var $pinterestShare = null;
 var FEATURED = null;
 var featured_position = 0;
 
@@ -139,6 +143,16 @@ $(function() {
     $search = $('#search');
     $body = $('body');
     $refreshQuoteButton = $('#refresh-quote');
+
+    $emailShare = $('.share-email');
+    $facebookShare = $('.share-facebook');
+    $twitterShare = $('.share-twitter');
+    $pinterestShare = $('.pinterest-share');
+
+    $emailShare.on('click', ANALYTICS.clickEmail);
+    $facebookShare.on('click', ANALYTICS.clickFacebook);
+    $twitterShare.on('click', ANALYTICS.clickTweet);
+    $pinterestShare.on('click', ANALYTICS.clickPinterest);
 
     if ($body.hasClass('homepage')){
         $leadQuote = $('#lead-quote');
