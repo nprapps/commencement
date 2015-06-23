@@ -111,7 +111,7 @@ def _speech(slug):
                         except IndexError:
                             next_speech = speech_tags[tag][0]
 
-                context['tags'].append({ 'tag': tag.replace('-', ' ').title(), 'speech': next_speech })
+                context['tags'].append({ 'tag': app_config.TAGS[tag], 'speech': next_speech })
                 break
 
     return make_response(render_template('speech.html', **context))
