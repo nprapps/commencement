@@ -40,6 +40,7 @@ www/js/*.min.js
 www/js/templates.js
 www/js/app_config.js
 www/js/copy.js
+www/speech/*
 confs/rendered/*
 data/copy.xls
 data/copy.xlsx
@@ -49,8 +50,6 @@ www/assets
 data/gdoc*.csv
 data/data.csv
 www/static-data/*
-.speeches_html
-.speeches_gzip
 .quote_images
 www/quote-images/*
 www/live-data/*.json

@@ -155,9 +155,9 @@ def render(quote, name, slug, school, year, mug_src):
 
 def main():
     for size in xrange(SIZE_MIN, SIZE_MAX + 1, SIZE_DELTA):
-        fonts['book'][size] =  ImageFont.truetype('www/assets/Gotham-Book.otf', size)
-        fonts['bold'][size] =  ImageFont.truetype('www/assets/Gotham-Bold.otf', size)
-        fonts['serif'][size] =  ImageFont.truetype('www/assets/Georgia-Italic.ttf', size)
+        fonts['book'][size] = ImageFont.truetype('www/assets/gotham-book.otf', size)
+        fonts['bold'][size] = ImageFont.truetype('www/assets/gotham-bold.otf', size)
+        fonts['serif'][size] = ImageFont.truetype('www/assets/georgia-italic.ttf', size)
         quote_width[size] = fonts['bold'][size].getsize(u'“')[0]
 
     with open('www/static-data/data.json') as f:

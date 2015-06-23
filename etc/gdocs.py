@@ -27,10 +27,11 @@ class GoogleDoc(object):
     key = None
     file_format = 'xlsx'
     file_name = 'copy'
+    gid = '0'
 
     # You can change these with kwargs but it's not recommended.
-    spreadsheet_url = 'https://spreadsheets.google.com/feeds/download/spreadsheets/Export?key=%(key)s&exportFormat=%(format)s'
-    new_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/%(key)s/export?format=%(format)s&id=%(key)s'
+    spreadsheet_url = 'https://spreadsheets.google.com/feeds/download/spreadsheets/Export?key=%(key)s&exportFormat=%(format)s&gid=%(gid)s'
+    new_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/%(key)s/export?format=%(format)s&id=%(key)s&gid=%(gid)s'
     auth = None
     email = os.environ.get('APPS_GOOGLE_EMAIL', None)
     password = os.environ.get('APPS_GOOGLE_PASS', None)
@@ -81,18 +82,18 @@ class GoogleDoc(object):
             headers = {}
             headers['Authorization'] = "GoogleLogin auth=%s" % self.auth
 
-            url_params = { 'key': self.key, 'format': self.file_format }
-            url = self.spreadsheet_url % url_params 
+            url_params = { 'key': self.key, 'format': self.file_format, 'gid': self.gid }
+            url = self.new_spreadsheet_url % url_params
 
             r = requests.get(url, headers=headers)
 
             if r.status_code != 200:
-                url = self.new_spreadsheet_url % url_params
+                url = self.spreadsheet_url % url_params
                 r = requests.get(url, headers=headers)
 
             if r.status_code != 200:
                 raise KeyError("Error! Your Google Doc does not exist.")
-                
+
             with open('data/%s.%s' % (self.file_name, self.file_format), 'wb') as writefile:
                 writefile.write(r.content)
 
