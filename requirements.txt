@@ -1,8 +1,9 @@
-Authomatic==0.0.13
+-e git+git@github.com:nprapps/authomatic.git@b28b08aef64d0d0ce7d25b9e70e22d2ec0482cea#egg=Authomatic-master
 Fabric==1.4.3
 Flask==0.9
 Jinja2==2.7.3
 MarkupSafe==0.23
+Pillow==2.8.2
 PyYAML==3.11
 Werkzeug==0.8.3
 bcdoc==0.12.0
@@ -13,8 +14,13 @@ colorama==0.2.5
 copytext==0.1.9
 docutils==0.11
 facebook-sdk==0.4.0
+gnureadline==6.3.3
+google-api-python-client==1.2
 gunicorn==19.1.1
 httplib2==0.9
+ipdb==0.8.1
+ipython==3.2.0
+jdcal==1.0
 jmespath==0.2.1
 nose==1.2.1
 odict==1.5.1
@@ -30,5 +36,6 @@ smartypants==1.8.6
 ssh==1.7.14
 termcolor==1.1.0
 twitter==1.14.3
+typogrify==2.0.7
 wheel==0.23.0
 wsgiref==0.1.2
