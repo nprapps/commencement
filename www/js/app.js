@@ -89,19 +89,23 @@ var renderMostViewed = function(data) {
 }
 
 var onTagButtonClick = function() {
-    hasher.setHash($(this).data('tag'));
+    var tag = $(this).data('tag');
+    hasher.setHash(tag);
     _gaq.push(['_trackEvent', 'Filters', 'onTagButtonClick', APP_CONFIG.PROJECT_SLUG]);
+    ANALYTICS.trackEvent('select-tag', tag);
 }
 
 var onResetSearchButtonClick = function() {
     $search.val('');
     hasher.setHash('_');
     _gaq.push(['_trackEvent', 'Filters', 'onResetSearchButtonClick', APP_CONFIG.PROJECT_SLUG]);
+    ANALYTICS.trackEvent('reset-search');
 }
 
 var onRefreshQuoteButtonClick = function() {
     renderLeadQuote();
     _gaq.push(['_trackEvent', 'Featured Quote', 'onRefreshQuoteButtonClick', APP_CONFIG.PROJECT_SLUG]);
+    ANALYTICS.trackEvent('refresh-quote');
 }
 
 var onFormSubmit = function(e) {
