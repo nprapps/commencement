@@ -3,6 +3,7 @@ var $tags = null;
 var $tagButtons = null;
 var $resetSearchButton = null;
 var $search = null;
+var $searchForm = null;
 var $body = null;
 var $leadQuote = null;
 var $imgSource = null;
@@ -103,6 +104,10 @@ var onRefreshQuoteButtonClick = function() {
     _gaq.push(['_trackEvent', 'Featured Quote', 'onRefreshQuoteButtonClick', APP_CONFIG.PROJECT_SLUG]);
 }
 
+var onFormSubmit = function(e) {
+    e.preventDefault();
+}
+
 var onHashChanged = function(new_hash, old_hash) {
     if (new_hash === '_') { new_hash = ''; }
 
@@ -126,6 +131,7 @@ $(function() {
     $tags = $('.tags');
     $tagButtons = $('.tags .btn').not('.reset-tags');
     $resetSearchButton = $('.reset-tags');
+    $searchForm = $('.filters form');
     $search = $('#search');
     $body = $('body');
     $refreshQuoteButton = $('#refresh-quote');
@@ -141,6 +147,7 @@ $(function() {
         $resetSearchButton.on('click', onResetSearchButtonClick);
         $search.on('keyup', filterSpeeches);
         $refreshQuoteButton.on('click', onRefreshQuoteButtonClick);
+        $searchForm.on('submit', onFormSubmit);
 
         // Get the featured speeches.
         FEATURED = _.where(SPEECHES, {'featured': 'y'});
