@@ -82,10 +82,10 @@
             {% if speech.video_url and not speech.youtube_id and not speech.vimeo_id %}
             <li class="video-link"><a href="{{ speech.video_url }}">{{ COPY.content.watch_link }} <i class="fa fa-angle-right"></i></a></li>
             {% endif %}
-            <li class="tags"><strong>Tagged:</strong> {% for tag in speech.tags %}<a href="{{ S3_BASE_URL }}/#/{{ tag }}">{{ TAGS[tag] }}</a>{% endfor %}</li>
+            <li class="tags"><strong>Tagged:</strong> {% for tag in speech.tags %}<a href="{{ S3_BASE_URL }}/#/{{ tag }}" onclick="ANALYTICS.trackEvent('speech-detail-click-tag', '{{ tag }}')">{{ TAGS[tag] }}</a>{% endfor %}</li>
         </ul>
 
-        
+
     </div>
 </div>
 
@@ -147,4 +147,3 @@
     {{ JS.push('js/analytics.js') }}
     {{ JS.render('js/app-footer-speech.min.js') }}
 {% endblock %}
-
