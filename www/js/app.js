@@ -112,6 +112,56 @@ var onRefreshQuoteButtonClick = function() {
     ANALYTICS.trackEvent('refresh-quote');
 }
 
+var onFeaturedSpeechImageClick = function(slug) {
+    _gaq.push(['_trackEvent', 'Social', 'Click Image Link From Featured Quote', APP_CONFIG.PROJECT_SLUG]);
+    ANALYTICS.trackEvent('featured-quote-image-click', slug);
+}
+
+var onFeaturedSpeechEmailClick = function(slug) {
+    _gaq.push(['_trackEvent', 'Social', 'Click Email From Featured Quote', APP_CONFIG.PROJECT_SLUG]);
+    ANALYTICS.trackEvent('featured-quote-email-click', slug);
+}
+
+var onFeaturedSpeechFacebookClick = function(slug) {
+    _gaq.push(['_trackEvent', 'Social', 'Click Facebook From Featured Quote', APP_CONFIG.PROJECT_SLUG]);
+    ANALYTICS.trackEvent('featured-quote-facebook-click', slug);
+}
+
+var onFeaturedSpeechTwitterClick = function(slug) {
+    _gaq.push(['_trackEvent', 'Social', 'Click Twitter From Featured Quote', APP_CONFIG.PROJECT_SLUG]);
+    ANALYTICS.trackEvent('featured-quote-twitter-click', slug);
+}
+
+var onFeaturedSpeechPinterestClick = function(slug) {
+    _gaq.push(['_trackEvent', 'Social', 'Click Pinterest From Featured Quote', APP_CONFIG.PROJECT_SLUG]);
+    ANALYTICS.trackEvent('featured-quote-pinterest-click', slug);
+}
+
+var onSpeechDetailImageClick = function() {
+    _gaq.push(['_trackEvent', 'Social', 'Click Image Link From Speech Detail', APP_CONFIG.PROJECT_SLUG]);
+    ANALYTICS.trackEvent('speech-detail-image-click', speechSlug);
+}
+
+var onSpeechDetailEmailClick = function() {
+    _gaq.push(['_trackEvent', 'Social', 'Click Email From Speech Detail', APP_CONFIG.PROJECT_SLUG]);
+    ANALYTICS.trackEvent('speech-detail-email-click', speechSlug);
+}
+
+var onSpeechDetailFacebookClick = function() {
+    _gaq.push(['_trackEvent', 'Social', 'Click Facebook From Speech Detail', APP_CONFIG.PROJECT_SLUG]);
+    ANALYTICS.trackEvent('speech-detail-facebook-click', speechSlug);
+}
+
+var onSpeechDetailTwitterClick = function() {
+    _gaq.push(['_trackEvent', 'Social', 'Click Twitter From Speech Detail', APP_CONFIG.PROJECT_SLUG]);
+    ANALYTICS.trackEvent('speech-detail-twitter-click', speechSlug);
+}
+
+var onSpeechDetailPinterestClick = function() {
+    _gaq.push(['_trackEvent', 'Social', 'Click Pinterest From Speech Detail', APP_CONFIG.PROJECT_SLUG]);
+    ANALYTICS.trackEvent('speech-detail-pinterest-click', speechSlug);
+}
+
 var onFormSubmit = function(e) {
     e.preventDefault();
 }
