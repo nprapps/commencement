@@ -10,21 +10,23 @@
 <header>
     <div class="container">
         <div class="header-wrapper">
-            <h2 class="npr"><a href="http://npr.org"><img src="{{ S3_BASE_URL }}/assets/npr-black.png" alt="NPR" /></a></h2>
-            <h1>{{ COPY.content.title|safe|typogrify }}</h1>
-            <p>{{ COPY.content.chatter }}</p>
+            <div class="header-content">
+                <h2 class="npr"><a href="http://npr.org"><img src="{{ S3_BASE_URL }}/assets/npr-black.png" alt="NPR" /></a></h2>
+                <h1>{{ COPY.content.title|safe|typogrify }}</h1>
+                <p>{{ COPY.content.chatter }}</p>
 
-            <div id="story-meta">
-                <p class="byline">By <span>{{ COPY.attribution.byline }}</span></p>
-                <p class="byline special-thanks">Thanks to Cristina Negrut, the creator of <a href="http://graduationwisdom.com/">http://graduationwisdom.com/</a> where many of these speeches were first collected.</p>
-                <p class="dateblock">
-                    <span class="date">{{ COPY.attribution.pubdate }}</span>
-                </p>
+                <div id="story-meta">
+                    <p class="byline">By <span>{{ COPY.attribution.byline }}</span></p>
+                    <p class="byline special-thanks">Thanks to Cristina Negrut, the creator of <a href="http://graduationwisdom.com/">http://graduationwisdom.com/</a> where many of these speeches were first collected.</p>
+                    <p class="dateblock">
+                        <span class="date">{{ COPY.attribution.pubdate }}</span>
+                    </p>
+                </div>
             </div>
         </div>
     </div>
+    {#
     <div id="bigbox">
-        {# 300x250 ad #}
         <div class="adwrapper">
             <div id="ad-desktop" class="sponsor300">
             </div>
@@ -32,6 +34,7 @@
             <p class="right"><a href="http://www.npr.org/about/place/corpsupport/">Become an NPR sponsor</a></p>
         </div>
     </div>
+    #}
 </header>
 {% endblock %}
 

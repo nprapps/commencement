@@ -35,11 +35,18 @@ header {
 	}
 
 	.header-wrapper {
-		padding: @grid-gutter-width / 2;
+		/* padding: @grid-gutter-width / 2; */
+		text-align: center;
+		.make-row();
 
-		@media screen and (min-width: @screen-sm){
-			padding: @grid-gutter-width;
-		}
+/* 		@media screen and (min-width: @screen-sm){
+	padding: @grid-gutter-width;
+} */
+	}
+
+	.header-content {
+		.make-sm-column(10);
+		.make-sm-column-push(1)
 	}
 
 	h1 {
