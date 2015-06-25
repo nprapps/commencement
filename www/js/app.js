@@ -162,6 +162,11 @@ var onSpeechDetailPinterestClick = function() {
     ANALYTICS.trackEvent('speech-detail-pinterest-click', speechSlug);
 }
 
+var onSpeechDetailRelatedClick = function() {
+    _gaq.push(['_trackEvent', 'Filters', 'Click Tag Link From Speech', APP_CONFIG.PROJECT_SLUG]);
+    ANALYTICS.trackEvent('speech-detail-related-click', speechSlug);
+}
+
 var onFormSubmit = function(e) {
     e.preventDefault();
 }
@@ -218,7 +223,8 @@ $(function() {
         $searchForm.on('submit', onFormSubmit);
 
         // Get the featured speeches.
-        FEATURED = _.where(SPEECHES, {'featured': 'y'});
+        FEATURED = SPEECHES;
+        // FEATURED = _.where(SPEECHES, {'featured': 'y'});
 
         // Add the initial speech slug to the list.
         FEATURED.push(_.where(SPEECHES, {'slug': APP_CONFIG.INITIAL_SPEECH_SLUG })[0])
