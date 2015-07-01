@@ -223,8 +223,7 @@ $(function() {
         $searchForm.on('submit', onFormSubmit);
 
         // Get the featured speeches.
-        FEATURED = SPEECHES;
-        // FEATURED = _.where(SPEECHES, {'featured': 'y'});
+        FEATURED = _.shuffle(SPEECHES);
 
         // Add the initial speech slug to the list.
         FEATURED.push(_.where(SPEECHES, {'slug': APP_CONFIG.INITIAL_SPEECH_SLUG })[0])
