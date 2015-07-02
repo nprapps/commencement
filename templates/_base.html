@@ -33,16 +33,15 @@
     {% block extra_css %}{% endblock extra_css %}
     {{ CSS.render('css/app.min.css') }}
 
-    <!-- JS -->
-    {{ JS.push('js/lib/modernizr.js') }}
-    {{ JS.push('js/app_config.js') }}
-    {{ JS.push('js/analytics.js') }}
-    {{ JS.render('js/app-header.min.js') }}
-
     {% block extra_head %}
     {% endblock extra_head %}
 </head>
 <body class="{% block body_class %}{% endblock body_class %}">
+    <!-- JS -->
+    {{ JS.push('js/app_config.js') }}
+    {{ JS.push('js/analytics.js') }}
+    {{ JS.render('js/app-header.min.js') }}
+
     <a class="sr-only" href="#content">Skip To Content</a>
 
     {% block outer_content %}
@@ -103,6 +102,7 @@
     {% endblock extra_foot %}
 
     {% block footer_js %}
+    {{ JS.push('js/lib/modernizr.js') }}
     {{ JS.push('js/lib/jquery.js') }}
     {{ JS.push('js/lib/underscore.js') }}
     {{ JS.push('js/lib/bootstrap.js') }}
