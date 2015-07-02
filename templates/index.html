@@ -43,82 +43,12 @@
     <div class="container">
         <div class="row">
             <div class="lead-quote-wrapper">
-                <div id="lead-quote">
-                    {% if featured.img %}
-                    <a href="{{ S3_BASE_URL }}/speech/{{ featured.slug }}/"><img class="mug img-circle" src="{{ S3_BASE_URL }}/assets/mugs/{{ featured.img }}"></a>
-                    {% endif %}
-                    <blockquote>
-                        <a href="{{ S3_BASE_URL }}/speech/{{ featured.slug }}/">
-                            <p class="money-quote">{{ featured.money_quote|safe }}</p>
-                        </a>
-                        <div class="img-source">
-                            {% if featured.img_source %}
-                                Photo: {% if featured.img_credit %}{{ featured.img_credit }}/{% endif %}{{ featured.img_source }}
-                            {% endif %}
-                        </div>
-                        <a href="{{ S3_BASE_URL }}/speech/{{ featured.slug }}/">
-                            <cite>{{ featured.name }}</cite>
-                            <p class="speech-meta">{{ featured.school }}, {{ featured.date }}</p>
-                        </a>
-                        <ul class="sharing list-unstyled">
-                            <li class="prompt">Share this <a href="{{ featured.money_quote_image }}" target="_blank" onclick="onFeaturedSpeechImageClick('{{ featured.slug }}');">quote image</a></li>
-                            <li>
-                                <a title="Share via email" href="mailto:?body=&quot;{{ featured.money_quote|safe }}&quot;%0A%0A&mdash; {{ featured.name }}, {{ featured.school }}, {{ featured.date }}%0A%0ANPR's Best Commencement Speeches, Ever: http://apps.npr.org/commencement/speech/{{ featured.slug }}/&subject=NPR's Best Commencement Speeches, Ever" onclick="onFeaturedSpeechEmailClick('{{ featured.slug }}');">
-                                    <span class="fa-stack">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.facebook.com/dialog/feed?app_id={{ FACEBOOK_APP_ID }}&amp;link={{ featured.share_url|urlencode }}&amp;name={{ featured.share_text|urlencode }}&amp;picture={{ featured.money_quote_image|urlencode }}&amp;redirect_uri={{ featured.share_url|urlencode }}" title="Share on Facebook" target="_blank" onclick="onFeaturedSpeechFacebookClick('{{ featured.slug }}');">
-                                    <span class="fa-stack">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                            <a href="http://twitter.com/share?text={{ featured.share_text|urlencode }}&amp;url={{ featured.share_url|urlencode }}" title="Share on Twitter" target="_blank" onclick="onFeaturedSpeechTwitterClick('{{ featured.slug }}');">
-                                    <span class="fa-stack">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://pinterest.com/pin/create/button/?url={{ featured.share_url|urlencode }}&amp;media={{ featured.money_quote_image|urlencode }}&amp;description={{ featured.share_text|urlencode }}" title="Share on Pinterest" target="_blank" onclick="onFeaturedSpeechPinterestClick('{{ featured.slug }}');">
-                                    <span class="fa-stack">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-pinterest fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </blockquote>
-                </div>
-
+                <div id="lead-quote"></div>
                 <a class="btn btn-warning" id="refresh-quote"><i class="fa fa-refresh"></i> Show Another Quote</a>
             </div>
         </div>
     </div>
 </div>
-
-<!--<div id="most-viewed">
-    <div class="container">
-        <div class="row">
-
-            <h2>Most Viewed Speeches</h2>
-
-            <ul class="most-viewed-speeches">
-                <li><span class="placeholder"></span></li>
-                <li><span class="placeholder"></span></li>
-                <li><span class="placeholder"></span></li>
-                <li><span class="placeholder"></span></li>
-            </ul>
-        </div>
-    </div>
-</div>-->
 
 <div class="filters container">
     <form role="form" class="row">

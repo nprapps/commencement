@@ -39,9 +39,6 @@ def index():
         speech['share_text'] = '%(name)s, %(year)s. From NPR\'s The Best Commencement Speeches, Ever.' % speech
         speeches.append(speech)
 
-        if speech['slug'] == app_config.INITIAL_SPEECH_SLUG:
-            context['featured'] = speech
-
     speeches = sorted(speeches, key=lambda x: x['name'])
     context['speeches'] = speeches
     context['speeches_json'] = json.dumps(speeches)

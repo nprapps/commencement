@@ -79,6 +79,7 @@ var renderLeadQuote = function() {
     var src = context['img_source'];
 
     $leadQuote.fadeOut('fast', function(){
+        $leadQuote.css('height', 'auto');
         $leadQuote.html(html);
         $leadQuote.fadeIn();
     });
@@ -224,9 +225,7 @@ $(function() {
 
         // Get the featured speeches.
         FEATURED = _.shuffle(SPEECHES);
-
-        // Add the initial speech slug to the list.
-        FEATURED.push(_.where(SPEECHES, {'slug': APP_CONFIG.INITIAL_SPEECH_SLUG })[0])
+        onRefreshQuoteButtonClick();
 
         for (i = 0; i < SPEECHES.length; i++) {
             SPEECHES[i]['simple_name'] = SPEECHES[i]['name'].replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()']/g, '')

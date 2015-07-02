@@ -187,7 +187,7 @@ TAGS = {
     'yolo': 'YOLO'
 }
 
-INITIAL_SPEECH_SLUG = 'john-f-kennedy-american-university-1963'
+INITIAL_SPEECH_SLUG = 'mindy-kaling-harvard-law-school-2014'
 
 COMMENT_PROMPT = 'Leave a comment'
 
