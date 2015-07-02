@@ -224,7 +224,9 @@ $(function() {
         $searchForm.on('submit', onFormSubmit);
 
         // Get the featured speeches.
-        FEATURED = _.shuffle(SPEECHES);
+        FEATURED = _.shuffle(_.filter(SPEECHES, function(speech) {
+            return speech.img;
+        }));
         onRefreshQuoteButtonClick();
 
         for (i = 0; i < SPEECHES.length; i++) {
