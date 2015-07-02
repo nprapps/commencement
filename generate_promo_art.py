@@ -29,31 +29,26 @@ def main():
     x = 0
     y = 0
 
-    # with open('www/static-data/data.json') as f:
-    #     data = json.load(f)
-
     mugs = [
-        'meryl-streep.jpg',
-        'adam-savage.jpg',
-        'ruth-westheimer.jpg',
-        'david-byrne.jpg',
-        'michelle-obama.jpg',
-        'john-f-kennedy.jpg',
+        'david_carr.jpg',
+        'diana_nyad.jpg',
+        'kanye.jpg',
+        'janetyellen.jpg',
+        'maya_rudolph.jpg',
+        'mindy_kaling.jpg',
+        'scorsese.jpg',
+        'terry_gross.jpg',
+        'zadie_smith.jpg',
+        'john_legend.jpg',
+        'john_kerry.jpg',
+        'victor_hwang.jpg',
         'neil-degrasse-tyson.jpg',
-        'kermit-the-frog.jpg',
-        'ellen-degeneres.jpg',
-        'james-carville.jpg',
-        'peter-dinklage.jpg',
-        'stephen-colbert.jpg',
-        'whoopi-goldberg.jpg',
-        'franklin-d-roosevelt.jpg',
-        'arnold-schwarzenegger.jpg'
+        'michelle-obama.jpg',
+        'dalai-lama.jpg',
     ]
 
     if not os.path.exists(OUT_DIR):
         os.mkdir(OUT_DIR)
-
-
 
     for mug in mugs:
         print mug
@@ -67,7 +62,6 @@ def main():
             y += SIZE
         else:
             continue
-
 
     img.save('%spromo_art.png' % OUT_DIR, 'PNG')
 
