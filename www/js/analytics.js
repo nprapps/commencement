@@ -252,6 +252,7 @@ var ANALYTICS = (function () {
     }
 
     setupGoogle();
+    setupChartbeat();
     setupComscore();
     setupNielson();
 

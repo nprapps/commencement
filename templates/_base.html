@@ -10,9 +10,6 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <link rel="shortcut icon" href="http://media.npr.org/favicon.ico" />
 
-    <!-- CHARTBEAT -->
-    <script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
-
     <!-- Fonts -->
     <script src="//ajax.googleapis.com/ajax/libs/webfont/1.4.10/webfont.js"></script>
     <script>
@@ -38,6 +35,8 @@
 
     <!-- JS -->
     {{ JS.push('js/lib/modernizr.js') }}
+    {{ JS.push('js/app_config.js') }}
+    {{ JS.push('js/analytics.js') }}
     {{ JS.render('js/app-header.min.js') }}
 
     {% block extra_head %}
@@ -110,7 +109,6 @@
     {{ JS.push('js/lib/moment.js') }}
     {{ JS.push('js/lib/lunr.js') }}
     {{ JS.push('js/lib/jquery.scrollTo.js') }}
-    {{ JS.push('js/app_config.js') }}
     {{ JS.push('js/copy.js') }}
     {{ JS.push('js/console.js') }}
     {{ JS.push('js/ads.js') }}
