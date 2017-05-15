@@ -1,8 +1,26 @@
 {
-    "name": "app-template",
-    "version": "1.0.0",
-    "dependencies": {
-        "less": "~1.7.0",
-        "universal-jst": "~1.0.5"
-    }
+  "name": "app-template",
+  "version": "1.0.0",
+  "dependencies": {
+    "less": "^1.7.5",
+    "universal-jst": "^1.0.5"
+  },
+  "description": "nprviz's Project Template =========================",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nprapps/commencement.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nprapps/commencement/issues"
+  },
+  "homepage": "https://github.com/nprapps/commencement#readme"
 }
