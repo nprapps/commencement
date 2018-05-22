@@ -22,6 +22,9 @@ def sync():
     """
     ignore_globs = []
 
+    ## If you get an error here, create an "assets" folder in "www",
+    ## and copy over an "assetsignore" file from the dailygraphics
+    ## repo: https://github.com/nprapps/dailygraphics/tree/master/graphic_templates/_base/assets
     with open('%s/assetsignore' % ASSETS_ROOT, 'r') as f:
         ignore_globs = [l.strip() for l in f]
 
